@@ -1,14 +1,21 @@
 <template>
   <view class="fix-top-window">
     <view class="uni-header">
-      <!-- 统计面包屑 -->
       <uni-stat-breadcrumb class="uni-stat-breadcrumb-on-phone" />
       <view class="uni-group">
         <view class="uni-sub-title hide-on-phone"></view>
       </view>
     </view>
     <view class="uni-container">
-      <!-- 提示条1：初始化db_init.json -->
+      <!-- 欢迎区域 -->
+      <view class="dashboard-welcome">
+        <view class="welcome-text">
+          <text class="welcome-greeting">{{ greeting }}，{{ displayName }} 👋</text>
+          <text class="welcome-date">{{ todayDate }}</text>
+        </view>
+      </view>
+
+      <!-- 提示条 -->
       <uni-notice-bar
         v-if="showdbInit"
         showGetMore
@@ -19,9 +26,7 @@
         color="#f56c6c"
         @click="toAddAppId"
       />
-      <!-- 提示条2：添加应用 -->
       <uni-notice-bar v-if="showAddAppId" showGetMore showIcon class="mb-m pointer" text="检测到您还未添加应用，点击前往应用管理添加" @click="toAddAppId" />
-      <!-- 提示条3：暂无数据，需开通统计功能 -->
       <uni-notice-bar
         v-if="!deviceTableData.length && !userTableData.length && !query.platform_id && complete"
         showGetMore
@@ -31,20 +36,46 @@
         @click="navTo('https://uniapp.dcloud.io/uni-stat-v2.html')"
       />
 
+      <!-- 概览卡片 -->
+      <view class="stat-cards" v-if="deviceTableData.length || userTableData.length">
+        <view class="stat-card">
+          <view class="stat-card-label">总设备数</view>
+          <view class="stat-card-value">{{ summaryStats.totalDevices }}</view>
+        </view>
+        <view class="stat-card">
+          <view class="stat-card-label">活跃设备</view>
+          <view class="stat-card-value">{{ summaryStats.activeDevices }}</view>
+          <view class="stat-card-change" :class="summaryStats.activeDevicesChange >= 0 ? 'up' : 'down'">
+            {{ summaryStats.activeDevicesChange >= 0 ? '↑' : '↓' }} {{ Math.abs(summaryStats.activeDevicesChange) }}%
+          </view>
+        </view>
+        <view class="stat-card">
+          <view class="stat-card-label">总用户数</view>
+          <view class="stat-card-value">{{ summaryStats.totalUsers }}</view>
+        </view>
+        <view class="stat-card">
+          <view class="stat-card-label">活跃用户</view>
+          <view class="stat-card-value">{{ summaryStats.activeUsers }}</view>
+          <view class="stat-card-change" :class="summaryStats.activeUsersChange >= 0 ? 'up' : 'down'">
+            {{ summaryStats.activeUsersChange >= 0 ? '↑' : '↓' }} {{ Math.abs(summaryStats.activeUsersChange) }}%
+          </view>
+        </view>
+      </view>
+
+      <!-- 平台选择 -->
       <view class="uni-stat--x mb-m">
-        <!-- 平台选择标签 -->
         <uni-stat-tabs label="平台选择" type="boldLine" mode="platform" v-model="query.platform_id" />
       </view>
+
+      <!-- 设备概览 -->
       <view class="uni-stat--x p-m">
-        <view class="uni-stat-card-header">设备概览</view>
-        <!-- 设备概览表格 -->
+        <view class="uni-stat-card-header">
+          <text>设备概览</text>
+        </view>
         <uni-table :loading="loading" border stripe emptyText="暂无数据">
           <uni-tr>
             <block v-for="(mapper, index) in deviceTableFields" :key="index">
-              <!-- 表头列 -->
-              <uni-th v-if="mapper.title" :key="index" align="center">
-                {{ mapper.title }}
-              </uni-th>
+              <uni-th v-if="mapper.title" :key="index" align="center">{{ mapper.title }}</uni-th>
             </block>
           </uni-tr>
           <uni-tr v-for="(item, i) in deviceTableData" :key="i">
@@ -62,15 +93,16 @@
           </uni-tr>
         </uni-table>
       </view>
+
+      <!-- 注册用户概览 -->
       <view class="uni-stat--x p-m">
-        <view class="uni-stat-card-header">注册用户概览</view>
-        <!-- 注册用户概览表格 -->
+        <view class="uni-stat-card-header">
+          <text>注册用户概览</text>
+        </view>
         <uni-table :loading="loading" border stripe emptyText="暂无数据">
           <uni-tr>
             <block v-for="(mapper, index) in userTableFields" :key="index">
-              <uni-th v-if="mapper.title" :key="index" align="center">
-                {{ mapper.title }}
-              </uni-th>
+              <uni-th v-if="mapper.title" :key="index" align="center">{{ mapper.title }}</uni-th>
             </block>
           </uni-tr>
           <uni-tr v-for="(item, i) in userTableData" :key="i">
@@ -173,6 +205,61 @@
       userTableFields() {
         // 返回用户表格的字段映射
         return this.tableFieldsMap(userFeildsMap);
+      },
+
+      displayName() {
+        const u = this.$uniIdPagesStore.store.userInfo || {};
+        return u.nickname || u.username || u.mobile || u.email || 'Admin';
+      },
+
+      greeting() {
+        const h = new Date().getHours();
+        if (h < 6) return '夜深了';
+        if (h < 9) return '早上好';
+        if (h < 12) return '上午好';
+        if (h < 14) return '中午好';
+        if (h < 18) return '下午好';
+        return '晚上好';
+      },
+
+      todayDate() {
+        const d = new Date();
+        const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+        return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 星期${weekdays[d.getDay()]}`;
+      },
+
+      summaryStats() {
+        const sum = (arr, key) => {
+          let total = 0;
+          for (const item of arr) {
+            const v = parseFloat(String(item[key] || '0').replace(/,/g, ''));
+            if (!isNaN(v)) total += v;
+          }
+          return total;
+        };
+        const fmt = (n) => {
+          if (n >= 10000) return (n / 10000).toFixed(1) + '万';
+          if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+          return String(n);
+        };
+        const pct = (today, yesterday) => {
+          if (!yesterday || yesterday === 0) return 0;
+          return Math.round(((today - yesterday) / yesterday) * 100);
+        };
+
+        const activeDevicesToday = sum(this.deviceTableData, 'active_device_count_value');
+        const activeDevicesYesterday = sum(this.deviceTableData, 'active_device_count_contrast');
+        const activeUsersToday = sum(this.userTableData, 'active_user_count_value');
+        const activeUsersYesterday = sum(this.userTableData, 'active_user_count_contrast');
+
+        return {
+          totalDevices: fmt(sum(this.deviceTableData, 'total_devices_value')),
+          activeDevices: fmt(activeDevicesToday),
+          activeDevicesChange: pct(activeDevicesToday, activeDevicesYesterday),
+          totalUsers: fmt(sum(this.userTableData, 'total_users_value')),
+          activeUsers: fmt(activeUsersToday),
+          activeUsersChange: pct(activeUsersToday, activeUsersYesterday),
+        };
       },
     },
 
@@ -371,14 +458,93 @@
 </script>
 
 <style lang="scss">
+  /* 欢迎区域 */
+  .dashboard-welcome {
+    margin-bottom: var(--space-6, 24px);
+  }
+
+  .welcome-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1, 4px);
+  }
+
+  .welcome-greeting {
+    font-size: var(--text-2xl, 24px);
+    font-weight: 600;
+    color: var(--color-text-primary, #1a1a2e);
+    line-height: 1.3;
+  }
+
+  .welcome-date {
+    font-size: var(--text-sm, 13px);
+    color: var(--color-text-tertiary, #9ca3af);
+  }
+
+  /* 概览卡片网格 */
+  .stat-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4, 16px);
+    margin-bottom: var(--space-6, 24px);
+
+    /* 小屏响应 */
+    @media screen and (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .stat-card {
+    background-color: var(--card-bg, #fff);
+    border: 1px solid var(--card-border, #f0f1f3);
+    border-radius: var(--radius-lg, 12px);
+    padding: var(--space-5, 20px);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      box-shadow: var(--shadow-md, 0 4px 12px rgba(0, 0, 0, 0.06));
+      transform: translateY(-1px);
+    }
+  }
+
+  .stat-card-label {
+    font-size: var(--text-sm, 13px);
+    color: var(--color-text-tertiary, #9ca3af);
+    margin-bottom: var(--space-2, 8px);
+  }
+
+  .stat-card-value {
+    font-size: var(--text-2xl, 24px);
+    font-weight: 700;
+    color: var(--color-text-primary, #1a1a2e);
+    line-height: 1.2;
+  }
+
+  .stat-card-change {
+    font-size: var(--text-xs, 12px);
+    font-weight: 500;
+    margin-top: var(--space-1, 4px);
+
+    &.up {
+      color: var(--color-success, #10b981);
+    }
+
+    &.down {
+      color: var(--color-error, #ef4444);
+    }
+  }
+
+  /* 表格区域 */
   .uni-stat-card-header {
     display: flex;
     justify-content: space-between;
-    color: $uni-text-color;
-    font-size: $uni-font-size-base;
+    align-items: center;
+    color: var(--color-text-primary, #1a1a2e);
+    font-size: var(--text-lg, 16px);
     font-weight: 600;
-    padding: 10px 0;
-    margin-bottom: 15px;
+    padding: var(--space-3, 12px) 0;
+    margin-bottom: var(--space-4, 16px);
+    border-bottom: 1px solid var(--color-border-subtle, #f0f1f3);
   }
 
   .uni-table-scroll {
@@ -386,7 +552,7 @@
   }
 
   .uni-stat-text {
-    color: $uni-text-color;
+    color: var(--color-text-primary, #1a1a2e);
   }
 
   .mt10 {
@@ -405,7 +571,7 @@
   .uni-a {
     cursor: pointer;
     text-decoration: underline;
-    color: $uni-text-color;
-    font-size: $uni-font-size-base;
+    color: var(--color-text-primary, #1a1a2e);
+    font-size: var(--text-base, 14px);
   }
 </style>
