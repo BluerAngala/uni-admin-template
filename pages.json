@@ -491,7 +491,7 @@
   "topWindow": {
     "path": "windows/topWindow",
     "style": {
-      "height": "60px"
+      "height": "56px"
     },
     "matchMedia": {
       "minWidth": 0
