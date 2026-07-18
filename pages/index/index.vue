@@ -49,28 +49,10 @@
 
       <!-- 概览卡片 -->
       <view class="stat-cards" v-if="complete">
-        <view class="stat-card">
-          <view class="stat-card-label">总设备数</view>
-          <view class="stat-card-value">{{ summaryStats.totalDevices }}</view>
-        </view>
-        <view class="stat-card">
-          <view class="stat-card-label">活跃设备</view>
-          <view class="stat-card-value">{{ summaryStats.activeDevices }}</view>
-          <view class="stat-card-change" :class="summaryStats.activeDevicesChange >= 0 ? 'up' : 'down'">
-            {{ summaryStats.activeDevicesChange >= 0 ? '↑' : '↓' }} {{ Math.abs(summaryStats.activeDevicesChange) }}%
-          </view>
-        </view>
-        <view class="stat-card">
-          <view class="stat-card-label">总用户数</view>
-          <view class="stat-card-value">{{ summaryStats.totalUsers }}</view>
-        </view>
-        <view class="stat-card">
-          <view class="stat-card-label">活跃用户</view>
-          <view class="stat-card-value">{{ summaryStats.activeUsers }}</view>
-          <view class="stat-card-change" :class="summaryStats.activeUsersChange >= 0 ? 'up' : 'down'">
-            {{ summaryStats.activeUsersChange >= 0 ? '↑' : '↓' }} {{ Math.abs(summaryStats.activeUsersChange) }}%
-          </view>
-        </view>
+        <app-stat-card label="总设备数" :value="summaryStats.totalDevices" />
+        <app-stat-card label="活跃设备" :value="summaryStats.activeDevices" :change="summaryStats.activeDevicesChange" />
+        <app-stat-card label="总用户数" :value="summaryStats.totalUsers" />
+        <app-stat-card label="活跃用户" :value="summaryStats.activeUsers" :change="summaryStats.activeUsersChange" />
       </view>
 
       <!-- 平台选择 -->
@@ -522,45 +504,7 @@
     }
   }
 
-  .stat-card {
-    background-color: var(--card-bg, #fff);
-    border: 1px solid var(--card-border, #f0f1f3);
-    border-radius: var(--radius-lg, 12px);
-    padding: var(--space-5, 20px);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
 
-    &:hover {
-      box-shadow: var(--shadow-md, 0 4px 12px rgba(0, 0, 0, 0.06));
-      transform: translateY(-1px);
-    }
-  }
-
-  .stat-card-label {
-    font-size: var(--text-sm, 13px);
-    color: var(--color-text-tertiary, #9ca3af);
-    margin-bottom: var(--space-2, 8px);
-  }
-
-  .stat-card-value {
-    font-size: var(--text-2xl, 24px);
-    font-weight: 700;
-    color: var(--color-text-primary, #1a1a2e);
-    line-height: 1.2;
-  }
-
-  .stat-card-change {
-    font-size: var(--text-xs, 12px);
-    font-weight: 500;
-    margin-top: var(--space-1, 4px);
-
-    &.up {
-      color: var(--color-success, #10b981);
-    }
-
-    &.down {
-      color: var(--color-error, #ef4444);
-    }
-  }
 
   /* 表格区域 */
   .uni-stat-card-header {
