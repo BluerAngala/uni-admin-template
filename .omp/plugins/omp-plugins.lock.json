@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "uni-app-dev": {
+      "version": "0.0.0",
+      "enabledFeatures": null,
+      "enabled": true
+    }
+  },
+  "settings": {}
+}

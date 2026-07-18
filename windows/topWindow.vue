@@ -15,7 +15,7 @@
           <image class="logo-image" :src="logo" mode="heightFix"></image>
           <text class="logo-text">{{ appName }}</text>
         </view>
-        <uni-icons @click="toggleSidebar" type="bars" class="menu-icon" size="30" color="#999"></uni-icons>
+        <uni-icons @click="toggleSidebar" type="bars" class="menu-icon" size="30" color="#9e9eb0"></uni-icons>
       </view>
       <view class="navbar-middle">
         <text class="title-text">{{ navigationBarTitleText }}</text>
@@ -33,8 +33,8 @@
         <!-- 主题选择器 -->
         <view class="navbar-right-item-gap" style="position: relative" :class="{ 'popup-menu': themeMenuOpened }">
           <view class="theme-selector" @click="toggleThemeMenu">
-            <uni-icons type="color-filled" size="24" color="#999" />
-            <uni-icons class="arrowdown" type="arrowdown" color="#666" size="13"></uni-icons>
+            <uni-icons type="color-filled" size="24" color="#9e9eb0" />
+            <uni-icons class="arrowdown" type="arrowdown" color="#9e9eb0" size="13"></uni-icons>
           </view>
           <view class="uni-mask" @click="closeThemeMenu" />
           <view class="theme-menu" :class="{ show: themeMenuOpened }">
@@ -49,7 +49,7 @@
         <view class="navbar-right-item-gap" style="position: relative" :class="{ 'popup-menu': langMenuOpened }">
           <view class="lang-selector" @click="toggleLangMenu">
             <view class="admin-icons-lang" />
-            <uni-icons class="arrowdown" type="arrowdown" color="#666" size="13"></uni-icons>
+            <uni-icons class="arrowdown" type="arrowdown" color="#9e9eb0" size="13"></uni-icons>
           </view>
           <view class="uni-mask" @click="closeLangMenu" />
           <view class="lang-menu" :class="{ show: langMenuOpened }">
@@ -66,7 +66,7 @@
             <view class="username ml-s"
               ><text>{{ userInfo.nickname || userInfo.username || userInfo.mobile || userInfo.email }}</text></view
             >
-            <uni-icons class="arrowdown" type="arrowdown" color="#666" size="13"></uni-icons>
+            <uni-icons class="arrowdown" type="arrowdown" color="#9e9eb0" size="13"></uni-icons>
           </view>
           <view class="uni-mask" @click="togglePopupMenu" />
           <view class="navbar-menu">
@@ -348,7 +348,7 @@
   .menu-item {
     padding: 8px;
     font-size: 16px;
-    color: #555;
+    color: #c0c0d0;
     line-height: 1;
   }
 
@@ -397,7 +397,7 @@
     border-width: 6px;
     margin-right: 3px;
     border-top-width: 0;
-    border-bottom-color: #ebeef5;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
     filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
   }
 
@@ -413,7 +413,7 @@
     top: 1px;
     margin-left: -10px;
     border-top-width: 0;
-    border-bottom-color: #fff;
+    border-bottom-color: #16162e;
   }
 
   /* 大屏时，隐藏的内容 */
@@ -460,11 +460,11 @@
     /* #ifndef H5 */
     // top: 85pxs: ;
     /* #endif */
-    background-color: #fff;
+    background-color: transparent;
     z-index: 999;
     padding: 10px 0;
-    background-color: #fff;
-    border: 1px solid #ebeef5;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 4px;
     box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.5);
   }
@@ -538,7 +538,7 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: rgba(255, 255, 255, 0.06);
     }
 
     .arrowdown {
@@ -556,10 +556,10 @@
     position: absolute;
     right: 0;
     top: 27px;
-    background-color: #fff;
+    background-color: transparent;
     z-index: 999;
     padding: 10px 0;
-    border: 1px solid #ebeef5;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 4px;
     box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.5);
     display: none;
@@ -567,17 +567,17 @@
     .menu-item {
       padding: 8px;
       font-size: 16px;
-      color: #555;
+      color: #c0c0d0;
       line-height: 1;
       cursor: pointer;
       transition: background-color 0.2s;
 
       &.active {
-        color: #1890ff;
+        color: #5b8def;
       }
 
       &:hover {
-        color: #1890ff;
+        color: #5b8def;
       }
     }
 
@@ -588,7 +588,7 @@
       border-width: 6px;
       margin-right: 3px;
       border-top-width: 0;
-      border-bottom-color: #ebeef5;
+      border-bottom-color: rgba(255, 255, 255, 0.08);
       filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
     }
 
@@ -604,7 +604,7 @@
       top: 1px;
       margin-left: -10px;
       border-top-width: 0;
-      border-bottom-color: #fff;
+      border-bottom-color: #16162e;
     }
   }
 </style>

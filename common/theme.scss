@@ -215,6 +215,276 @@ $error-key: 'error';
     }
   }
 }
+@mixin uni-surface-overrides {
+  $primary-color: getTheme(#{$primary-key + '-color'});
+  $bg-color: getTheme('bg-color');
+  $text-color: getTheme('text-color');
+  $text-color-grey: getTheme('text-color-grey');
+  $bg-color-grey: getTheme('bg-color-grey');
+  $bg-color-hover: getTheme('bg-color-hover');
+  $border-color: getTheme('border-color');
+
+  .uni-app--showleftwindow {
+    .uni-mask + .uni-left-window,
+    .uni-mask + .uni-right-window,
+    .uni-left-window,
+    .uni-left-window > * {
+      background-color: getTheme('left-window-bg-color') !important;
+    }
+
+    .uni-top-window,
+    .uni-top-window > *,
+    .uni-top-window,
+    .uni-top-window > * {
+      background-color: getTheme('top-window-bg-color') !important;
+    }
+
+    uni-main,
+    uni-page-wrapper,
+    uni-page-body,
+    uni-page-head,
+    uni-page-head .uni-page-head {
+      background-color: $bg-color-grey !important;
+      color: $text-color !important;
+    }
+
+    uni-page-body {
+      background-color: $bg-color !important;
+    }
+  }
+
+  uni-page-head .uni-btn-icon,
+  .uni-tips,
+  .uni-form-item-tips,
+  .uni-form-item-empty,
+  .uni-input-placeholder,
+  .select-picker button text,
+  .uni-sub-title,
+  .uni-table-text,
+  .uni-table-loading,
+  .uni-pagination__total,
+  .uni-pagination__num,
+  .uni-pagination__num-tag,
+  .uni-pagination__child-btn,
+  .uni-easyinput__placeholder-class,
+  .uni-load-more__text,
+  .uni-group__title-text,
+  .uni-card__header-title-text,
+  .uni-card__sub-title,
+  .uni-data-checklist .checklist-text,
+  .uni-data-picker__text,
+  .uni-data-picker__selector-item,
+  .uni-combox__placeholder,
+  .uni-combox__input,
+  .uni-select__input-text,
+  .uni-list-item__content-title,
+  .uni-list-item__content-note,
+  .uni-tag--default,
+  .uni-tag--default--inverted {
+    color: $text-color-grey !important;
+  }
+
+  .uni-title,
+  .uni-breadcrumb,
+  .uni-breadcrumb-item,
+  .uni-breadcrumb-item--slot,
+  .uni-breadcrumb-item--slot-link,
+  .uni-breadcrumb-item--separator,
+  .uni-breadcrumb-item text,
+  .uni-breadcrumb__item,
+  .uni-breadcrumb__item text,
+  .uni-breadcrumb-x,
+  .uni-card__header-title,
+  .uni-list-item__content-title-text,
+  .uni-group__title,
+  .uni-easyinput__content-input,
+  .uni-easyinput__content-textarea,
+  .uni-select,
+  .uni-select__input-box,
+  .uni-combox,
+  .uni-combox__input-box,
+  .uni-data-picker,
+  .uni-data-picker__selector,
+  .uni-pagination--enabled,
+  .uni-table,
+  .uni-table-tr,
+  .uni-table-th,
+  .uni-table-td,
+  .uni-table-th-content,
+  .uni-table-td-text,
+  .uni-list-item,
+  .uni-list-item__container,
+  .uni-card,
+  .uni-group,
+  .uni-popup-dialog,
+  .uni-popup__wrapper,
+  .uni-popup-share,
+  .uni-calendar,
+  .uni-calendar-item__weeks-box,
+  .uni-calendar-item__weeks-box-item,
+  .uni-datetime-picker,
+  .uni-datetime-picker--btn,
+  .uni-picker-container,
+  .uni-picker-custom,
+  .uni-data-checkbox,
+  .checklist-group,
+  .uni-stat--sum-item-value,
+  .uni-stat-card-header {
+    color: $text-color !important;
+  }
+
+  .uni-table,
+  .uni-table-tr,
+  .uni-table-th,
+  .uni-table-td,
+  .uni-table table,
+  .uni-table tbody,
+  .uni-table thead,
+  .uni-card,
+  .uni-group,
+  .uni-popup-dialog,
+  .uni-popup__wrapper,
+  .uni-popup-share,
+  .uni-calendar,
+  .uni-datetime-picker,
+  .uni-picker-container,
+  .uni-picker-custom,
+  .uni-data-picker,
+  .uni-data-picker__selector,
+  .uni-combox,
+  .uni-combox__selector,
+  .uni-select,
+  .uni-select__selector-scroll,
+  .uni-select__selector,
+  .uni-easyinput__content,
+  .uni-easyinput__content-input,
+  .uni-easyinput__content-textarea,
+  .uni-list,
+  .uni-list-item,
+  .uni-list-item__container,
+  .uni-data-checklist,
+  .checklist-group,
+  .uni-stat--x,
+  .uni-stat--sum-x,
+  .uni-container,
+  .select-picker button,
+  button,
+  button[type='default'] {
+    background-color: $bg-color !important;
+  }
+
+  .uni-tabs__header,
+  .uni-app--showleftwindow uni-main,
+  .uni-app--showleftwindow uni-page-wrapper,
+  .uni-mask + .uni-left-window,
+  .uni-mask + .uni-right-window,
+  .uni-left-window,
+  .uni-left-window > *,
+  .uni-table .uni-table-tr:nth-child(2n + 3),
+  .uni-table .uni-table-thead .uni-table-tr:hover,
+  .uni-pagination__btn,
+  .uni-pagination--hover,
+  .uni-group--wrap,
+  .uni-list-item:hover,
+  .uni-card--shadow,
+  .uni-calendar-item--multiple .uni-calendar-item--before-checked,
+  .uni-calendar-item--multiple .uni-calendar-item--after-checked {
+    background-color: $bg-color-grey !important;
+  }
+
+  .uni-table .uni-table-tr:hover,
+  .uni-list-item:active,
+  .uni-select__selector-scroll .uni-select__selector-item:hover,
+  .uni-combox__selector-item:hover,
+  .uni-pagination__btn:hover,
+  .uni-calendar-item__weeks-box-item:hover {
+    background-color: $bg-color-hover !important;
+  }
+
+  .table--border,
+  .empty-border,
+  .uni-table,
+  .uni-table-tr,
+  .uni-table-th,
+  .uni-table-td,
+  .uni-table table,
+  .uni-table tbody,
+  .uni-table thead,
+  .uni-table .tr-table--border,
+  .uni-card,
+  .uni-group,
+  .uni-popup-dialog,
+  .uni-picker-container,
+  .uni-picker-custom,
+  .uni-select,
+  .uni-select__selector,
+  .uni-combox,
+  .uni-combox__selector,
+  .uni-easyinput__content,
+  .uni-easyinput__content.is-input-border,
+  .uni-calendar,
+  .uni-calendar-item__weeks-box-item,
+  .uni-pagination__btn,
+  .page--active,
+  button,
+  button[type='default'] {
+    border-color: $border-color !important;
+  }
+
+  .uni-table-mask {
+    background-color: rgba(26, 26, 46, 0.82) !important;
+  }
+
+  .uni-table--loader {
+    border-color: $text-color-grey !important;
+  }
+
+  .uni-pagination__btn,
+  .uni-pagination__num-tag,
+  .uni-pagination__child-btn {
+    color: $text-color !important;
+  }
+
+  .uni-icon-wrapper,
+  .uni-icons,
+  .select-picker-icon,
+  .uni-data-picker .uni-icons,
+  .uni-combox .uni-icons,
+  .uni-datetime-picker .uni-icons,
+  .uni-pagination .uni-icons {
+    color: $text-color-grey !important;
+  }
+
+  .uni-select__selector-item.active,
+  .uni-combox__selector-item.active,
+  .uni-data-picker__selector-item.active,
+  .uni-pagination__num-current-text,
+  .current-index-text,
+  .page--active,
+  .uni-button-color,
+  .uni-link,
+  .link-btn,
+  .uni-table .link-btn-color {
+    color: $primary-color !important;
+  }
+
+  .page--active,
+  button[type='primary'],
+  .uni-datetime-picker--btn,
+  .uni-tag--primary,
+  .uni-tag--success,
+  .uni-tag--warning,
+  .uni-tag--error {
+    background-color: $primary-color !important;
+  }
+
+  .uni-tag--default,
+  .uni-tag--default--inverted,
+  button[plain],
+  button[type='default'][plain] {
+    background-color: transparent !important;
+  }
+}
 @mixin uni-tag($tag-type) {
   $tag-type-color: getTheme(#{$tag-type + '-color'});
   .uni-tag {
@@ -248,6 +518,7 @@ body {
       @include uni-picker;
       @include uni-calendar;
       @include uni-popup;
+      @include uni-surface-overrides;
       // 页面
       .link-btn {
         color: $primary-color !important;
@@ -287,6 +558,115 @@ body {
         .icon-item:hover .icon-text {
           color: $primary-color;
         }
+      }
+
+      // ──────────────────────────────
+      // 暗色基础样式覆盖（各主题从 $themes 取各自值）
+      // ──────────────────────────────
+      $bg-color: getTheme('bg-color');
+      $text-color: getTheme('text-color');
+      $text-color-grey: getTheme('text-color-grey');
+      $bg-color-grey: getTheme('bg-color-grey');
+      $bg-color-hover: getTheme('bg-color-hover');
+      $border-color: getTheme('border-color');
+
+      // 页面主体背景
+      background-color: $bg-color;
+      color: $text-color;
+
+      .uni-app--showleftwindow {
+        uni-main {
+          background-color: $bg-color-grey;
+        }
+        uni-page-wrapper {
+          background-color: $bg-color-grey;
+        }
+        uni-page-body {
+          background-color: $bg-color;
+          box-shadow: -1px -1px 5px 0 rgba(0, 0, 0, 0.15);
+        }
+      }
+
+      .uni-container {
+        background-color: $bg-color;
+      }
+
+      .uni-header {
+        border-bottom-color: $bg-color-grey;
+      }
+
+      // 文字颜色
+      .uni-title {
+        color: $text-color;
+      }
+      .uni-sub-title {
+        color: $text-color-grey;
+      }
+      .label-text {
+        color: $text-color;
+      }
+
+      // 统计卡片 / 面板
+      .uni-stat--x {
+        background-color: $bg-color;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+      }
+
+      // Modal
+      .modal {
+        background-color: $bg-color;
+      }
+
+      // Tabs
+      .uni-tabs__header {
+        background-color: $bg-color-grey;
+        border-bottom-color: $border-color;
+      }
+      .uni-tabs__item.is-active {
+        background-color: $bg-color;
+      }
+
+      // 输入类
+      .uni-search,
+      .uni-input-border,
+      .uni-textarea-border {
+        color: $text-color;
+        border-color: $border-color;
+        background-color: $bg-color;
+      }
+
+      // 下拉菜单（顶栏用户菜单 / 主题菜单 / 语言菜单）
+      .navbar-menu,
+      .theme-menu,
+      .lang-menu {
+        background-color: $bg-color;
+        border-color: $border-color;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.35);
+      }
+      .popup-menu__arrow {
+        border-bottom-color: $border-color;
+        &::after {
+          border-bottom-color: $bg-color;
+        }
+      }
+
+      // 顶部导航
+      .header {
+        background-color: getTheme('top-window-bg-color') !important;
+        color: getTheme('top-window-text-color');
+        border-bottom-color: darken(getTheme('top-window-bg-color'), 8%);
+      }
+
+      // 左侧菜单
+      .sidebar {
+        background-color: getTheme('left-window-bg-color');
+        border-right-color: darken(getTheme('left-window-bg-color'), 8%);
+      }
+
+      // 顶栏 hover 高亮
+      .theme-selector:hover,
+      .lang-selector:hover {
+        background-color: $bg-color-hover;
       }
     }
   }

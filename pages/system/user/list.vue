@@ -454,12 +454,12 @@
       width: 400px;
       padding: 40px 30px;
       border-radius: 5px;
-      background-color: #fff;
+      background-color: #1a1a2e;
     }
 
     &--header {
       font-size: 22px;
-      color: #333;
+      color: #e0e0e8;
       text-align: center;
     }
   }

@@ -35,13 +35,13 @@
   };
 </script>
 
-<style>
+<style lang="scss">
   .uni-menu-group {
     /* border: 1px red solid; */
   }
   .uni-menu-group__title {
     line-height: 36px;
     font-size: 12px;
-    color: #999;
+    color: #7f8096;
   }
 </style>

@@ -20,7 +20,7 @@
   };
 </script>
 
-<style>
+<style lang="scss">
   .uni-breadcrumb-x {
     flex: 1;
     display: flex;
@@ -28,5 +28,15 @@
     min-height: 55px;
     line-height: 55px;
     align-items: center;
+    color: #e0e0e8;
+    background-color: transparent;
+  }
+
+  ::v-deep .uni-breadcrumb,
+  ::v-deep .uni-breadcrumb-item,
+  ::v-deep .uni-breadcrumb-item text,
+  ::v-deep .uni-breadcrumb__item,
+  ::v-deep .uni-breadcrumb__item text {
+    color: #e0e0e8 !important;
   }
 </style>

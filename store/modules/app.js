@@ -32,11 +32,18 @@ export default {
       state.routes = routes;
     },
     SET_THEME: (state, theme) => {
+      state.theme = theme;
+      // auto → 根据系统偏好解析实际主题
+      let resolved = theme;
+      if (theme === 'auto') {
+        // #ifdef H5
+        resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+        // #endif
+      }
       // #ifdef H5
-      document.getElementsByTagName('body')[0].setAttribute('data-theme', theme);
+      document.getElementsByTagName('body')[0].setAttribute('data-theme', resolved);
       // #endif
       uni.setStorageSync(uniAdminCacheKey.theme, theme);
-      state.theme = theme;
     },
   },
   actions: {

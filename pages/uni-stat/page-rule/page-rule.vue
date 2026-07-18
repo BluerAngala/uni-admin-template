@@ -336,7 +336,7 @@
 <style lang="scss" scoped>
   .edit-rule-popup {
     padding: 20px;
-    background-color: #fff;
+    background-color: #1a1a2e;
     width: 900px;
     max-width: 90vw;
 
@@ -352,7 +352,7 @@
         align-items: center;
         justify-content: space-between;
         margin-top: 20px;
-        color: #606266;
+        color: #c0c0d0;
         font-size: 14px;
         word-break: break-all;
 
@@ -366,7 +366,7 @@
 
         .tags {
           flex: 1;
-          border: 1px solid #eee;
+          border: 1px solid rgba(255, 255, 255, 0.08);
           padding: 5px 10px;
           display: flex;
           flex-wrap: wrap;
@@ -385,10 +385,10 @@
             }
 
             &.tags-item-text {
-              background-color: #ecf8f3;
-              border-color: #d9f1e6;
+              background-color: rgba(91, 141, 239, 0.12);
+              border-color: rgba(91, 141, 239, 0.35);
               padding: 0 10px;
-              color: #42b983;
+              color: #5b8def;
               border-width: 1px;
               border-style: solid;
               border-radius: 4px;
@@ -402,13 +402,14 @@
                 padding: 0 10px;
                 box-sizing: border-box;
                 border-radius: 4px;
-                border: 1px solid #dcdfe6;
+                border: 1px solid rgba(255, 255, 255, 0.12);
                 font-size: 12px;
-                color: #606266;
+                color: #c0c0d0;
+                background-color: #16162a;
                 outline: none;
 
                 &:focus {
-                  border-color: #409eff;
+                  border-color: #5b8def;
                 }
               }
 

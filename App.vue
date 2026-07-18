@@ -27,6 +27,18 @@
     onLaunch: function () {
       // #ifdef H5
       initEmbed();
+
+      // 监听系统暗色模式变化
+      this.themeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const onThemeChange = () => {
+        const theme = uni.getStorageSync(uniAdminCacheKey.theme) || 'default';
+        if (theme === 'auto') {
+          this.SET_THEME('auto');
+        }
+      };
+      this.themeMediaQuery.addEventListener('change', onThemeChange);
+      // #endif
+
       console.log(
         `%c uni-admin %c v${version} `,
         'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',

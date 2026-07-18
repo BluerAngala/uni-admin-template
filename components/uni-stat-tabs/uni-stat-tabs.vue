@@ -20,7 +20,7 @@
             <!-- #ifndef MP -->
             <uni-tooltip>
               {{ item.name }}
-              <uni-icons v-if="item.tooltip" type="help" color="#666" />
+              <uni-icons v-if="item.tooltip" type="help" color="#9e9eb0" />
               <template v-if="item.tooltip" v-slot:content>
                 <view class="uni-stat-tooltip-s">
                   {{ item.tooltip }}
@@ -285,7 +285,7 @@
   .uni-label-text {
     font-size: 14px;
     font-weight: bold;
-    color: #555;
+    color: #c0c0d0;
     margin-top: 17px;
     margin-bottom: 17px;
     margin-right: 5px;
@@ -310,7 +310,7 @@
       &-item {
         white-space: nowrap;
         font-size: 14px;
-        color: #666;
+        color: #9e9eb0;
         text-align: center;
         cursor: pointer;
         box-sizing: border-box;
@@ -359,7 +359,7 @@
 
         &-box {
           padding: 5px 15px;
-          border: 1px solid #dcdfe6;
+          border: 1px solid rgba(255, 255, 255, 0.08);
           // margin: 0;
 
           &:not(:last-child) {
@@ -406,11 +406,11 @@
         position: absolute;
         top: 40px;
         right: 0;
-        border: 1px #eee solid;
+        border: 1px solid rgba(255, 255, 255, 0.08);
         box-sizing: border-box;
         width: 200px;
         border-radius: 5px;
-        background-color: #fff;
+        background-color: #1a1a2e;
         box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.1);
 
         // z-index: 10;
@@ -424,7 +424,7 @@
           transform: rotate(45deg);
           // border: 1px red solid;
           z-index: 0;
-          background-color: #fff;
+          background-color: #1a1a2e;
           box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
         }
         .costom-dialog-inner {
@@ -432,7 +432,7 @@
           padding: 15px;
           width: 100%;
           height: 100%;
-          background-color: #fff;
+          background-color: #1a1a2e;
           box-sizing: border-box;
           z-index: 2;
         }

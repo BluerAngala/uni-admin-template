@@ -30,17 +30,17 @@
       // 菜单的背景色
       backgroundColor: {
         type: String,
-        default: '#fff',
+        default: '#16162a',
       },
       // 菜单的文字颜色
       textColor: {
         type: String,
-        default: '#303133',
+        default: '#c0c0d0',
       },
       // 当前激活菜单的文字颜色
       activeTextColor: {
         type: String,
-        default: '#42B983',
+        default: '#5b8def',
       },
       // 当前激活菜单的背景色
       activeBackgroundColor: {
@@ -203,7 +203,7 @@
   .uni-nav-menu {
     width: 240px;
     // min-height: 500px;
-    background-color: #ffffff;
+    background-color: transparent;
     font-size: 14px;
   }
 </style>

@@ -9,7 +9,7 @@
       :field="field"
       where="enable==true"
       orderby="sort asc"
-      active-text-color="#409eff"
+      active-text-color="#5b8def"
       @select="select"
     >
     </uni-data-menu>

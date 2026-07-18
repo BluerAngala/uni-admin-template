@@ -370,12 +370,12 @@
   };
 </script>
 
-<style>
+<style lang="scss">
   .uni-stat-card-header {
     display: flex;
     justify-content: space-between;
-    color: #555;
-    font-size: 14px;
+    color: $uni-text-color;
+    font-size: $uni-font-size-base;
     font-weight: 600;
     padding: 10px 0;
     margin-bottom: 15px;
@@ -385,13 +385,8 @@
     min-height: auto;
   }
 
-  .link-btn-color {
-    color: #007aff;
-    cursor: pointer;
-  }
-
   .uni-stat-text {
-    color: #606266;
+    color: $uni-text-color;
   }
 
   .mt10 {
@@ -410,7 +405,7 @@
   .uni-a {
     cursor: pointer;
     text-decoration: underline;
-    color: #555;
-    font-size: 14px;
+    color: $uni-text-color;
+    font-size: $uni-font-size-base;
   }
 </style>
