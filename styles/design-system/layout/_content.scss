@@ -88,3 +88,82 @@
 .tags-manager--header {
   color: var(--color-text-primary) !important;
 }
+
+// --- 弹窗通用覆盖 ---
+.uni-popup__wrapper {
+  background-color: var(--modal-bg) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-xl);
+}
+
+// --- 通用文字颜色覆盖 ---
+.uni-title {
+  color: var(--color-text-primary) !important;
+}
+
+.uni-link {
+  color: var(--color-accent) !important;
+}
+
+// --- 表单提示文字 ---
+.uni-form-item-tips {
+  color: var(--color-text-tertiary) !important;
+}
+
+.uni-form-item-empty {
+  color: var(--color-text-tertiary) !important;
+}
+
+// --- 按钮覆盖 ---
+button[type='primary'] {
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+}
+
+button[type='default'] {
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border-primary) !important;
+}
+
+button[type='warn'] {
+  background-color: var(--color-error) !important;
+  border-color: var(--color-error) !important;
+}
+
+button[plain] {
+  background-color: transparent !important;
+}
+
+// --- 输入框覆盖 ---
+.uni-input-border,
+.uni-textarea-border {
+  border-color: var(--color-border-primary) !important;
+  background-color: var(--input-bg) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.uni-input-placeholder {
+  color: var(--input-placeholder) !important;
+}
+
+// --- tabs 覆盖 ---
+.uni-tabs__header {
+  border-bottom-color: var(--color-border-subtle) !important;
+}
+
+.uni-tabs__item {
+  color: var(--color-text-secondary) !important;
+
+  &.is-active {
+    color: var(--color-accent) !important;
+    border-bottom-color: var(--color-accent) !important;
+  }
+}
+
+// --- 弹窗中内联样式覆盖 ---
+// 处理页面中直接写 style="background-color: #fff" 的情况
+view[style*="background-color: #ffffff"],
+view[style*="background-color: #fff"] {
+  background-color: var(--modal-bg) !important;
+}

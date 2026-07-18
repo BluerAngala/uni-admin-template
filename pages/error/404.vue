@@ -29,7 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5f7fa;
+    background-color: var(--color-bg-secondary, #f5f7fa);
   }
 
   .error-container {
@@ -40,20 +40,20 @@
   .error-code {
     font-size: 120px;
     font-weight: 700;
-    color: #409eff;
+    color: var(--color-accent, #409eff);
     line-height: 1;
     margin-bottom: 20px;
   }
 
   .error-title {
     font-size: 24px;
-    color: #303133;
+    color: var(--color-text-primary, #303133);
     margin-bottom: 12px;
   }
 
   .error-msg {
     font-size: 14px;
-    color: #909399;
+    color: var(--color-text-secondary, #909399);
     line-height: 1.6;
   }
 </style>

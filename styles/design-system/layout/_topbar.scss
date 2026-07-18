@@ -16,32 +16,31 @@
 
 // --- 标题文字 ---
 .title-text {
-  color: var(--color-text-primary);
-  font-size: var(--text-base);
-  font-weight: 500;
+  color: var(--color-text-primary) !important;
+  font-weight: 600;
+  font-size: var(--text-lg);
 }
 
 // --- 菜单项 ---
 .menu-item {
-  color: var(--topbar-text) !important;
-  font-size: var(--text-lg) !important;
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
+  color: var(--color-text-secondary) !important;
+  transition: color var(--transition-fast);
 
-  &:hover {
-    color: var(--color-text-primary) !important;
-    background-color: var(--color-bg-tertiary);
+  &:hover,
+  &.hover-highlight:hover {
+    color: var(--color-accent) !important;
   }
 }
 
 // --- 用户名 ---
 .username {
-  color: var(--color-text-secondary);
-  font-size: var(--text-sm);
+  color: var(--color-text-primary) !important;
 }
 
 // --- hover 高亮 ---
 .hover-highlight {
+  color: var(--color-text-secondary) !important;
+
   &:hover {
     color: var(--color-accent) !important;
   }
@@ -50,11 +49,10 @@
 // --- 主题/语言选择器 ---
 .theme-selector,
 .lang-selector {
-  border-radius: var(--radius-sm);
-  transition: background-color var(--transition-fast);
+  color: var(--color-text-secondary) !important;
 
   &:hover {
-    background-color: var(--color-bg-tertiary) !important;
+    color: var(--color-accent) !important;
   }
 }
 
@@ -65,35 +63,29 @@
   background-color: var(--dropdown-bg) !important;
   border: 1px solid var(--dropdown-border) !important;
   border-radius: var(--radius-md) !important;
-  box-shadow: var(--dropdown-shadow) !important;
-  padding: var(--space-1\.5) 0 !important;
+  box-shadow: var(--shadow-lg) !important;
   transition: background-color var(--transition-normal), border-color var(--transition-normal);
 
   .menu-item {
-    color: var(--color-text-secondary) !important;
-    font-size: var(--text-sm) !important;
-    padding: var(--space-2) var(--space-4) !important;
-    border-radius: 0;
-    transition: all var(--transition-fast);
+    color: var(--color-text-primary) !important;
 
     &:hover {
-      color: var(--color-text-primary) !important;
       background-color: var(--dropdown-item-hover) !important;
+      color: var(--color-accent) !important;
     }
 
     &.active {
       color: var(--color-accent) !important;
     }
   }
+}
 
-  // 下拉箭头
-  .popup-menu__arrow {
-    border-bottom-color: var(--dropdown-border) !important;
-    filter: none;
+// --- 下拉箭头 ---
+.popup-menu__arrow {
+  border-bottom-color: var(--dropdown-border) !important;
 
-    &::after {
-      border-bottom-color: var(--dropdown-bg) !important;
-    }
+  &::after {
+    border-bottom-color: var(--dropdown-bg) !important;
   }
 }
 
@@ -104,9 +96,16 @@
 
 // --- debug 标记 ---
 .menu-item.debug {
-  color: var(--color-text-tertiary);
+  color: var(--color-warning) !important;
+}
 
-  &:hover {
-    color: var(--color-warning);
-  }
+// --- 侧栏切换图标 ---
+.menu-icon {
+  color: var(--color-text-tertiary) !important;
+}
+
+// --- uni-icons 颜色覆盖 ---
+.navbar-right .uni-icons,
+.navbar-right uni-icons {
+  color: var(--color-text-secondary) !important;
 }
