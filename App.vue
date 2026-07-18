@@ -95,5 +95,5 @@
   @import '@/common/uni-icons.css';
   @import '@/common/admin-icons.css';
   @import '@/common/theme.scss';
-  @import '@/styles/design-system/index';
+  @import '@/styles/design-system/index.scss';
 </style>
