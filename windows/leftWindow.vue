@@ -127,22 +127,22 @@
 <style lang="scss">
   .sidebar {
     position: fixed;
-    // top: var(--top-window-height); // useless
     width: 240px;
-    height: calc(100vh - (var(--top-window-height)));
+    height: calc(100vh - 56px);
     box-sizing: border-box;
-    border-right: 1px solid darken($left-window-bg-color, 8%);
-    background-color: $left-window-bg-color;
-    padding-bottom: 10px;
+    border-right: 1px solid var(--color-border-subtle, #f0f1f3);
+    background-color: var(--color-bg-elevated, #fff);
+    padding-bottom: var(--space-3, 12px);
+    transition: background-color 0.2s, border-color 0.2s;
   }
+
   /* #ifdef H5 */
-  .sidebar ::-webkit-scrollbar {
+  .sidebar::-webkit-scrollbar {
     display: none;
-    // scrollbar-width: thin;
   }
   /* #endif */
 
   .title {
-    margin-left: 5px;
+    margin-left: var(--space-1, 4px);
   }
 </style>
