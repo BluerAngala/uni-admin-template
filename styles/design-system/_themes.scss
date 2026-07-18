@@ -6,6 +6,10 @@
 // Default（亮色）主题 — 现代明亮
 // ------------------------------------------
 [data-theme="default"] {
+  // 字体
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+
   // 背景 — 干净白灰
   --color-bg-primary:    #ffffff;
   --color-bg-secondary:  #f9fafb;
@@ -50,6 +54,10 @@
 // Dark 主题 — 现代深色（参考 Vercel/Linear）
 // ------------------------------------------
 [data-theme="dark"] {
+  // 字体
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+
   // 背景 — 三层灰度，层次分明
   --color-bg-primary:    #0a0a0b;
   --color-bg-secondary:  #111113;
