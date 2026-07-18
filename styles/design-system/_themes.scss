@@ -1,0 +1,80 @@
+// ============================================
+// 主题映射 — Dark / Auto
+// ============================================
+
+// ------------------------------------------
+// Dark 主题
+// ------------------------------------------
+[data-theme="dark"] {
+  // 背景
+  --color-bg-primary:    #0f0f1a;
+  --color-bg-secondary:  #16162a;
+  --color-bg-tertiary:   #1e1e32;
+  --color-bg-elevated:   #1a1a2e;
+
+  // 文字
+  --color-text-primary:   #e8e8f0;
+  --color-text-secondary: #9e9eb0;
+  --color-text-tertiary:  #6b7290;
+  --color-text-inverse:   #1a1a2e;
+
+  // 边框
+  --color-border-primary: #2a2a42;
+  --color-border-subtle:  #1e1e32;
+
+  // 强调色（dark 下微调亮度）
+  --color-accent:         #5b8def;
+  --color-accent-hover:   #6b9df0;
+  --color-accent-active:  #4a7de0;
+  --color-accent-subtle:  rgba(91, 141, 239, 0.12);
+
+  // 语义色
+  --color-success-subtle: rgba(16, 185, 129, 0.12);
+  --color-warning-subtle: rgba(245, 158, 11, 0.12);
+  --color-error-subtle:   rgba(239, 68, 68, 0.12);
+
+  // 遮罩（dark 下更深）
+  --color-mask:           rgba(0, 0, 0, 0.6);
+
+  // 阴影（dark 下用更重的阴影区分层级）
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+// ------------------------------------------
+// Auto 模式 — 跟随系统偏好
+// ------------------------------------------
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] {
+    --color-bg-primary:    #0f0f1a;
+    --color-bg-secondary:  #16162a;
+    --color-bg-tertiary:   #1e1e32;
+    --color-bg-elevated:   #1a1a2e;
+
+    --color-text-primary:   #e8e8f0;
+    --color-text-secondary: #9e9eb0;
+    --color-text-tertiary:  #6b7290;
+    --color-text-inverse:   #1a1a2e;
+
+    --color-border-primary: #2a2a42;
+    --color-border-subtle:  #1e1e32;
+
+    --color-accent:         #5b8def;
+    --color-accent-hover:   #6b9df0;
+    --color-accent-active:  #4a7de0;
+    --color-accent-subtle:  rgba(91, 141, 239, 0.12);
+
+    --color-success-subtle: rgba(16, 185, 129, 0.12);
+    --color-warning-subtle: rgba(245, 158, 11, 0.12);
+    --color-error-subtle:   rgba(239, 68, 68, 0.12);
+
+    --color-mask:           rgba(0, 0, 0, 0.6);
+
+    --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.5);
+  }
+}

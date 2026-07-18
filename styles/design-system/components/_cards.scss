@@ -1,0 +1,80 @@
+// ============================================
+// 卡片覆盖
+// ============================================
+
+// --- 通用卡片 ---
+.uni-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.uni-card__header {
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding: var(--space-4) var(--space-5);
+}
+
+.uni-card__content {
+  padding: var(--space-5);
+}
+
+.uni-card__title {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: var(--text-base);
+}
+
+// --- 统计面板卡片 ---
+.uni-stat-panel {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+}
+
+// --- 通知条 ---
+.uni-notice-bar {
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+
+  // 警告通知
+  &[background-color="#fef0f0"] {
+    background-color: var(--color-error-subtle) !important;
+    color: var(--color-error) !important;
+  }
+}
+
+// --- Element Plus 卡片兼容 ---
+.el-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .el-card__header {
+    border-bottom-color: var(--color-border-subtle);
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .el-card__body {
+    padding: var(--space-5);
+  }
+}

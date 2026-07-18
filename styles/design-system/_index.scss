@@ -1,0 +1,29 @@
+// ============================================
+// Design System — 总入口
+// 按依赖顺序 import 所有模块
+// ============================================
+
+// 1. Token 定义
+@import 'tokens';
+
+// 2. 主题映射
+@import 'themes';
+
+// 3. 全局基础
+@import 'base';
+
+// 4. 布局覆盖
+@import 'layout/sidebar';
+@import 'layout/topbar';
+@import 'layout/content';
+
+// 5. 组件覆盖
+@import 'components/buttons';
+@import 'components/tables';
+@import 'components/forms';
+@import 'components/cards';
+@import 'components/modals';
+@import 'components/badges';
+@import 'components/breadcrumbs';
+@import 'components/pagination';
+@import 'components/dropdowns';

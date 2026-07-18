@@ -1,0 +1,133 @@
+// ============================================
+// 弹窗/抽屉覆盖
+// ============================================
+
+// --- uni-popup 弹窗 ---
+.uni-popup {
+  // 遮罩
+  .uni-popup__mask {
+    background-color: var(--modal-mask);
+  }
+
+  // 弹窗容器
+  .uni-popup__wrapper {
+    background-color: var(--modal-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    transition: background-color var(--transition-normal);
+  }
+
+  // 中心弹窗
+  &.uni-popup--center {
+    .uni-popup__wrapper {
+      border-radius: var(--radius-xl);
+    }
+  }
+
+  // 底部弹窗
+  &.uni-popup--bottom {
+    .uni-popup__wrapper {
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+  }
+}
+
+// --- uni-modal 模态框 ---
+.uni-modal {
+  background-color: var(--modal-bg);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+
+  .uni-modal__title {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .uni-modal__content {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .uni-modal__btn {
+    color: var(--color-accent);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-accent-subtle);
+    }
+
+    &.uni-modal__btn--primary {
+      color: var(--color-accent);
+    }
+
+    &.uni-modal__btn--default {
+      color: var(--color-text-secondary);
+    }
+  }
+}
+
+// --- uni-drawer 抽屉 ---
+.uni-drawer {
+  .uni-drawer__mask {
+    background-color: var(--modal-mask);
+  }
+
+  .uni-drawer__content {
+    background-color: var(--modal-bg);
+    transition: background-color var(--transition-normal);
+  }
+}
+
+// --- 标签管理弹窗（用户列表页）---
+.tags-manager--x {
+  background-color: var(--modal-bg) !important;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+
+  .tags-manager--header {
+    color: var(--color-text-primary) !important;
+  }
+}
+
+// --- Element Plus 弹窗兼容 ---
+.el-dialog {
+  background-color: var(--modal-bg);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+
+  .el-dialog__title {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .el-dialog__body {
+    color: var(--color-text-secondary);
+  }
+
+  .el-dialog__headerbtn .el-dialog__close {
+    color: var(--color-text-tertiary);
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+}
+
+.el-message-box {
+  background-color: var(--modal-bg);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+
+  .el-message-box__title {
+    color: var(--color-text-primary);
+  }
+
+  .el-message-box__content {
+    color: var(--color-text-secondary);
+  }
+}
+
+.el-overlay {
+  background-color: var(--modal-mask);
+}

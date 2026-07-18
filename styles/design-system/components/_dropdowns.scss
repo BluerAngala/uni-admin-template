@@ -1,0 +1,139 @@
+// ============================================
+// 下拉菜单覆盖
+// ============================================
+
+// --- uni-data-select ---
+.uni-data-select {
+  .uni-select {
+    border-color: var(--input-border);
+    border-radius: var(--radius-md);
+    background-color: var(--input-bg);
+    transition: all var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-accent);
+    }
+  }
+
+  .uni-select__input-text {
+    color: var(--color-text-primary);
+  }
+
+  .uni-select__input-placeholder {
+    color: var(--input-placeholder);
+  }
+}
+
+// --- 下拉面板 ---
+.uni-select__selector {
+  background-color: var(--dropdown-bg) !important;
+  border: 1px solid var(--dropdown-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--dropdown-shadow) !important;
+  padding: var(--space-1\.5) 0;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.uni-select__selector-item {
+  color: var(--color-text-primary);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background-color: var(--dropdown-item-hover);
+  }
+
+  &.is-selected {
+    color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+    font-weight: 500;
+  }
+}
+
+// --- uni-stat-tabs（统计标签页）---
+.uni-stat-tabs {
+  .uni-stat-tabs__item {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+
+    &:hover {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-tertiary);
+    }
+
+    &.is-active {
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+  }
+
+  // boldLine 模式
+  &.uni-stat-tabs--boldLine {
+    .uni-stat-tabs__item.is-active {
+      border-bottom-color: var(--color-accent);
+    }
+  }
+}
+
+// --- Element Plus 下拉菜单兼容 ---
+.el-dropdown-menu {
+  background-color: var(--dropdown-bg);
+  border: 1px solid var(--dropdown-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--dropdown-shadow);
+  padding: var(--space-1\.5) 0;
+
+  .el-dropdown-menu__item {
+    color: var(--color-text-primary);
+    font-size: var(--text-sm);
+    padding: var(--space-2) var(--space-4);
+    transition: all var(--transition-fast);
+
+    &:hover {
+      background-color: var(--dropdown-item-hover);
+      color: var(--color-accent);
+    }
+
+    &.is-disabled {
+      color: var(--color-text-tertiary);
+
+      &:hover {
+        background-color: transparent;
+        color: var(--color-text-tertiary);
+      }
+    }
+  }
+}
+
+// --- Element Plus Select 下拉 ---
+.el-select-dropdown {
+  background-color: var(--dropdown-bg);
+  border-color: var(--dropdown-border);
+  box-shadow: var(--dropdown-shadow);
+
+  .el-select-dropdown__item {
+    color: var(--color-text-primary);
+
+    &:hover {
+      background-color: var(--dropdown-item-hover);
+    }
+
+    &.selected {
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+  }
+}
+
+// --- 下拉箭头图标 ---
+.arrowdown {
+  color: var(--color-text-tertiary);
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-text-secondary);
+  }
+}

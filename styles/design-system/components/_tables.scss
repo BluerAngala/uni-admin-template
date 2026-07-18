@@ -1,0 +1,115 @@
+// ============================================
+// 表格覆盖
+// ============================================
+
+// --- uni-ui 表格 ---
+.uni-table {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  border-color: var(--table-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition-normal);
+}
+
+// --- 表头 ---
+.uni-th {
+  background-color: var(--table-header-bg) !important;
+  color: var(--color-text-secondary) !important;
+  font-weight: 600;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  border-bottom-color: var(--table-border) !important;
+  padding: var(--space-3) var(--space-4);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+// --- 表格行 ---
+.uni-tr {
+  transition: background-color var(--transition-fast);
+
+  &:hover {
+    background-color: var(--table-row-hover);
+  }
+}
+
+// --- 表格单元格 ---
+.uni-td {
+  color: var(--color-text-primary);
+  border-bottom-color: var(--table-border) !important;
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--transition-normal);
+}
+
+// --- 条纹模式 ---
+.uni-table--stripe {
+  .uni-tr:nth-child(2n) {
+    background-color: var(--color-bg-secondary);
+  }
+}
+
+// --- 边框模式 ---
+.uni-table--border {
+  border-color: var(--table-border);
+
+  .uni-th,
+  .uni-td {
+    border-color: var(--table-border);
+  }
+}
+
+// --- 空数据 ---
+.uni-table__empty {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-sm);
+  padding: var(--space-8) 0;
+}
+
+// --- 加载状态 ---
+.uni-table__loading {
+  color: var(--color-text-tertiary);
+}
+
+// --- Element Plus 表格兼容 ---
+.el-table {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+
+  th.el-table__cell {
+    background-color: var(--table-header-bg) !important;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  td.el-table__cell {
+    border-bottom-color: var(--table-border);
+  }
+
+  tr:hover > td.el-table__cell {
+    background-color: var(--table-row-hover);
+  }
+
+  &--border {
+    border-color: var(--table-border);
+
+    td.el-table__cell,
+    th.el-table__cell {
+      border-right-color: var(--table-border);
+    }
+  }
+
+  &--striped {
+    .el-table__body tr.el-table__row--striped td.el-table__cell {
+      background-color: var(--color-bg-secondary);
+    }
+  }
+}
+
+// --- 分页器（与表格配合使用）---
+.uni-pagination {
+  margin-top: var(--space-4);
+}
