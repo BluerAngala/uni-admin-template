@@ -409,7 +409,7 @@
         box-sizing: border-box;
         width: 200px;
         border-radius: 5px;
-        background-color: #1a1a2e;
+        background-color: var(--modal-bg, #fff);
         box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.1);
 
         // z-index: 10;
@@ -423,7 +423,7 @@
           transform: rotate(45deg);
           // border: 1px red solid;
           z-index: 0;
-          background-color: #1a1a2e;
+          background-color: var(--modal-bg, #fff);
           box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
         }
         .costom-dialog-inner {
@@ -431,7 +431,7 @@
           padding: 15px;
           width: 100%;
           height: 100%;
-          background-color: #1a1a2e;
+          background-color: var(--modal-bg, #fff);
           box-sizing: border-box;
           z-index: 2;
         }

@@ -336,7 +336,7 @@
 <style lang="scss" scoped>
   .edit-rule-popup {
     padding: 20px;
-    background-color: #1a1a2e;
+    background-color: var(--modal-bg, #fff);
     width: 900px;
     max-width: 90vw;
 
@@ -352,7 +352,7 @@
         align-items: center;
         justify-content: space-between;
         margin-top: 20px;
-        color: #c0c0d0;
+        color: var(--color-text-secondary, #999);
         font-size: 14px;
         word-break: break-all;
 
@@ -388,7 +388,7 @@
               background-color: rgba(91, 141, 239, 0.12);
               border-color: rgba(91, 141, 239, 0.35);
               padding: 0 10px;
-              color: #5b8def;
+              color: var(--color-accent, #5b8def);
               border-width: 1px;
               border-style: solid;
               border-radius: 4px;
@@ -404,12 +404,12 @@
                 border-radius: 4px;
                 border: 1px solid rgba(255, 255, 255, 0.12);
                 font-size: 12px;
-                color: #c0c0d0;
-                background-color: #16162a;
+                color: var(--color-text-secondary, #999);
+                background-color: var(--color-bg-tertiary, #f0f1f3);
                 outline: none;
 
                 &:focus {
-                  border-color: #5b8def;
+                  border-color: var(--color-accent, #5b8def);
                 }
               }
 
