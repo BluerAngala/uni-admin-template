@@ -1,13 +1,10 @@
 // ============================================
-// Design System — Token + 主题 + 基础样式
-// 不做全局组件覆盖，组件样式由各组件自行处理
+// Design System — 主题 + 基础样式
+// CSS Variables 在 _themes.scss 中通过 [data-theme] 定义
 // ============================================
 
-// 1. Token 定义（CSS Variables）
-@import './tokens';
-
-// 2. 主题映射（light / dark / auto）
+// 1. 主题映射（default / dark / auto）— 定义所有 CSS Variables
 @import './themes';
 
-// 3. 全局基础（body/link/scrollbar/page）
+// 2. 全局基础（body/link/scrollbar/page）
 @import './base';
