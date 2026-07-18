@@ -124,32 +124,32 @@
   .strong {
     padding: 10rpx;
     display: inline-block;
-    color: #c7254e;
+    color: var(--color-error, #ef4444);
   }
 
   .a-label {
     text-decoration: none;
-    color: #0366d6;
+    color: var(--color-accent, #5b8def);
     font-weight: bold;
     padding: 10rpx;
   }
 
   .text-separated {
     line-height: 2em;
-    color: #2c3e50;
+    color: var(--color-text-primary, #1a1a2e);
   }
 
   .tip {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: #f3f5f7;
-    color: #2c3e50;
+    background-color: var(--color-bg-secondary, #f7f8fa);
+    color: var(--color-text-primary, #1a1a2e);
     padding: 10px;
     font-size: 32rpx;
 
     border: {
-      color: #409eff;
+      color: var(--color-accent, #5b8def);
       left-width: 8px;
       left-style: solid;
     }

@@ -9,7 +9,7 @@
       </uni-forms-item>
       <uni-forms-item name="icon" label="图标 class" style="margin-bottom: 40px">
         <uni-easyinput v-model="formData.icon" :clearable="false" placeholder="请输入菜单图标css样式类名">
-          <span slot="right" style="color: #007aff; cursor: pointer; padding-right: 10px" @click="showIconPopup">内置图标</span>
+          <span slot="right" style="color: var(--color-accent, #007aff); cursor: pointer; padding-right: 10px" @click="showIconPopup">内置图标</span>
         </uni-easyinput>
         <uni-link font-size="12" href="https://uniapp.dcloud.net.cn/uniCloud/admin?id=icon-%e5%9b%be%e6%a0%87" text="如何使用自定义图标？" class="uni-form-item-tips"></uni-link>
       </uni-forms-item>
