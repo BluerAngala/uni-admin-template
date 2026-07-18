@@ -37,7 +37,7 @@
       />
 
       <!-- 概览卡片 -->
-      <view class="stat-cards" v-if="deviceTableData.length || userTableData.length">
+      <view class="stat-cards" v-if="complete">
         <view class="stat-card">
           <view class="stat-card-label">总设备数</view>
           <view class="stat-card-value">{{ summaryStats.totalDevices }}</view>

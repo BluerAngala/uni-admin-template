@@ -88,3 +88,12 @@
   color: var(--color-error);
   border-color: transparent;
 }
+
+// --- 通知条覆盖 ---
+// uni-notice-bar 使用 inline style 传颜色，需要 !important 覆盖
+.uni-notice-bar {
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  background-color: var(--color-warning-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
