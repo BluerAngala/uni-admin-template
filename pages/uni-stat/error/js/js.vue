@@ -75,7 +75,7 @@
                 <!-- #ifndef MP -->
                 <uni-tooltip>
                   {{ mapper.title }}
-                  <uni-icons v-if="mapper.tooltip" type="help" color="#666" />
+                  <uni-icons v-if="mapper.tooltip" type="help" color="var(--color-text-tertiary, #666)" />
                   <template v-if="mapper.tooltip" v-slot:content>
                     <view class="uni-stat-tooltip-s">
                       {{ mapper.tooltip }}
@@ -605,7 +605,9 @@
 
       navTo(url, item) {
         if (url.indexOf('http') > -1) {
+          // #ifdef H5
           window.open(url);
+          // #endif
         } else {
           if (item) {
             url = `${url}?error_hash=${item.hash}&create_time=${item.start_time}`;
@@ -640,7 +642,7 @@
 
   .uni-stat-panel {
     box-shadow: unset;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
     padding: 0;
     margin: 0 15px;
   }
@@ -684,7 +686,7 @@
 
   .upload-msg-warning {
     padding: 0px 15px;
-    color: red;
+    color: var(--color-error, red);
     font-size: 14px;
   }
 
@@ -700,7 +702,7 @@
     font-size: 14px;
     color: var(--color-text-secondary, #6b7280);
     padding: 15rpx 25rpx;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid var(--color-border-subtle, #e5e7eb);
+    border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
   }
 </style>

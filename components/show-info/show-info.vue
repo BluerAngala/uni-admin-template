@@ -1,6 +1,6 @@
 <template>
   <view style="position: relative">
-    <uni-icons @mouseenter.native="mouseenter" @mouseleave.native="showStableInfo = false" style="padding: 0 10px; color: #a8a8a8; cursor: pointer" type="info" />
+    <uni-icons @mouseenter.native="mouseenter" @mouseleave.native="showStableInfo = false" style="padding: 0 10px; color: var(--color-text-tertiary, #a8a8a8); cursor: pointer" type="info" />
     <view v-if="showStableInfo" class="show-stable" :style="{ top: `${top}px`, left: `${left}px`, width: `${width}px` }">
       <text>{{ content }}</text>
     </view>
@@ -39,7 +39,7 @@
 </script>
 
 <style lang="scss" scoped>
-  $main_color: #fff;
+  $main_color: var(--color-text-inverse, #fff);
   $main_back_color: #303133;
 
   .show-stable {
@@ -48,7 +48,7 @@
     background-color: $main_back_color;
     color: $main_color;
     border-radius: 4px;
-    border: 1px solid #e9e9eb;
+    border: 1px solid var(--color-border-subtle, #e9e9eb);
     z-index: 99999;
   }
 </style>

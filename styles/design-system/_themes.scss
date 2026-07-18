@@ -1,98 +1,97 @@
-// ============================================
-// 主题映射 — 暗夜毛玻璃风格
-// 完全参照 Glassmorphism-Admin-Panel-UI
-// ============================================
+// Semantic theme maps. `default` and `dark` must each define every UI role.
+:root,
+[data-theme='default'] {
+  --color-bg-primary: #f8f9fc;
+  --color-bg-secondary: #f0f2f7;
+  --color-bg-tertiary: #e8ebf2;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-inset: #f5f6fa;
+  --color-surface-overlay: #ffffff;
 
-// ------------------------------------------
-// 全局 CSS 变量（默认暗色主题）
-// ------------------------------------------
-:root {
-  // 字体
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  --color-text-primary: #0f1729;
+  --color-text-secondary: #4b5672;
+  --color-text-tertiary: #7c879e;
+  --color-text-inverse: #ffffff;
 
-  // 基础色调
-  --background: 0 0% 4%;
-  --foreground: 0 0% 98%;
-  --card-bg-hsl: 20 15% 8%;
+  --color-border-subtle: rgba(15, 23, 42, 0.07);
+  --color-border-strong: rgba(15, 23, 42, 0.12);
+  --color-focus-ring: rgba(99, 91, 255, 0.28);
+  --color-mask: rgba(15, 23, 42, 0.36);
 
-  // 主题色（靛蓝灰 — 可动态调节）
-  --theme-primary: 215 25% 63%;
-  --theme-primary-rgb: 148, 162, 180;
-  --theme-gradient-from: #94a2b4;
-  --theme-gradient-to: #7a8a9e;
+  --color-accent: #635bff;
+  --color-accent-hover: #5147e5;
+  --color-accent-active: #4338ca;
+  --color-accent-subtle: #ede9fe;
+  --color-success: #16a34a;
+  --color-success-subtle: #ecfdf5;
+  --color-warning: #d97706;
+  --color-warning-subtle: #fffbeb;
+  --color-error: #dc2626;
+  --color-error-subtle: #fef2f2;
 
-  // 毛玻璃参数（可从设置页面调节）
-  --glass-opacity: 0.06;
-  --glass-blur: 16px;
-  --glass-border-opacity: 0.10;
-  --glass-saturation: 150%;
-  --glass-hover-opacity-add: 0.02;
-  --glass-hover-border-add: 0.05;
+  --color-table-header: #f8f9fc;
+  --color-table-row-hover: #f3f4f9;
+  --color-menu-bg: #fafbfd;
+  --color-menu-hover: #f0f2f7;
+  --color-menu-active: #ede9fe;
+  --color-input-bg: #ffffff;
+  --color-input-disabled: #f0f2f7;
+  --color-scrollbar: rgba(15, 23, 42, 0.12);
+  --color-scrollbar-hover: rgba(15, 23, 42, 0.22);
 
-  // 透明度层级
-  --ui-opacity-5: 0.05;
-  --ui-opacity-10: 0.10;
-  --ui-opacity-15: 0.15;
-  --ui-opacity-20: 0.20;
-  --ui-opacity-40: 0.40;
-  --ui-opacity-60: 0.60;
-  --ui-opacity-80: 0.80;
+  /* Topbar glass effect */
+  --color-topbar-bg: rgba(255, 255, 255, 0.72);
+  --color-topbar-border: rgba(15, 23, 42, 0.06);
 
-  // 文字色（rgba 形式，便于统一调整）
-  --text-primary: rgba(255, 255, 255, 1);
-  --text-secondary: rgba(255, 255, 255, 0.80);
-  --text-tertiary: rgba(255, 255, 255, 0.60);
-  --text-muted: rgba(255, 255, 255, 0.40);
-
-  // 渐变透明度
-  --bg-gradient-opacity-1: 0.12;
-  --bg-gradient-opacity-2: 0.10;
-  --bg-gradient-opacity-3: 0.04;
-
-  // 圆角
-  --radius: 1rem; // 16px
-  --radius-lg: 1.25rem; // 20px
-  --radius-md: 0.75rem; // 12px
-  --radius-sm: 0.5rem; // 8px
-
-  // 阴影
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
-
-  // 背景色
-  --theme-bg-color: #0a0a0a;
-
-  // 语义色
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: var(--theme-gradient-from);
+  /* Sidebar refinement */
+  --color-sidebar-bg: #fafbfd;
+  --color-sidebar-active-indicator: var(--color-accent);
 }
 
-// ------------------------------------------
-// 兼容旧 token（逐步迁移用）
-// ------------------------------------------
-[data-theme="default"],
-[data-theme="dark"] {
-  --color-bg-primary: var(--theme-bg-color);
-  --color-bg-secondary: rgba(255, 255, 255, var(--ui-opacity-5));
-  --color-bg-tertiary: rgba(255, 255, 255, var(--ui-opacity-10));
-  --color-bg-elevated: rgba(255, 255, 255, var(--glass-opacity));
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-tertiary: var(--text-tertiary);
-  --color-text-inverse: #0a0a0a;
-  --color-border-primary: rgba(255, 255, 255, var(--glass-border-opacity));
-  --color-border-subtle: rgba(255, 255, 255, calc(var(--glass-border-opacity) - 0.04));
-  --color-accent: var(--theme-gradient-from);
-  --color-accent-hover: var(--theme-gradient-to);
-  --color-accent-active: var(--theme-gradient-from);
-  --color-accent-subtle: rgba(var(--theme-primary-rgb), var(--ui-opacity-15));
-  --color-success-subtle: rgba(34, 197, 94, var(--ui-opacity-15));
-  --color-warning-subtle: rgba(245, 158, 11, var(--ui-opacity-15));
-  --color-error-subtle: rgba(239, 68, 68, var(--ui-opacity-15));
-  --color-mask: rgba(0, 0, 0, 0.7);
+[data-theme='dark'] {
+  --color-bg-primary: #0c1021;
+  --color-bg-secondary: #111729;
+  --color-bg-tertiary: #1a2236;
+  --color-surface: #151c2e;
+  --color-surface-raised: #1a2338;
+  --color-surface-inset: #0e1424;
+  --color-surface-overlay: #1a2338;
+
+  --color-text-primary: #f0f2f8;
+  --color-text-secondary: #9ca3c0;
+  --color-text-tertiary: #6b7490;
+  --color-text-inverse: #0f1729;
+
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border-strong: rgba(255, 255, 255, 0.1);
+  --color-focus-ring: rgba(129, 120, 255, 0.35);
+  --color-mask: rgba(0, 0, 0, 0.6);
+
+  --color-accent: #8178ff;
+  --color-accent-hover: #9b93ff;
+  --color-accent-active: #6b62e6;
+  --color-accent-subtle: rgba(129, 120, 255, 0.12);
+  --color-success: #34d673;
+  --color-success-subtle: rgba(52, 214, 115, 0.1);
+  --color-warning: #fbbf24;
+  --color-warning-subtle: rgba(251, 191, 36, 0.1);
+  --color-error: #f87171;
+  --color-error-subtle: rgba(248, 113, 113, 0.1);
+
+  --color-table-header: #151c2e;
+  --color-table-row-hover: #1a2338;
+  --color-menu-bg: #111729;
+  --color-menu-hover: #1a2236;
+  --color-menu-active: rgba(129, 120, 255, 0.12);
+  --color-input-bg: #111729;
+  --color-input-disabled: #1a2236;
+  --color-scrollbar: rgba(255, 255, 255, 0.08);
+  --color-scrollbar-hover: rgba(255, 255, 255, 0.16);
+
+  --color-topbar-bg: rgba(12, 16, 33, 0.78);
+  --color-topbar-border: rgba(255, 255, 255, 0.05);
+
+  --color-sidebar-bg: #111729;
+  --color-sidebar-active-indicator: var(--color-accent);
 }

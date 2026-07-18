@@ -9,7 +9,7 @@
           <!-- #ifndef MP -->
           <uni-tooltip>
             {{ mapper.title }}
-            <uni-icons v-if="tooltip && mapper.tooltip" type="help" color="#9e9eb0" />
+            <uni-icons v-if="tooltip && mapper.tooltip" type="help" color="var(--color-text-tertiary, #9e9eb0)" />
             <template v-if="tooltip && mapper.tooltip" v-slot:content>
               <view class="uni-stat-tooltip-s">
                 {{ mapper.tooltip }}

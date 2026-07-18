@@ -1,19 +1,12 @@
 <template>
   <view class="fix-top-window">
-    <view class="uni-header">
-      <uni-stat-breadcrumb class="uni-stat-breadcrumb-on-phone" />
-      <view class="uni-group">
-        <view class="uni-sub-title hide-on-phone"></view>
-      </view>
-    </view>
+    <app-page fluid>
     <view class="uni-container">
-      <!-- 欢迎区域 -->
-      <view class="dashboard-welcome">
-        <view class="welcome-text">
-          <text class="welcome-greeting">{{ greeting }}，{{ displayName }} 👋</text>
-          <text class="welcome-date">{{ todayDate }}</text>
-        </view>
-      </view>
+      <app-page-header :title="greeting + '，' + displayName" :description="todayDate">
+        <template #breadcrumb>
+          <uni-stat-breadcrumb class="uni-stat-breadcrumb-on-phone" />
+        </template>
+      </app-page-header>
 
       <!-- 提示条 -->
       <uni-notice-bar
@@ -21,8 +14,6 @@
         showGetMore
         showIcon
         class="mb-m pointer"
-        :background-color="noticeColors.warning.bgColor"
-        :color="noticeColors.warning.color"
         text="检测到您未初始化db_init.json，请先右键uniCloud/database/db_init.json文件，执行初始化云数据库，否则左侧无法显示菜单等数据"
         @click="toAddAppId"
       />
@@ -31,8 +22,6 @@
         showGetMore
         showIcon
         class="mb-m pointer"
-        :background-color="noticeColors.info.bgColor"
-        :color="noticeColors.info.color"
         text="检测到您还未添加应用，点击前往应用管理添加"
         @click="toAddAppId"
       />
@@ -41,80 +30,31 @@
         showGetMore
         showIcon
         class="mb-m pointer"
-        :background-color="noticeColors.info.bgColor"
-        :color="noticeColors.info.color"
         text="暂无数据, 统计相关功能需开通 uni 统计后才能使用, 如未开通, 点击查看具体流程"
         @click="navTo('https://uniapp.dcloud.io/uni-stat-v2.html')"
       />
 
-      <!-- KPI 概览卡片 -->
-      <view class="kpi-grid" v-if="complete">
-        <view class="kpi-card">
-          <view class="kpi-card__header">
-            <view class="kpi-card__icon kpi-card__icon--blue">
-              <text class="kpi-card__icon-text">📊</text>
-            </view>
-            <text class="kpi-card__label">总设备数</text>
-          </view>
-          <text class="kpi-card__value">{{ summaryStats.totalDevices }}</text>
-          <view class="kpi-card__footer">
-            <text class="kpi-card__sub">今日 {{ summaryStats.activeDevices }}</text>
-          </view>
+      <app-section class="dashboard-metrics">
+        <view class="kpi-grid">
+          <app-stat-card label="总设备数" :value="summaryStats.totalDevices" :loading="!complete">
+            <template #meta>今日 {{ summaryStats.activeDevices }}</template>
+          </app-stat-card>
+          <app-stat-card label="活跃设备" :value="summaryStats.activeDevices" :change="summaryStats.activeDevicesChange" :loading="!complete" />
+          <app-stat-card label="总用户数" :value="summaryStats.totalUsers" :loading="!complete">
+            <template #meta>今日 {{ summaryStats.activeUsers }}</template>
+          </app-stat-card>
+          <app-stat-card label="活跃用户" :value="summaryStats.activeUsers" :change="summaryStats.activeUsersChange" :loading="!complete" />
         </view>
-        <view class="kpi-card">
-          <view class="kpi-card__header">
-            <view class="kpi-card__icon kpi-card__icon--green">
-              <text class="kpi-card__icon-text">📈</text>
-            </view>
-            <text class="kpi-card__label">活跃设备</text>
-          </view>
-          <text class="kpi-card__value">{{ summaryStats.activeDevices }}</text>
-          <view class="kpi-card__footer">
-            <text class="kpi-card__sub">较昨日 {{ summaryStats.activeDevicesChange >= 0 ? '+' : '' }}{{ summaryStats.activeDevicesChange }}%</text>
-          </view>
-        </view>
-        <view class="kpi-card">
-          <view class="kpi-card__header">
-            <view class="kpi-card__icon kpi-card__icon--purple">
-              <text class="kpi-card__icon-text">👥</text>
-            </view>
-            <text class="kpi-card__label">总用户数</text>
-          </view>
-          <text class="kpi-card__value">{{ summaryStats.totalUsers }}</text>
-          <view class="kpi-card__footer">
-            <text class="kpi-card__sub">今日 {{ summaryStats.activeUsers }}</text>
-          </view>
-        </view>
-        <view class="kpi-card">
-          <view class="kpi-card__header">
-            <view class="kpi-card__icon kpi-card__icon--amber">
-              <text class="kpi-card__icon-text">🔥</text>
-            </view>
-            <text class="kpi-card__label">活跃用户</text>
-          </view>
-          <text class="kpi-card__value">{{ summaryStats.activeUsers }}</text>
-          <view class="kpi-card__footer">
-            <text class="kpi-card__sub">较昨日 {{ summaryStats.activeUsersChange >= 0 ? '+' : '' }}{{ summaryStats.activeUsersChange }}%</text>
-          </view>
-        </view>
-      </view>
-      <view class="kpi-grid" v-else>
-        <view class="kpi-card kpi-card--loading"><view class="kpi-skeleton"></view></view>
-        <view class="kpi-card kpi-card--loading"><view class="kpi-skeleton"></view></view>
-        <view class="kpi-card kpi-card--loading"><view class="kpi-skeleton"></view></view>
-        <view class="kpi-card kpi-card--loading"><view class="kpi-skeleton"></view></view>
-      </view>
+      </app-section>
 
-      <!-- 平台选择 -->
-      <view class="uni-stat--x mb-m">
-        <uni-stat-tabs label="平台选择" type="boldLine" mode="platform" v-model="query.platform_id" />
-      </view>
+      <app-section title="平台选择">
+        <app-surface padding="compact">
+          <uni-stat-tabs type="boldLine" mode="platform" v-model="query.platform_id" />
+        </app-surface>
+      </app-section>
 
-      <!-- 设备概览 -->
-      <view class="uni-stat--x p-m">
-        <view class="uni-stat-card-header">
-          <text>设备概览</text>
-        </view>
+      <app-section title="设备概览">
+        <app-surface padding="none">
         <uni-table :loading="loading" border stripe emptyText="暂无数据">
           <uni-tr>
             <block v-for="(mapper, index) in deviceTableFields" :key="index">
@@ -135,13 +75,11 @@
             </block>
           </uni-tr>
         </uni-table>
-      </view>
+        </app-surface>
+      </app-section>
 
-      <!-- 注册用户概览 -->
-      <view class="uni-stat--x p-m">
-        <view class="uni-stat-card-header">
-          <text>注册用户概览</text>
-        </view>
+      <app-section title="注册用户概览">
+        <app-surface padding="none">
         <uni-table :loading="loading" border stripe emptyText="暂无数据">
           <uni-tr>
             <block v-for="(mapper, index) in userTableFields" :key="index">
@@ -162,8 +100,10 @@
             </block>
           </uni-tr>
         </uni-table>
-      </view>
+        </app-surface>
+      </app-section>
     </view>
+    </app-page>
 
     <!-- #ifndef H5 -->
     <fix-window />
@@ -172,12 +112,23 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
   import { stringifyQuery, stringifyField, stringifyGroupField, getTimeOfSomeDayAgo, division, format, parseDateTime, getFieldTotal, debounce } from '@/js_sdk/uni-stat/util.js';
 
   import { deviceFeildsMap, userFeildsMap } from './fieldsMap.js';
+  import AppPage from '@/components/app-page/app-page.vue';
+  import AppPageHeader from '@/components/app-page-header/app-page-header.vue';
+  import AppSection from '@/components/app-section/app-section.vue';
+  import AppSurface from '@/components/app-surface/app-surface.vue';
+  import AppStatCard from '@/components/app-stat-card/app-stat-card.vue';
 
   export default {
+    components: {
+      AppPage,
+      AppPageHeader,
+      AppSection,
+      AppSurface,
+      AppStatCard,
+    },
     data() {
       return {
         query: {
@@ -234,22 +185,6 @@
     },
 
     computed: {
-      ...mapState('app', ['theme']),
-
-      noticeColors() {
-        const isDark = this.theme === 'dark';
-        return {
-          warning: {
-            bgColor: isDark ? 'rgba(245, 158, 11, 0.12)' : '#fef0f0',
-            color: isDark ? '#f0b446' : '#f56c6c',
-          },
-          info: {
-            bgColor: isDark ? 'rgba(59, 130, 246, 0.12)' : '#f4f4f5',
-            color: isDark ? '#93c5fd' : '#909399',
-          },
-        };
-      },
-
       queryStr() {
         // 默认查询条件
         const defQuery = `(dimension == "hour" || dimension == "day")`;
@@ -453,7 +388,9 @@
       navTo(url, id) {
         if (url.indexOf('http') > -1) {
           // 如果url中包含'http'，则在新窗口中打开该链接
+          // #ifdef H5
           window.open(url);
+          // #endif
         } else {
           if (id) {
             // 如果有提供id参数，则将其添加到url中作为查询参数
@@ -518,71 +455,10 @@
 </script>
 
 <style lang="scss">
-  /* 欢迎区域 */
-  .dashboard-welcome {
-    margin-bottom: var(--space-6, 24px);
-  }
-
-  .welcome-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1, 4px);
-  }
-
-  .welcome-greeting {
-    font-size: var(--text-2xl, 24px);
-    font-weight: 600;
-    color: var(--color-text-primary, #1a1a2e);
-    line-height: 1.3;
-  }
-
-  .welcome-date {
-    font-size: var(--text-sm, 13px);
-    color: var(--color-text-tertiary, #9ca3af);
-  }
-
-  /* 概览卡片网格 */
-  .stat-cards {
+  .kpi-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-4, 16px);
-    margin-bottom: var(--space-6, 24px);
-
-    /* 小屏响应 */
-    @media screen and (max-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-
-
-  /* 表格区域 */
-  .uni-stat-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--color-text-primary, #1a1a2e);
-    font-size: var(--text-lg, 16px);
-    font-weight: 600;
-    padding: var(--space-3, 12px) 0;
-    margin-bottom: var(--space-4, 16px);
-    border-bottom: 1px solid var(--color-border-subtle, #f0f1f3);
-  }
-
-  .uni-table-scroll {
-    min-height: auto;
-  }
-
-  .uni-stat-text {
-    color: var(--color-text-primary, #1a1a2e);
-  }
-
-  .mt10 {
-    margin-top: 10px;
-  }
-
-  .uni-radio-cell {
-    margin: 0 10px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
   }
 
   .uni-stat-tooltip-s {
@@ -590,12 +466,15 @@
     white-space: normal;
   }
 
-  .uni-a {
-    cursor: pointer;
-    text-decoration: underline;
-    color: var(--color-text-primary, #1a1a2e);
-    font-size: var(--text-base, 14px);
+  @media screen and (max-width: 1023px) {
+    .kpi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
-
+  @media screen and (max-width: 599px) {
+    .kpi-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

@@ -70,7 +70,7 @@
     display: inline-block;
     padding: 10px 20px;
     background-color: var(--color-accent, #5b8def);
-    color: #fff;
+    color: var(--color-text-inverse, #fff);
     border-radius: 8px;
     font-size: 13px;
     cursor: pointer;

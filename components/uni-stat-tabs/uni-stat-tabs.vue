@@ -20,7 +20,7 @@
             <!-- #ifndef MP -->
             <uni-tooltip>
               {{ item.name }}
-              <uni-icons v-if="item.tooltip" type="help" color="#9e9eb0" />
+              <uni-icons v-if="item.tooltip" type="help" color="var(--color-text-tertiary)" />
               <template v-if="item.tooltip" v-slot:content>
                 <view class="uni-stat-tooltip-s">
                   {{ item.tooltip }}
@@ -282,20 +282,18 @@
   }
 
   .uni-label-text {
-    font-size: 14px;
-    font-weight: bold;
-    color: #c0c0d0;
-    margin-top: 17px;
-    margin-bottom: 17px;
-    margin-right: 5px;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-4);
+    margin-right: var(--space-2);
+    letter-spacing: var(--tracking-normal);
   }
 
   .uni-stat--tab-x {
     display: flex;
-    margin: 0 15px;
+    margin: 0 var(--space-4);
     white-space: nowrap;
   }
 
@@ -309,7 +307,7 @@
       &-item {
         white-space: nowrap;
         font-size: 14px;
-        color: #9e9eb0;
+        color: var(--color-text-secondary);
         text-align: center;
         cursor: pointer;
         box-sizing: border-box;
@@ -321,29 +319,27 @@
         }
 
         &-line {
-          margin-right: 30px;
+          margin-right: 24px;
           padding: 2px 0;
           border-bottom: 1px solid transparent;
+          transition: color var(--transition-fast), border-color var(--transition-fast);
 
           &:last-child {
             margin-right: 0;
           }
 
           &-active {
-            color: $uni-color-primary;
-            border-bottom: 1px solid $uni-color-primary;
-            // &-disabled {
-            // 	color: #666;
-            // 	border-color: #666;
-            // }
+            color: var(--color-accent);
+            border-bottom: 1px solid var(--color-accent);
           }
         }
 
         &-boldLine {
           box-sizing: border-box;
-          margin-right: 30px;
+          margin-right: 24px;
           padding: 2px 0;
           border-bottom: 2px solid transparent;
+          transition: color var(--transition-fast), border-color var(--transition-fast);
 
           &:last-child {
             margin-right: 0;
@@ -351,15 +347,16 @@
 
           &-active {
             box-sizing: border-box;
-            color: $uni-color-primary;
-            border-bottom: 2px solid $uni-color-primary;
+            color: var(--color-accent);
+            border-bottom: 2px solid var(--color-accent);
           }
         }
 
         &-box {
-          padding: 5px 15px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          // margin: 0;
+          padding: 5px 14px;
+          border: 1px solid var(--color-border-subtle);
+          border-radius: var(--radius-md);
+          transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 
           &:not(:last-child) {
             border-right-color: transparent;
@@ -367,7 +364,9 @@
 
           &-active {
             box-sizing: border-box;
-            border: 1px solid $uni-color-primary !important;
+            color: var(--color-accent);
+            background-color: var(--color-accent-subtle);
+            border: 1px solid var(--color-accent) !important;
           }
         }
       }
@@ -405,12 +404,12 @@
         position: absolute;
         top: 40px;
         right: 0;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--color-border-subtle);
         box-sizing: border-box;
         width: 200px;
-        border-radius: 5px;
-        background-color: var(--modal-bg, #fff);
-        box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.1);
+        border-radius: var(--radius-xl);
+        background-color: var(--color-surface-overlay);
+        box-shadow: var(--shadow-lg);
 
         // z-index: 10;
         &::before {
@@ -423,15 +422,15 @@
           transform: rotate(45deg);
           // border: 1px red solid;
           z-index: 0;
-          background-color: var(--modal-bg, #fff);
-          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+          background-color: var(--color-surface-overlay);
+          box-shadow: var(--shadow-md);
         }
         .costom-dialog-inner {
           position: relative;
           padding: 15px;
           width: 100%;
           height: 100%;
-          background-color: var(--modal-bg, #fff);
+          background-color: var(--color-surface-overlay);
           box-sizing: border-box;
           z-index: 2;
         }

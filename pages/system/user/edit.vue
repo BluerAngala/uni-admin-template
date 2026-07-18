@@ -13,20 +13,20 @@
         </uni-easyinput>
       </uni-forms-item>
       <uni-forms-item v-else label="重置密码">
-        <span class="reset-password-btn" @click="trigger">点击重置密码</span>
+        <text class="reset-password-btn" @click="trigger">点击重置密码</text>
       </uni-forms-item>
       <uni-forms-item name="role" label="角色列表" class="flex-center-x">
         <uni-data-checkbox multiple :localdata="roles" v-model="formData.role" />
       </uni-forms-item>
       <uni-forms-item name="tags" label="用户标签" labelWidth="100" class="flex-center-x">
         <uni-data-checkbox ref="checkboxTags" :multiple="true" v-model="formData.tags" collection="uni-id-tag" field="tagid as value, name as text"></uni-data-checkbox>
-        <span class="link-btn" @click="gotoTagAdd">新增</span>
-        <span class="link-btn" @click="gotoTagList" style="margin-left: 10px">管理</span>
+        <text class="link-btn" @click="gotoTagAdd">新增</text>
+        <text class="link-btn" @click="gotoTagList" style="margin-left: 10px">管理</text>
       </uni-forms-item>
       <uni-forms-item name="authorizedApp" label="可登录应用">
         <view class="uni-forms-item-flex-center-x">
           <uni-data-checkbox :multiple="true" v-model="formData.authorizedApp" :localdata="appList"></uni-data-checkbox>
-          <span class="link-btn" @click="gotoAppList">管理</span>
+          <text class="link-btn" @click="gotoAppList">管理</text>
         </view>
         <view v-if="formDataId === userId" class="uni-form-item-tips">当前有未添加的应用{{ unknownAppidsCom }}，建议点击右侧管理进行添加</view>
       </uni-forms-item>

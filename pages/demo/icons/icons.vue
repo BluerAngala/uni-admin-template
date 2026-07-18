@@ -130,7 +130,7 @@
   }
 
   .icon-text {
-    color: #99a9bf;
+    color: var(--color-text-secondary);
     font-size: 12px;
     text-align: center;
     height: 1em;

@@ -1,7 +1,7 @@
 <template>
-  <div :id="idName" @click="generate">
+  <view :id="idName" @click="generate">
     <slot> Download {{ name }} </slot>
-  </div>
+  </view>
 </template>
 
 <script>
@@ -317,6 +317,7 @@
         return value || value === 0 || typeof value === 'boolean' ? value : this.defaultValue;
       },
       base64ToBlob(data, mime) {
+        // #ifdef H5
         let base64 = window.btoa(window.unescape(encodeURIComponent(data)));
         let bstr = atob(base64);
         let n = bstr.length;
@@ -325,6 +326,7 @@
           u8arr[n] = bstr.charCodeAt(n);
         }
         return new Blob([u8arr], { type: mime });
+        // #endif
       },
     }, // end methods
   };

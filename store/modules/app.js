@@ -11,6 +11,7 @@ export default {
     navMenu: [],
     routes: [],
     theme: uni.getStorageSync(uniAdminCacheKey.theme) || 'default',
+    sideBarCollapsed: uni.getStorageSync(uniAdminCacheKey.sidebarCollapsed) || false,
     // #ifndef VUE3
     appName: process.env.VUE_APP_NAME || '',
     appid: (statConfig && statConfig.appid) || '',
@@ -30,6 +31,10 @@ export default {
     },
     SET_ROUTES: (state, routes) => {
       state.routes = routes;
+    },
+    SET_SIDEBAR_COLLAPSED: (state, collapsed) => {
+      state.sideBarCollapsed = !!collapsed;
+      uni.setStorageSync(uniAdminCacheKey.sidebarCollapsed, state.sideBarCollapsed);
     },
     SET_THEME: (state, theme) => {
       state.theme = theme;

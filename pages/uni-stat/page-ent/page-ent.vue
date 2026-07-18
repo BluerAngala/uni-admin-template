@@ -70,7 +70,7 @@
                 <!-- #ifndef MP -->
                 <uni-tooltip>
                   {{ mapper.title }}
-                  <uni-icons v-if="index === 0 && mapper.tooltip" type="help" color="#666" />
+                  <uni-icons v-if="index === 0 && mapper.tooltip" type="help" color="var(--color-text-tertiary, #666)" />
                   <template v-if="index === 0 && mapper.tooltip" v-slot:content>
                     <view class="uni-stat-tooltip-s">
                       {{ mapper.tooltip }}

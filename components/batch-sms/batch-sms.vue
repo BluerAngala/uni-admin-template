@@ -39,15 +39,15 @@
                 >
                 </uni-data-select>
                 <view class="sms-data-tip">
-                  导入短信模版参考<a class="a-link" href="https://uniapp.dcloud.net.cn/uniCloud/admin.html#群发短信" target="_blank">教程</a>；若有新的短信模版，可
+                  导入短信模版参考<text class="a-link" @click="openLink('https://uniapp.dcloud.net.cn/uniCloud/admin.html#群发短信')">教程</text>；若有新的短信模版，可
                   <text @click="chooseFile" class="a-link">点此导入 </text>
                 </view>
               </view>
               <view v-else>
                 <button @click="chooseFile" type="primary" style="width: 120px" size="mini">上传短信模板</button>
                 <view class="sms-data-tip"
-                  >当前未导入短信模板，请从dev.dcloud.net.cn的短信-<a href="https://dev.dcloud.net.cn/pages/sms/template" target="_blank">模板配置</a
-                  >中导出短信模版，并在此导入。教程<a href="https://uniapp.dcloud.net.cn/uniCloud/admin.html#batch-sms" target="_blank">详见</a></view
+                  >当前未导入短信模板，请从dev.dcloud.net.cn的短信-<text class="a-link" @click="openLink('https://dev.dcloud.net.cn/pages/sms/template')">模板配置</text
+                  >中导出短信模版，并在此导入。教程<text class="a-link" @click="openLink('https://uniapp.dcloud.net.cn/uniCloud/admin.html#batch-sms')">详见</text></view
                 >
               </view>
             </template>
@@ -190,6 +190,14 @@
       },
     },
     methods: {
+      openLink(url) {
+        // #ifdef H5
+        window.open(url)
+        // #endif
+        // #ifndef H5
+        plus.runtime.openURL(url)
+        // #endif
+      },
       smsFilteredChange() {
         this.smsDataModel.filtered = !this.smsDataModel.filtered;
       },
@@ -300,10 +308,10 @@
                     // #ifdef H5
                     window.open('https://unicloud.dcloud.net.cn/pages/uni-sms/send-record', '_blank');
                     // #endif
-                    // ifndef H5
+                    // #ifndef H5
                     this.reset();
                     this.$refs.smsPopup.close();
-                    // endif
+                    // #endif
                   }
                 },
               });
@@ -312,6 +320,7 @@
         });
       },
       chooseFile() {
+        // #ifdef H5
         if (typeof window.FileReader === 'undefined') {
           uni.showModal({
             content: '当前浏览器不支持文件上传，请升级浏览器重试',
@@ -319,6 +328,7 @@
           });
           return;
         }
+        // #endif
 
         uni.chooseFile({
           count: 1,
@@ -404,7 +414,7 @@
 
   .sms-manager {
     width: 570px;
-    background: #fff;
+    background: var(--color-bg-elevated, #fff);
     padding: 30px;
     border-radius: 5px;
 
@@ -423,7 +433,7 @@
       .sub-title {
         margin-top: 5px;
         font-size: 16px;
-        color: #999;
+        color: var(--color-text-tertiary, #999);
       }
     }
 
@@ -444,12 +454,12 @@
     }
 
     .tip {
-      border-top: #ccc solid 1px;
+      border-top: var(--color-border-subtle, #ccc) solid 1px;
       padding-top: 20px;
       margin-top: 20px;
       line-height: 1.7;
       font-size: 13px;
-      color: #999;
+      color: var(--color-text-tertiary, #999);
     }
   }
 

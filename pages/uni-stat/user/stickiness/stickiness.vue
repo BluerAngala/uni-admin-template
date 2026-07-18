@@ -429,12 +429,12 @@
   }
 
   .line-bottom {
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--color-border-subtle, #e5e7eb);
   }
 
   .uni-stat-panel {
     box-shadow: unset;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
     padding: 0;
     margin: 0 15px;
   }

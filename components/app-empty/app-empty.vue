@@ -1,7 +1,7 @@
 <template>
   <view class="app-empty">
-    <view class="app-empty__icon">📭</view>
-    <view class="app-empty__text">{{ text || '暂无数据' }}</view>
+    <uni-icons class="app-empty__icon" type="info" size="32" />
+    <text class="app-empty__text">{{ text || '暂无数据' }}</text>
     <view v-if="$slots.action" class="app-empty__action">
       <slot name="action" />
     </view>
@@ -12,7 +12,10 @@
   export default {
     name: 'AppEmpty',
     props: {
-      text: { type: String, default: '' },
+      text: {
+        type: String,
+        default: '',
+      },
     },
   };
 </script>
@@ -23,20 +26,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--space-12, 48px) var(--space-6, 24px);
+    min-height: 180px;
+    padding: var(--space-10) var(--space-6);
+    text-align: center;
   }
 
   .app-empty__icon {
-    font-size: 48px;
-    margin-bottom: var(--space-4, 16px);
+    margin-bottom: var(--space-3);
+    color: var(--color-text-tertiary);
   }
 
   .app-empty__text {
-    font-size: var(--text-sm, 13px);
-    color: var(--color-text-tertiary, #9ca3af);
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
   }
 
   .app-empty__action {
-    margin-top: var(--space-4, 16px);
+    margin-top: var(--space-4);
   }
 </style>

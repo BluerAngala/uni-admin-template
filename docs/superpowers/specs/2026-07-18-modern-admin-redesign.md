@@ -1,187 +1,115 @@
-# uni-admin 现代化重设计方案
+# uni-admin 全量设计系统重构规格
+
+## 状态
+已确认。用户要求完整执行，不以首页或少量组件为边界。
 
 ## 目标
+将 uni-admin 重构为支持亮色、暗色与跟随系统主题的现代化后台管理系统。建立统一、可复用的 UI 基础设施，随后以该体系迁移 Shell、首页、系统管理、统计、安全审计和演示模块。保留业务路由、权限、菜单数据、数据库查询与 i18n 契约。
 
-将 uni-admin 从 2018 风格的管理后台改造为 2025 现代 SaaS 管理面板。视觉对标 Vercel Dashboard / Linear，面向开发者和技术用户，简洁高效。
+## 背景与审计结论
+当前界面由 `uni.scss`、`common/theme.scss`、`common/uni.css` 和 `styles/design-system/*` 共同控制。它们的主题和样式职责重叠：
 
-## 约束
+- `styles/design-system/_themes.scss` 将 `:root` 固定为暗色玻璃风格，`[data-theme='default']` 没有亮色覆盖，因此 default 并非真实亮色主题。
+- `common/uni.css` 对页面壳、按钮、输入、表面、弹窗和统计区块进行全局玻璃拟态覆盖，破坏组件本身的主题边界。
+- 现有 `app-*` 组件仅覆盖卡片、统计、骨架、空态、标签和 toast，未被业务页面普遍采用，并包含 emoji 反馈图标。
+- 业务页面广泛直接使用 `uni-table`、`uni-forms`、`uni-easyinput`、`uni-popup`、`uni-pagination`、`uni-notice-bar`、`uni-card`、`uni-stat-tabs`，因此这些原语必须被统一收口。
 
-- **平台：** 当前仅 H5，架构预留跨平台扩展
-- **框架：** uni-app（Vue 2/3 双模式，Options API only）
-- **构建：** 无 npm scripts，仅 HBuilderX 运行/调试/部署
-- **样式：** CSS Variables 做主题系统，组件级样式为主，不搞全局覆盖层
-- **后端：** uniCloud Serverless，数据模型不变
+## 不变量
 
-## 视觉方向：Clean Minimal
+- 使用 uni-app 与 Vue Options API，保持 Vue 2/3 双模式。
+- 使用 `view`、`text`、`image` 等 uni-app 标签；不引入 DOM API、vue-router、axios 或新 Web 框架。
+- 不新增 npm scripts，验证通过 HBuilderX 运行的 H5 目标完成。
+- 所有新增用户可见文本必须进入 `i18n/zh-Hans.json`、`i18n/zh-Hant.json`、`i18n/en.json`。
+- 业务路由、页面地址、菜单数据、权限名称、表单字段顺序和 uniCloud 查询保持不变。
+- 样式使用既有主题 map、`themeify`/`themed` 和 CSS 变量；组件中不硬编码颜色。
+- 样式用 rpx 或 px，不用 rem、vh、vw。
 
-```
-关键词：留白、呼吸感、中性色、微动效、信息层次清晰
+## 设计语言
 
-色板：
-  主色    #5b8def（蓝色，链接/按钮/激活态）
-  成功    #10b981（绿色）
-  警告    #f59e0b（琥珀色）
-  错误    #ef4444（红色）
-  背景    #ffffff / #f7f8fa（浅灰交替）
-  文字    #1a1a2e（主）/ #6b7280（次）/ #9ca3af（辅助）
+- 方向：现代运营控制台。清晰的层级、克制的表面、适中的数据密度与可感知但不干扰的反馈。
+- 双主题：亮色为中性浅灰画布与白色分层表面；暗色为深石墨画布与低反射分层表面。
+- 品牌强调色：一套蓝色主色贯穿交互、焦点、激活状态和主要操作。成功、警告、危险仅表达真实语义。
+- 质感：细边框、轻量主题化阴影和稳定圆角。移除玻璃、全局 blur、环境光晕和渐变按钮。
+- 动效：仅使用 opacity 与 transform。路由内容进入、菜单激活状态、下拉与弹窗、骨架加载、按钮 pressed 状态遵守统一节奏。`prefers-reduced-motion` 下禁用非必要动画。
+- 图标：保留项目内现有 admin icon 字体或 `uni-icons`。禁止 emoji 作为 UI 图标。
 
-字体：
-  英文    Inter（Google Fonts CDN 或系统字体回退）
-  中文    PingFang SC / Microsoft YaHei
-  等宽    JetBrains Mono（代码/ID）
+## 主题契约
 
-间距（4px 网格）：
-  4 / 8 / 12 / 16 / 24 / 32 / 48 / 64
+`theme` 保留 `default`、`dark`、`auto` 三种存储值。`auto` 解析为系统实际主题并设置 `body[data-theme]`。
 
-圆角：
-  按钮/输入框  8px
-  卡片  12px
-  弹窗  16px
-  药丸/徽章  9999px
+主题变量按语义定义，而非按组件或视觉技巧定义：
 
-阴影（3 级）：
-  sm  0 1px 2px rgba(0,0,0,0.04)
-  md  0 4px 12px rgba(0,0,0,0.06)
-  lg  0 8px 24px rgba(0,0,0,0.08)
-```
+- 画布：`--color-bg-primary`、`--color-bg-secondary`、`--color-bg-tertiary`
+- 表面：`--color-surface`、`--color-surface-raised`、`--color-surface-overlay`
+- 文字：`--color-text-primary`、`--color-text-secondary`、`--color-text-tertiary`、`--color-text-inverse`
+- 边框与焦点：`--color-border-subtle`、`--color-border-strong`、`--color-focus-ring`
+- 交互：`--color-accent`、`--color-accent-hover`、`--color-accent-active`、`--color-accent-subtle`
+- 状态：`--color-success`、`--color-warning`、`--color-error` 及对应 subtle 表面
+- 结构：间距、字号、行高、圆角、阴影、层级和动效变量
 
-## 架构改造
+`uni.scss` 的 `$themes` 保持为 uni-ui 兼容层。`common/theme.scss` 负责将其映射至 uni-ui 原语。`styles/design-system/_themes.scss` 是所有 CSS 变量的唯一来源。`common/uni.css` 只保留布局兼容和通用类，不再决定主题视觉。
 
-### 1. 主题系统（保留，已就绪）
+## 组件系统
 
-`styles/design-system/` 中保留三个文件：
+### 页面与布局
 
-| 文件 | 职责 |
+| 单元 | 责任 |
 |---|---|
-| `_tokens.scss` | CSS Variables 定义（色板、间距、圆角、阴影、排版、层级、过渡） |
-| `_themes.scss` | light / dark / auto 三套主题映射 |
-| `_base.scss` | body/link/scrollbar/page 全局基础样式 |
+| `app-page` | 页面画布与内容最大宽度、响应式内边距、进入动效 |
+| `app-page-header` | 面包屑、标题、说明和操作区 |
+| `app-section` | 内容区块标题、辅助说明、操作槽位与一致间距 |
+| `app-surface` | standard / raised / inset 三种分层表面，取代手写卡片和 `uni-stat--x` |
+| Shell | 顶栏、侧栏、主内容区和嵌入模式布局 |
 
-`App.vue` 引入顺序：`uni.css` → `uni-icons.css` → `admin-icons.css` → `theme.scss` → `design-system/index.scss`
+### 导航
 
-不做全局组件覆盖。组件样式由各组件自行处理。
-
-### 2. 布局 Shell（重构）
-
-```
-┌─────────────────────────────────────────────────────┐
-│  Shell.vue（统一布局容器）                             │
-│                                                      │
-│  ┌─── TopBar (56px) ──────────────────────────────┐ │
-│  │ [☰] [Logo]    [⌘K 搜索占位]    [🔔] [🌙] [👤] │ │
-│  └────────────────────────────────────────────────┘ │
-│                                                      │
-│  ┌─── Sidebar ──────┐ ┌─── Content ──────────────┐ │
-│  │  📊 首页          │ │                           │ │
-│  │  ▸ 系统管理       │ │  <router-view />          │ │
-│  │    用户管理       │ │                           │ │
-│  │    角色管理       │ │                           │ │
-│  │    菜单管理       │ │                           │ │
-│  │    权限管理       │ │                           │ │
-│  │  ▸ uni 统计       │ │                           │ │
-│  │  ▸ 安全审计       │ │                           │ │
-│  └───────────────────┘ └───────────────────────────┘ │
-└─────────────────────────────────────────────────────┘
-```
-
-**改造要点：**
-- `topWindow.vue` 重写：高度 56px，清洁顶栏，无冗余 SVG icon
-- `leftWindow.vue` 重写：可折叠至 icon-only 模式（64px）
-- 侧栏菜单项：44px 高度，左侧 3px 激活指示条，hover 背景色过渡
-- 移动端/小屏：侧栏默认收起，汉堡菜单触发
-
-### 3. 组件库（新建）
-
-在 `components/` 下新建现代组件，逐步替换 uni-ui 原生组件：
-
-| 组件 | 用途 | 替换目标 |
-|---|---|---|
-| `app-card` | 通用卡片容器（圆角、阴影、hover） | `uni-card` / 手写 div |
-| `app-table` | 数据表格（骨架屏、空状态、斑马纹） | `uni-table` |
-| `app-form-item` | 表单项（label + input + error） | `uni-forms-item` |
-| `app-modal` | 模态框（居中弹出、遮罩、ESC 关闭） | `uni-popup` |
-| `app-drawer` | 侧滑抽屉（新增/编辑表单容器） | `uni-popup type="right"` |
-| `app-toast` | 轻提示（自动消失、支持 undo） | 无 |
-| `app-badge` | 状态徽章（圆角药丸、语义色） | `uni-tag` |
-| `app-empty` | 空状态（插画 + 引导操作） | 无 |
-| `app-skeleton` | 骨架屏（行/卡片形状） | 无 |
-| `app-stat-card` | 统计数字卡片（数字 + 趋势 + sparkline） | 无 |
-
-**组件设计原则：**
-- 每个组件自包含样式（scoped），通过 props 控制变体
-- 颜色用 CSS Variables 引用，支持主题切换
-- 不搞全局覆盖，不搞 `!important`
-- Props 优先于 class 控制外观
-
-### 4. 页面改造清单
-
-#### Phase 1 — 基础框架（第 1 周）
-| 页面 | 改造内容 |
+| 单元 | 责任 |
 |---|---|
-| `windows/topWindow.vue` | 重写顶栏：56px 高度、清洁布局、主题/语言切换 |
-| `windows/leftWindow.vue` | 重写侧栏：可折叠、激活指示条、hover 过渡 |
-| `pages/index/index.vue` | Dashboard：欢迎区域 + 概览卡片 + 统计表格 |
-| `pages/error/404.vue` | 现代空状态页面 |
+| 顶栏 | 侧栏控制、页面上下文、主题菜单、用户菜单、错误入口 |
+| 侧栏 | 品牌区、滚动导航、展开态、紧凑态和移动端抽屉态 |
+| `uni-nav-menu`、`uni-menu-item`、`uni-sub-menu`、`uni-menu-group` | 唯一菜单行为和视觉实现，active/hover/focus/disabled 状态统一 |
+| `uni-stat-breadcrumb`、`uni-stat-tabs` | 页面路径和筛选导航的统一外观 |
 
-#### Phase 2 — 系统管理（第 2 周）
-| 页面 | 改造内容 |
+### 输入与操作
+
+直接主题化并保持 API 的 uni-ui 原语：原生 `button`、`uni-easyinput`、原生 `input`/`textarea`、`uni-data-select`、`uni-data-checkbox`、`switch`、`uni-datetime-picker`、`uni-file-picker`、`uni-pagination`。
+
+统一状态：default、hover、focus-visible、active、disabled、error、loading。表单标签在控件上方或保持现有 `uni-forms-item` 标签布局，不改变字段顺序。
+
+### 数据与反馈
+
+| 单元 | 责任 |
 |---|---|
-| `pages/system/user/list.vue` | 用户列表：新表格、批量操作栏、筛选面板 |
-| `pages/system/user/add.vue` | 新建用户：Drawer 抽屉表单 |
-| `pages/system/user/edit.vue` | 编辑用户：Drawer 抽屉表单 |
-| `pages/system/role/list.vue` | 角色列表 |
-| `pages/system/role/add.vue` | 新建角色 |
-| `pages/system/role/edit.vue` | 编辑角色 |
-| `pages/system/menu/list.vue` | 菜单列表（树形表格） |
-| `pages/system/menu/add.vue` | 新建菜单 |
-| `pages/system/menu/edit.vue` | 编辑菜单 |
-| `pages/system/permission/list.vue` | 权限列表 |
-| `pages/system/permission/add.vue` | 新建权限 |
-| `pages/system/permission/edit.vue` | 编辑权限 |
-| `pages/system/tag/list.vue` | 标签管理 |
-| `pages/system/tag/add.vue` | 新建标签 |
-| `pages/system/tag/edit.vue` | 编辑标签 |
+| `app-stat-card` | 统计标题、指标、辅助对比、语义趋势和加载态 |
+| `uni-table`、`uni-stat-table` | 表头、行 hover、选择、排序、筛选、空态、加载态和窄屏横向滚动 |
+| `app-badge`/`uni-tag` | 统一状态语义与可读性 |
+| `uni-notice-bar` | information / warning / error 提示级别与操作入口 |
+| `uni-popup`、`uni-popup-dialog`、`app-toast` | 覆盖层、标题、正文、操作区、打开/关闭动效与焦点视觉 |
+| `app-empty`、`app-skeleton`、qiun loading | 无数据、加载、错误状态，禁止 emoji |
+| qiun charts | 由主题变量提供坐标、网格、文字和数据颜色 |
 
-#### Phase 3 — 统计模块（第 3 周）
-| 页面 | 改造内容 |
-|---|---|
-| `pages/uni-stat/device/overview/` | 设备概览 |
-| `pages/uni-stat/user/overview/` | 用户概览 |
-| `pages/uni-stat/channel/` | 渠道分析 |
-| `pages/uni-stat/scene/` | 场景分析 |
-| `pages/uni-stat/event/` | 事件分析 |
-| `pages/uni-stat/page-content/` | 页面分析 |
-| `pages/uni-stat/page-res/` | 页面资源 |
-| `pages/uni-stat/page-ent/` | 页面入口 |
-| `pages/uni-stat/error/` | 错误分析 |
-| `pages/uni-stat/pay-order/` | 支付订单 |
+## Shell 响应式契约
 
-#### Phase 4 — 其他页面 + 交互打磨（第 4 周）
-| 页面 | 改造内容 |
-|---|---|
-| `pages/system/app/` | 应用管理 |
-| `pages/system/safety/` | 安全审计 |
-| `pages/demo/` | 功能演示 |
-| 全局 | 骨架屏替换 loading spinner |
-| 全局 | 空状态插画 |
-| 全局 | Toast 通知系统 |
-| 全局 | 深色模式精调 |
+- 桌面大于等于 1200px：完整 240px 侧栏与 56px 顶栏，主内容最大宽度 1440px。
+- 768px 到 1199px：侧栏为紧凑态，保留菜单图标和 hover/tap 提示；主内容使用紧凑边距。
+- 小于 768px：侧栏通过既有 `uni.showLeftWindow()`/`uni.hideLeftWindow()` 以抽屉展示；所有内容单列；表格允许其自身横向滚动。
+- 嵌入模式：保留 `.uni-embed-hide-left` 与 `.uni-embed-hide-top` 契约，不将其耦合进页面组件。
 
-## 实施原则
+## 实施顺序
 
-### 渐进式改造
-- 每个 Phase 独立可交付、可验证
-- 新组件先建后用，不破坏现有功能
-- 旧页面改造时保持数据逻辑不变，只改模板和样式
+1. 重建主题 token 和全局基础样式，移除全局 glass 规则。
+2. 重构 Shell、菜单树、顶栏和响应式状态。
+3. 主题化全部高频 uni-ui 原语及现有 app 反馈组件。
+4. 迁移首页作为页面模板，保留全部统计查询逻辑。
+5. 迁移系统管理 CRUD 页面。
+6. 迁移统计、安全审计、演示及其图表、表格、筛选控件。
+7. 在亮色、暗色、auto 和主要断点下进行 H5 验收。
 
-### 样式规范
-- 新页面/新组件：全面使用 CSS Variables
-- 旧页面改造：逐步替换硬编码颜色为 CSS Variables
-- 不搞全局覆盖层，组件样式自包含
-- 间距用 4px 网格（`--space-1` = 4px, `--space-2` = 8px, ...）
-- 颜色只用 Token，不写 hex
+## 验收标准
 
-### 测试验证
-- 每个 Phase 完成后：浏览器验证亮色/暗色模式
-- 重点检查：表格可读性、表单交互、弹窗层级、侧栏折叠
-- H5 专属：检查响应式（768px / 1024px 断点）
+- 切换 default/dark/auto 后，画布、表面、文本、边框、表格、表单、弹窗、菜单和图表均使用对应主题，且文本与背景可读。
+- 不存在 `glass-*`、`backdrop-filter`、全局环境光晕或 emoji UI 图标残留。
+- 全部高频表单、表格、分页、提示、弹窗、导航组件有一致的 hover、focus、active、disabled、loading 与 empty/error 呈现。
+- 原菜单路由、权限、查询、创建/编辑/删除和统计筛选行为保持可用。
+- 动效只使用 transform/opacity，且在 reduced motion 下停用。
+- H5 在 375px、768px、1024px、1440px 无非预期横向溢出；数据表格除外，表格需保留可滚动提示和可操作性。

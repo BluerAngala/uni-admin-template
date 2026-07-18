@@ -10,7 +10,7 @@
       <uni-tooltip>
         <view class="uni-stat--sum-item-title">
           {{ item.title ? item.title : '' }}
-          <uni-icons v-if="item.title" class="ml-s" type="help" color="#9e9eb0" />
+          <uni-icons v-if="item.title" class="ml-s" type="help" color="var(--color-text-tertiary, #9e9eb0)" />
         </view>
         <template v-if="item.tooltip" v-slot:content>
           <view class="uni-stat-tooltip-s">
@@ -78,19 +78,19 @@
       justify-content: center;
       min-height: 17px;
       font-size: 12px;
-      color: #9e9eb0;
+      color: var(--color-text-tertiary, #9e9eb0);
     }
 
     &-item-value {
       font-size: 24px;
       line-height: 48px;
       font-weight: 700;
-      color: #e0e0e8;
+      color: var(--color-text-disabled, #e0e0e8);
     }
 
     &-item-contrast {
       font-size: 14px;
-      color: #9e9eb0;
+      color: var(--color-text-tertiary, #9e9eb0);
     }
   }
 

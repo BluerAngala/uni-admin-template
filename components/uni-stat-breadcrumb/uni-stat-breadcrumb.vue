@@ -28,7 +28,7 @@
     min-height: 55px;
     line-height: 55px;
     align-items: center;
-    color: #e0e0e8;
+    color: var(--color-text-secondary);
     background-color: transparent;
   }
 
@@ -37,6 +37,6 @@
   ::v-deep .uni-breadcrumb-item text,
   ::v-deep .uni-breadcrumb__item,
   ::v-deep .uni-breadcrumb__item text {
-    color: #e0e0e8 !important;
+    color: var(--color-text-secondary) !important;
   }
 </style>

@@ -101,10 +101,10 @@
                     </view>
                   </radio-group>
                   <button type="primary" size="mini" @click="selectFile" style="margin: 0 0 0 20rpx">选择文件</button>
-                  <text style="padding: 10px; font-size: 12px; color: var(--color-text-secondary, #6b7280)"> 上传apk到当前服务空间的云存储中，上传成功后，会自动使用云存储地址填充下载链接 </text>
+                  <text style="padding: 10px; font-size: 12px; color: var(--color-text-secondary)"> 上传apk到当前服务空间的云存储中，上传成功后，会自动使用云存储地址填充下载链接 </text>
                 </view>
               </uni-file-picker>
-              <text v-if="hasPackage" style="padding-left: 20px; color: var(--color-text-tertiary, #9ca3af)">
+              <text v-if="hasPackage" style="padding-left: 20px; color: var(--color-text-tertiary)">
                 {{ appPackageInfo.size && Number(appPackageInfo.size / 1024 / 1024).toFixed(2) + 'M' }}
               </text>
             </uni-forms-item>
@@ -117,7 +117,7 @@
           </template>
         </view>
 
-        <uni-popup ref="scheme" background-color="#fff">
+        <uni-popup ref="scheme">
           <view class="popup-content">
             <text style="font-size: 15px; font-weight: bold"> 常见的应用商店 scheme 地址 </text>
             <view></view>
@@ -130,7 +130,7 @@
         <uni-forms-item name="store_schemes" label="Android应用市场" labelWidth="120">
           <view style="height: 100%">
             <view class="flex" style="justify-content: end">
-              <text class="pointer" style="text-decoration: underline; color: var(--color-text-secondary, #6b7280); font-size: 12px; padding-left: 10rpx" @click="schemeDemo">常见应用商店schema汇总</text>
+              <text class="pointer" style="text-decoration: underline; color: var(--color-text-secondary); font-size: 12px; padding-left: 10rpx" @click="schemeDemo">常见应用商店schema汇总</text>
               <button type="primary" size="mini" @click="addStoreScheme" style="margin: 0 0 0 10px">新增</button>
             </view>
 
@@ -191,8 +191,8 @@
       <uni-card title="web信息">
         <uni-forms-item label="链接地址">
           <uni-easyinput :maxlength="-1" v-model="formData.h5.url" trim="both"></uni-easyinput>
-          <span style="font-size: 13px; color: var(--color-text-tertiary, #9ca3af)"
-            >如需免费的前端网页托管，请开通 <a style="color: inherit" href="https://unicloud.dcloud.net.cn">uniCloud</a> ，创建服务空间，并在 “前端网页托管” 里上传你的网页</span
+          <text style="font-size: 13px; color: var(--color-text-tertiary)"
+            >如需免费的前端网页托管，请开通 <text style="color: inherit" class="a-link" @click="openLink('https://unicloud.dcloud.net.cn')">uniCloud</text> ，创建服务空间，并在 “前端网页托管” 里上传你的网页</text
           >
         </uni-forms-item>
       </uni-card>
@@ -504,7 +504,7 @@
     }
 
     .uni-card__header {
-      background-color: var(--color-bg-tertiary, #f0f1f3);
+      background-color: var(--color-bg-tertiary);
     }
 
     .uni-card__header-title-text {
@@ -532,13 +532,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: var(--color-bg-secondary, #f7f8fa);
-    color: var(--color-text-primary, #1a1a2e);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
     padding: 10px;
     font-size: 32rpx;
 
     border: {
-      color: var(--color-warning, #f59e0b);
+      color: var(--color-warning);
       left-width: 8px;
       left-style: solid;
     }

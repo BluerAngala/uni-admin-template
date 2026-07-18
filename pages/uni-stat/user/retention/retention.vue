@@ -451,7 +451,7 @@
   }
 
   .line-bottom {
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--color-border-subtle, #e5e7eb);
   }
 
   .uni-stat-table-bg {

@@ -91,7 +91,7 @@
                   <!-- #ifndef MP -->
                   <uni-tooltip>
                     {{ mapper.title }}
-                    <uni-icons v-if="mapper.tooltip" type="help" color="#666" />
+                    <uni-icons v-if="mapper.tooltip" type="help" color="var(--color-text-tertiary, #666)" />
                     <template v-if="mapper.tooltip" v-slot:content>
                       <view class="uni-stat-tooltip-s">
                         {{ mapper.tooltip }}
@@ -111,7 +111,7 @@
                   <!-- #ifndef MP -->
                   <uni-tooltip>
                     {{ item.error_msg ? item.error_msg.substring(0, 100) + '...' : '' }}
-                    <uni-icons v-if="item.error_msg" type="help" color="#666" />
+                    <uni-icons v-if="item.error_msg" type="help" color="var(--color-text-tertiary, #666)" />
                     <template v-if="item.error_msg" v-slot:content>
                       <view class="uni-stat-tooltip-l">
                         {{ item.error_msg }}
@@ -562,7 +562,7 @@
 
   .uni-stat-panel {
     box-shadow: unset;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
     padding: 0;
     margin: 0 15px;
   }

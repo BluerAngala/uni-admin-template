@@ -79,7 +79,7 @@
                   <!-- #ifndef MP -->
                   <uni-tooltip>
                     {{ mapper.title }}
-                    <uni-icons v-if="mapper.tooltip" type="help" color="#666" />
+                    <uni-icons v-if="mapper.tooltip" type="help" color="var(--color-text-tertiary)" />
                     <template v-if="mapper.tooltip" v-slot:content>
                       <view class="uni-stat-tooltip-s">
                         {{ mapper.tooltip }}
@@ -114,7 +114,7 @@
                   <!-- #ifndef MP -->
                   <uni-tooltip>
                     {{ mapper.title }}
-                    <uni-icons v-if="mapper.tooltip" type="help" color="#666" />
+                    <uni-icons v-if="mapper.tooltip" type="help" color="var(--color-text-tertiary)" />
                     <template v-if="mapper.tooltip" v-slot:content>
                       <view class="uni-stat-tooltip-s">
                         {{ mapper.tooltip }}
@@ -550,7 +550,7 @@
   .uni-stat-card-header {
     display: flex;
     justify-content: space-between;
-    color: var(--color-text-secondary, #6b7280);
+    color: var(--color-text-secondary);
     font-size: 14px;
     font-weight: 600;
     padding: 10px 0;

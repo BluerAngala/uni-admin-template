@@ -501,6 +501,7 @@ export const sourceMapMethods = {
     this.logSourceMapDebug('upload:prepare', { appid, uni_platform, version, base, prefix });
 
     // 原生 input 上传逻辑
+    // #ifdef H5
     const inputEl = document.createElement('input');
     inputEl.type = 'file';
     inputEl.directory = true;
@@ -600,6 +601,7 @@ export const sourceMapMethods = {
         uni.showToast({ title: message, icon: 'none', duration: 3000 });
       }
     });
+    // #endif
   },
   openErrPopup(item) {
     this.errorItem = item;

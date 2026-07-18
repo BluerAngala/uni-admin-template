@@ -448,7 +448,7 @@
                     window.location.reload();
                     // #endif
                     // #ifndef H5
-                    this.loadData(true);
+                    uni.reLaunch({ url: '/pages/system/menu/list' })
                     // #endif
                   }, 300);
                 } else {

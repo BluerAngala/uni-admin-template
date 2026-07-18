@@ -10,7 +10,7 @@
           <uni-tooltip>
             <view class="uni-stat--sum-item-title">
               {{ item.title }}
-              <uni-icons class="ml-s" type="help" color="#666" />
+              <uni-icons class="ml-s" type="help" color="var(--color-text-tertiary, #666)" />
             </view>
             <template v-slot:content>
               <view class="uni-stat-tooltip-s">

@@ -3,8 +3,11 @@
 // CSS Variables 在 _themes.scss 中通过 [data-theme] 定义
 // ============================================
 
-// 1. 主题映射（default / dark / auto）— 定义所有 CSS Variables
+// 1. 主题无关 token（排版、间距、圆角、动效与层级）
+@import './tokens';
+
+// 2. 主题映射（default / dark / auto）
 @import './themes';
 
-// 2. 全局基础（body/link/scrollbar/page）
+// 3. 全局基础（body/link/scrollbar/page）
 @import './base';

@@ -1,6 +1,6 @@
 <template>
   <view class="uni-container">
-    <h3 class="text-separated" style="padding: 0 0 20rpx 0">步骤1：了解“统一发布页”</h3>
+    <text class="h3 text-separated" style="padding: 0 0 20rpx 0">步骤1：了解“统一发布页”</text>
 
     <view style="margin-top: 20rpx">
       <view class="text-separated">
@@ -15,21 +15,21 @@
       <!-- #ifdef H5 -->
       <view class="text-separated">
         <text style="font-size: 16px"
-          >uni-app 官方示例的发布页就是基于<text class="strong">uni-portal </text> 制作的，<a href="https://hellouniapp.dcloud.net.cn/portal" target="_blank" class="a-label"
-            >点击体验</a
+          >uni-app 官方示例的发布页就是基于<text class="strong">uni-portal </text> 制作的，<text class="a-label" @click="openLink('https://hellouniapp.dcloud.net.cn/portal')"
+            >点击体验</text
           >
         </text>
       </view>
       <!-- #endif -->
     </view>
 
-    <h3 class="text-separated" style="padding: 40rpx 0 20rpx 0">步骤2：获取“统一发布页”</h3>
+    <text class="h3 text-separated" style="padding: 40rpx 0 20rpx 0">步骤2：获取“统一发布页”</text>
     <view class="flex text-separated" style="margin-top: 20rpx">
       <text> <view class="strong">uni-portal </view> 可根据「应用管理」中所填写的应用信息，一键生成发布页： </text>
       <button class="custom-button" size="mini" type="primary" @click="publish" style="margin: 0">生成并下载发布页</button>
     </view>
 
-    <h3 class="text-separated" style="padding: 40rpx 0 20rpx 0">步骤3：上传“统一发布页”</h3>
+    <text class="h3 text-separated" style="padding: 40rpx 0 20rpx 0">步骤3：上传“统一发布页”</text>
 
     <view style="margin-top: 20rpx">
       <view class="text-separated">
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+  // #ifdef H5
   const download = function (content, filename) {
     let eleLink = document.createElement('a');
     eleLink.download = filename;
@@ -62,6 +63,7 @@
     eleLink.click();
     document.body.removeChild(eleLink);
   };
+  // #endif
 
   export default {
     data() {
@@ -73,6 +75,14 @@
       this.id = id;
     },
     methods: {
+      openLink(url) {
+        // #ifdef H5
+        window.open(url)
+        // #endif
+        // #ifndef H5
+        plus.runtime.openURL(url)
+        // #endif
+      },
       publish() {
         if (!this.id) {
           uni.showModal({

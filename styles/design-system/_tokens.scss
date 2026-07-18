@@ -1,177 +1,73 @@
-// ============================================
-// Design Tokens — 三层结构
-// 色板（原始值）→ 语义 Token（主题切换）→ 组件 Token
-// ============================================
-
-// ------------------------------------------
-// 第一层：原始色板（不直接用于 UI，仅供语义层引用）
-// ------------------------------------------
-
+// Theme-independent design tokens. Theme colors belong in _themes.scss.
 :root {
-  // Blue
-  --palette-blue-50:  #eff6ff;
-  --palette-blue-100: #dbeafe;
-  --palette-blue-200: #bfdbfe;
-  --palette-blue-400: #60a5fa;
-  --palette-blue-500: #5b8def;
-  --palette-blue-600: #4a7de0;
-  --palette-blue-700: #3b6dd0;
-
-  // Gray
-  --palette-gray-50:  #f9fafb;
-  --palette-gray-100: #f3f4f6;
-  --palette-gray-200: #e5e7eb;
-  --palette-gray-300: #d1d5db;
-  --palette-gray-400: #9ca3af;
-  --palette-gray-500: #6b7280;
-  --palette-gray-600: #4b5563;
-  --palette-gray-700: #374151;
-  --palette-gray-800: #1f2937;
-  --palette-gray-900: #111827;
-
-  // Semantic
-  --palette-green-500:  #10b981;
-  --palette-green-100:  #d1fae5;
-  --palette-yellow-500: #f59e0b;
-  --palette-yellow-100: #fef3c7;
-  --palette-red-500:    #ef4444;
-  --palette-red-100:    #fee2e2;
-}
-
-// ------------------------------------------
-// 第二层：语义 Token（Light 默认值）
-// [data-theme="dark"] 覆盖在 _themes.scss
-// ------------------------------------------
-
-:root {
-  // --- 背景 ---
-  --color-bg-primary:    #ffffff;
-  --color-bg-secondary:  #f7f8fa;
-  --color-bg-tertiary:   #f0f1f3;
-  --color-bg-elevated:   #ffffff;
-
-  // --- 文字 ---
-  --color-text-primary:   #1a1a2e;
-  --color-text-secondary: #6b7280;
-  --color-text-tertiary:  #9ca3af;
-  --color-text-inverse:   #ffffff;
-
-  // --- 边框 ---
-  --color-border-primary: #e5e7eb;
-  --color-border-subtle:  #f0f1f3;
-
-  // --- 强调色 ---
-  --color-accent:         #5b8def;
-  --color-accent-hover:   #4a7de0;
-  --color-accent-active:  #3b6dd0;
-  --color-accent-subtle:  rgba(91, 141, 239, 0.08);
-
-  // --- 语义色 ---
-  --color-success:        #10b981;
-  --color-success-subtle: rgba(16, 185, 129, 0.08);
-  --color-warning:        #f59e0b;
-  --color-warning-subtle: rgba(245, 158, 11, 0.08);
-  --color-error:          #ef4444;
-  --color-error-subtle:   rgba(239, 68, 68, 0.08);
-
-  // --- 遮罩 ---
-  --color-mask:           rgba(0, 0, 0, 0.4);
-
-  // --- 组件 Token ---
-  --btn-primary-bg:       var(--color-accent);
-  --btn-primary-text:     #ffffff;
-  --btn-primary-hover-bg: var(--color-accent-hover);
-  --btn-primary-active-bg: var(--color-accent-active);
-
-  --input-border:         var(--color-border-primary);
-  --input-focus-ring:     rgba(91, 141, 239, 0.2);
-  --input-bg:             var(--color-bg-primary);
-  --input-placeholder:    var(--color-text-tertiary);
-
-  --table-header-bg:      var(--color-bg-secondary);
-  --table-row-hover:      var(--color-bg-secondary);
-  --table-border:         var(--color-border-subtle);
-
-  --card-bg:              var(--color-bg-elevated);
-  --card-border:          var(--color-border-subtle);
-
-  --sidebar-bg:           var(--color-bg-elevated);
-  --sidebar-border:       var(--color-border-subtle);
-  --sidebar-item-hover:   var(--color-bg-tertiary);
-  --sidebar-item-active-bg:  var(--color-accent-subtle);
-  --sidebar-item-active-indicator: var(--color-accent);
-
-  --topbar-bg:            var(--color-bg-elevated);
-  --topbar-border:        var(--color-border-primary);
-  --topbar-text:          var(--color-text-secondary);
-
-  --dropdown-bg:          var(--color-bg-elevated);
-  --dropdown-border:      var(--color-border-primary);
-  --dropdown-shadow:      var(--shadow-lg);
-  --dropdown-item-hover:  var(--color-bg-tertiary);
-
-  --modal-bg:             var(--color-bg-elevated);
-  --modal-mask:           var(--color-mask);
-
-  // --- 间距（4px 网格）---
-  --space-0:   0;
+  --space-0: 0;
   --space-0\.5: 2px;
-  --space-1:   4px;
+  --space-1: 4px;
   --space-1\.5: 6px;
-  --space-2:   8px;
+  --space-2: 8px;
   --space-2\.5: 10px;
-  --space-3:   12px;
-  --space-4:   16px;
-  --space-5:   20px;
-  --space-6:   24px;
-  --space-8:   32px;
-  --space-10:  40px;
-  --space-12:  48px;
-  --space-16:  64px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
 
-  // --- 圆角 ---
-  --radius-sm:   6px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
-  --radius-xl:   16px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 24px;
   --radius-full: 9999px;
 
-  // --- 阴影（elevation）---
-  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.12);
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Consolas', 'Liberation Mono', monospace;
+  --text-xs: 11px;
+  --text-sm: 12.5px;
+  --text-base: 13.5px;
+  --text-lg: 15px;
+  --text-xl: 18px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+  --tracking-tight: -0.022em;
+  --tracking-normal: -0.006em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
 
-  // --- 排版 ---
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', 'Liberation Mono', monospace;
+  /* Ambient (soft) + Key (directional) shadow pairs */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --shadow-xl: 0 24px 64px rgba(15, 23, 42, 0.1), 0 4px 12px rgba(15, 23, 42, 0.06);
+  --shadow-inner: inset 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --shadow-glow: 0 0 0 3px var(--color-focus-ring);
 
-  --text-xs:   12px;
-  --text-sm:   13px;
-  --text-base: 14px;
-  --text-lg:   16px;
-  --text-xl:   18px;
-  --text-2xl:  24px;
-  --text-3xl:  30px;
+  /* Bezel / double-border treatment */
+  --bezel-outer-bg: rgba(0, 0, 0, 0.025);
+  --bezel-inner-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.5);
 
-  --leading-tight:   1.25;
-  --leading-normal:  1.5;
-  --leading-relaxed: 1.75;
+  /* Premium easing — physically plausible spring curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
 
-  --tracking-tight:  -0.01em;
-  --tracking-normal: 0;
-  --tracking-wide:   0.02em;
+  --transition-fast: 150ms var(--ease-out-expo);
+  --transition-normal: 260ms var(--ease-out-expo);
+  --transition-slow: 400ms var(--ease-out-expo);
+  --transition-spring: 500ms var(--ease-spring);
 
-  // --- 过渡 ---
-  --transition-fast:   0.15s ease;
-  --transition-normal: 0.2s ease;
-  --transition-slow:   0.3s ease;
-
-  // --- 层级 ---
-  --z-dropdown:  100;
-  --z-sticky:    200;
-  --z-fixed:     300;
-  --z-modal:     400;
-  --z-popover:   500;
-  --z-tooltip:   600;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+  --z-tooltip: 600;
 }

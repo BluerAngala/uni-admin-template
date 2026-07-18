@@ -76,7 +76,7 @@
           表格中显示为空，表示留存为 0 或无数据
         </view>
         <uni-table :loading="loading" stripe :emptyText="errorMessage || $t('common.empty')">
-          <uni-tr style="background-color: var(--color-bg-tertiary, #f0f1f3)">
+          <uni-tr style="background-color: var(--color-bg-tertiary)">
             <block v-for="(mapper, index) in fieldsMap" :key="index">
               <uni-th v-if="mapper.title" :key="index" align="center">{{ mapper.title }}</uni-th>
             </block>
@@ -445,17 +445,17 @@
 
   .label-text {
     font-size: 14px;
-    color: var(--color-text-secondary, #6b7280);
+    color: var(--color-text-secondary);
     margin: auto 0;
     margin-right: 5px;
   }
 
   .line-bottom {
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--color-border-subtle);
   }
 
   .uni-stat-table-bg {
-    background-color: var(--color-accent, #5b8def);
-    color: var(--color-text-inverse, #fff);
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
   }
 </style>

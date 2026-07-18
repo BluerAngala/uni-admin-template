@@ -1,10 +1,10 @@
 <template>
   <view class="uni-sub-menu">
     <view class="uni-sub-menu__title" :class="{ 'is-disabled': disabled }" :style="{ paddingLeft: paddingLeft }" @click="select">
-      <view class="uni-sub-menu__title-sub" :style="{ color: disabled ? '#999' : textColor }">
+      <view class="uni-sub-menu__title-sub" :class="{ 'uni-sub-menu__title-sub--disabled': disabled }">
         <slot name="title"></slot>
       </view>
-      <uni-icons class="uni-sub-menu__icon" :class="{ transition: isOpen }" type="down" color="#bbb" size="14"></uni-icons>
+      <uni-icons class="uni-sub-menu__icon" :class="{ transition: isOpen }" type="down" color="var(--color-text-tertiary)" size="14"></uni-icons>
     </view>
     <view class="uni-sub-menu__content" :class="{ 'uni-sub-menu--close': !isOpen }" :style="{ 'background-color': backgroundColor }">
       <view id="content--hook">
@@ -40,7 +40,7 @@
       // 展开菜单的背景色
       backgroundColor: {
         type: String,
-        default: '#f5f5f5',
+        default: 'transparent',
       },
     },
     data() {
@@ -48,13 +48,13 @@
         height: 0,
         oldheight: 0,
         isOpen: false,
-        textColor: '#303133',
+        textColor: '',
       };
     },
     computed: {
       paddingLeft() {
         let subMenu = (this.rootMenu && this.rootMenu.SubMenu && this.rootMenu.SubMenu.length) || 0;
-        return 20 + 20 * subMenu + 'px';
+        return 16 + 16 * subMenu + 'px';
       },
     },
     created() {
@@ -107,31 +107,38 @@
 <style lang="scss">
   .uni-sub-menu {
     position: relative;
-    /* background-color: #FFFFFF; */
   }
 
   .uni-sub-menu__title {
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    padding-right: 10px;
-    height: 56px;
-    line-height: 56px;
-    color: #303133;
+    min-height: 44px;
+    padding-right: var(--space-3);
+    margin: var(--space-0\.5) var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    border-radius: var(--radius-md);
     cursor: pointer;
-    /* border-bottom: 1px #f5f5f5 solid; */
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
   }
 
   .uni-sub-menu__title:hover {
-    color: #42b983;
+    color: var(--color-text-primary);
+    background-color: var(--color-menu-hover);
     outline: none;
-    background-color: #ebebeb;
   }
 
   .uni-sub-menu__title-sub {
     display: flex;
     align-items: center;
     flex: 1;
+  }
+
+  .uni-sub-menu__title-sub--disabled {
+    color: var(--color-text-tertiary);
   }
 
   .uni-sub-menu--close {
@@ -144,8 +151,12 @@
   }
 
   .uni-sub-menu__icon {
-    max-height: auto;
-    transition: all 0.2s;
+    color: var(--color-text-tertiary);
+    transition: transform var(--transition-fast);
+  }
+
+  .uni-sub-menu__title:hover .uni-sub-menu__icon {
+    color: var(--color-text-secondary);
   }
 
   .transition {
@@ -153,12 +164,12 @@
   }
 
   .is-disabled {
-    /* background-color: #f5f5f5; */
-    color: red;
-  }
-  .uni-sub-menu__title.is-disabled:hover {
-    background-color: inherit;
-    color: #999;
+    opacity: 0.48;
     cursor: not-allowed;
+  }
+
+  .uni-sub-menu__title.is-disabled:hover {
+    color: var(--color-text-secondary);
+    background-color: transparent;
   }
 </style>

@@ -42,6 +42,6 @@
   .uni-menu-group__title {
     line-height: 36px;
     font-size: 12px;
-    color: #999;
+    color: var(--color-text-tertiary, #999);
   }
 </style>

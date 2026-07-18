@@ -500,7 +500,7 @@
   "leftWindow": {
     "path": "windows/leftWindow",
     "style": {
-      "width": "240px"
+      "width": "260px"
     }
   },
   "uniIdRouter": {

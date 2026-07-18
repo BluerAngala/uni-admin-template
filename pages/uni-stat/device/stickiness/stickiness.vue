@@ -424,18 +424,18 @@
 
   .label-text {
     font-size: 14px;
-    color: var(--color-text-secondary, #6b7280);
+    color: var(--color-text-secondary);
     margin: auto 0;
     margin-right: 5px;
   }
 
   .line-bottom {
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--color-border-subtle);
   }
 
   .uni-stat-panel {
     box-shadow: unset;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-subtle);
     padding: 0;
     margin: 0 15px;
   }

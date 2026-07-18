@@ -75,7 +75,7 @@
             <block v-for="(mapper, index) in fieldsMap.slice(0, fieldsMap.length - 1)" :key="index">
               <uni-td v-if="mapper.title && index === 1" :key="mapper.field" class="uni-stat-edit--x">
                 {{ item[mapper.field] ? item[mapper.field] : '-' }}
-                <uni-icons type="compose" color="#2979ff" size="25" class="uni-stat-edit--btn" @click="inputDialogToggle(item.channel_code, item.channel_name)" />
+                <uni-icons type="compose" color="var(--color-accent, #2979ff)" size="25" class="uni-stat-edit--btn" @click="inputDialogToggle(item.channel_code, item.channel_name)" />
               </uni-td>
               <uni-td v-else="mapper.title" :key="mapper.field" align="center">
                 {{ item[mapper.field] !== undefined ? item[mapper.field] : '-' }}
@@ -488,7 +488,7 @@
 <style>
   .uni-stat-panel {
     box-shadow: unset;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
     padding: 0;
     margin: 0 15px;
   }

@@ -27,20 +27,16 @@ export default {
     ],
     themes: [
       {
-        text: '跟随系统',
-        value: 'auto',
-      },
-      {
-        text: '默认',
+        text: '浅色',
         value: 'default',
-      },
-      {
-        text: '绿柔',
-        value: 'green',
       },
       {
         text: '暗色',
         value: 'dark',
+      },
+      {
+        text: '跟随系统',
+        value: 'auto',
       },
     ],
     debug: {

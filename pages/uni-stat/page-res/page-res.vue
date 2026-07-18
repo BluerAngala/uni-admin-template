@@ -70,7 +70,7 @@
                 <!-- #ifndef MP -->
                 <uni-tooltip>
                   {{ mapper.title }}
-                  <uni-icons v-if="index === 0 && mapper.tooltip" type="help" color="#666" />
+                  <uni-icons v-if="index === 0 && mapper.tooltip" type="help" color="var(--color-text-tertiary, #666)" />
                   <template v-if="index === 0 && mapper.tooltip" v-slot:content>
                     <view class="uni-stat-tooltip-s">
                       {{ mapper.tooltip }}
@@ -85,7 +85,7 @@
             <block v-for="(mapper, index) in fieldsMap" :key="index">
               <uni-td v-if="index === 1" :key="mapper.field" class="uni-stat-edit--x">
                 {{ item[mapper.field] !== undefined ? item[mapper.field] : '-' }}
-                <uni-icons type="compose" color="#2979ff" size="25" class="uni-stat-edit--btn" @click="inputDialogToggle(item.path, item.title)" />
+                <uni-icons type="compose" color="var(--color-accent, #2979ff)" size="25" class="uni-stat-edit--btn" @click="inputDialogToggle(item.path, item.title)" />
               </uni-td>
               <uni-td v-else :key="mapper.field" :align="index === 0 ? 'left' : 'center'">
                 {{ item[mapper.field] !== undefined ? item[mapper.field] : '-' }}

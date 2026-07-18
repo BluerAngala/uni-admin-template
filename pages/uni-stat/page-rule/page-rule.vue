@@ -74,7 +74,7 @@
             <view class="name"> 规则 {{ pageInfo.page_rules.length - index1 }} </view>
             <view class="tags">
               <view class="tags-item tags-item-text" v-for="(item2, index2) in item1" :key="index2">
-                <text class="text">{{ item2 }}</text> <uni-icons class="pointer" type="closeempty" size="12" color="#42b983" @click="deleteParamItem(index1, index2)"></uni-icons>
+                <text class="text">{{ item2 }}</text> <uni-icons class="pointer" type="closeempty" size="12" color="var(--color-success, #42b983)" @click="deleteParamItem(index1, index2)"></uni-icons>
               </view>
               <view class="tags-item tags-item-add">
                 <input
@@ -90,8 +90,8 @@
               </view>
             </view>
             <view class="btn">
-              <uni-icons type="plus" size="28" class="pointer" color="#606266" @click="addRulesItem" v-if="index1 === 0 && pageInfo.page_rules.length < 5"></uni-icons>
-              <uni-icons type="minus" size="28" class="pointer" color="#606266" @click="deleteRulesItem(index1)" v-else></uni-icons>
+              <uni-icons type="plus" size="28" class="pointer" color="var(--color-text-secondary, #606266)" @click="addRulesItem" v-if="index1 === 0 && pageInfo.page_rules.length < 5"></uni-icons>
+              <uni-icons type="minus" size="28" class="pointer" color="var(--color-text-secondary, #606266)" @click="deleteRulesItem(index1)" v-else></uni-icons>
             </view>
           </view>
         </view>

@@ -1,3 +1,4 @@
+// #ifdef H5
 //download.js v4.2, by dandavis; 2008-2016. [MIT] see http://danml.com/download.html for tests/usage
 // v1 landed a FF+Chrome compat way of downloading strings to local un-named files, upgraded to use a hidden frame and optional mime
 // v2 added named files via a[download], msSaveBlob, IE (10+) support, and window.URL support for larger+faster saves than dataURLs
@@ -159,3 +160,5 @@ export default function download(data, strFileName, strMimeType) {
   }
   return true;
 } /* end download() */
+
+// #endif

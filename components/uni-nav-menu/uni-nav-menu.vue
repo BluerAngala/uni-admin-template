@@ -30,17 +30,17 @@
       // 菜单的背景色
       backgroundColor: {
         type: String,
-        default: '#fff',
+        default: 'transparent',
       },
       // 菜单的文字颜色
       textColor: {
         type: String,
-        default: '#303133',
+        default: 'var(--color-text-secondary)',
       },
       // 当前激活菜单的文字颜色
       activeTextColor: {
         type: String,
-        default: '#42B983',
+        default: 'var(--color-accent)',
       },
       // 当前激活菜单的背景色
       activeBackgroundColor: {
@@ -95,14 +95,20 @@
       },
       activeIndex(newVal, oldVal) {
         if (this.itemChildrens.length > 0) {
-          let isActive = false;
+          // 重置所有菜单项激活状态，避免路由切换后残留旧高亮
+          this.itemChildrens.forEach((item) => {
+            item.active = false;
+            item.indexPath = [];
+          });
+          this.closeAll();
+
+          let matched = false;
           for (let i = 0; i < this.itemChildrens.length; i++) {
             const item = this.itemChildrens[i];
-            isActive = this.isActive(item);
-            if (isActive) break;
-          }
-          if (!isActive) {
-            this.closeAll();
+            if (this.isActive(item)) {
+              matched = true;
+              break;
+            }
           }
         }
       },
@@ -125,28 +131,29 @@
       close(key, keyPath) {
         this.$emit('close', key, keyPath);
       },
-      // 判断当前选中,只有初始值会使用
+      // 判断当前选中，支持所有层级菜单项
       isActive(subItem) {
         let active = '';
-        let isActive = false;
         if (typeof subItem.index === 'object') {
           active = subItem.index[this.activeKey] || '';
         } else {
           active = subItem.index;
         }
-        if (subItem.index && this.activeIndex === active) {
-          isActive = true;
-          subItem.$subMenu.forEach((item, index) => {
-            if (!item.disabled && !subItem.disabled) {
-              subItem.indexPath.push(item.index);
-              item.isOpen = true;
-            }
-          });
-          if (!subItem.active) {
-            subItem.onClickItem('init');
+        if (!subItem.index || !active) return false;
+
+        // 标准化路径：去除末尾斜杠后比较，避免 /path 与 /path/ 不匹配
+        const activePath = String(this.activeIndex || '').replace(/\/$/, '') || '/';
+        const itemPath = String(active || '').replace(/\/$/, '') || '/';
+        if (activePath !== itemPath) return false;
+
+        // 展开所有父级子菜单，使当前项可见
+        subItem.$subMenu.forEach((item) => {
+          if (!item.disabled && !subItem.disabled) {
+            item.isOpen = true;
           }
-        }
-        return isActive;
+        });
+        subItem.active = true;
+        return true;
       },
       // 打开关闭 sunMenu
       selectMenu(subMenu) {
@@ -201,9 +208,9 @@
 
 <style lang="scss">
   .uni-nav-menu {
-    width: 240px;
-    // min-height: 500px;
-    background-color: #ffffff;
-    font-size: 14px;
+    width: 100%;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    background-color: transparent;
   }
 </style>

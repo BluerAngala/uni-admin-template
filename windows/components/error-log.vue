@@ -48,7 +48,7 @@
 
 <style>
   .err-msg {
-    color: #ff0000;
+    color: var(--color-error, #ff0000);
   }
 
   .err-search {

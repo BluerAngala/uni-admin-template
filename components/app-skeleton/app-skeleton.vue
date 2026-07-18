@@ -1,19 +1,18 @@
 <template>
   <view class="skeleton" :class="`skeleton--${variant}`">
-    <view v-if="variant === 'text'" class="skeleton__text" :style="{ width }"></view>
-    <view v-else-if="variant === 'title'" class="skeleton__title"></view>
-    <view v-else-if="variant === 'card'" class="skeleton__card">
+    <view v-if="variant === 'card'" class="skeleton__card">
       <view class="skeleton__card-header"></view>
-      <view class="skeleton__card-line" style="width: 80%"></view>
-      <view class="skeleton__card-line" style="width: 60%"></view>
+      <view class="skeleton__card-line"></view>
+      <view class="skeleton__card-line skeleton__card-line--short"></view>
     </view>
     <view v-else-if="variant === 'row'" class="skeleton__row">
       <view class="skeleton__avatar"></view>
       <view class="skeleton__lines">
-        <view class="skeleton__line" style="width: 70%"></view>
-        <view class="skeleton__line" style="width: 50%"></view>
+        <view class="skeleton__line"></view>
+        <view class="skeleton__line skeleton__line--short"></view>
       </view>
     </view>
+    <view v-else :class="`skeleton__${variant}`" :style="{ width: width }"></view>
   </view>
 </template>
 
@@ -21,80 +20,101 @@
   export default {
     name: 'AppSkeleton',
     props: {
-      variant: { type: String, default: 'text', validator: (v) => ['text', 'title', 'card', 'row'].includes(v) },
-      width: { type: String, default: '100%' },
+      variant: {
+        type: String,
+        default: 'text',
+        validator: (value) => ['text', 'title', 'card', 'row'].includes(value),
+      },
+      width: {
+        type: String,
+        default: '100%',
+      },
     },
   };
 </script>
 
 <style lang="scss" scoped>
-  @keyframes skeleton-pulse {
-    0%,
-    100% {
-      opacity: 1;
+  @keyframes skeleton-shimmer {
+    from {
+      background-position: 200% 0;
     }
-    50% {
-      opacity: 0.4;
+
+    to {
+      background-position: -200% 0;
     }
   }
 
-  .skeleton {
-    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  .skeleton__text,
+  .skeleton__title,
+  .skeleton__line,
+  .skeleton__card-header,
+  .skeleton__card-line,
+  .skeleton__avatar {
+    background: linear-gradient(90deg, var(--color-bg-tertiary) 25%, var(--color-bg-secondary) 50%, var(--color-bg-tertiary) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s linear infinite;
   }
 
   .skeleton__text,
   .skeleton__line {
     height: 14px;
-    border-radius: var(--radius-sm, 6px);
-    background-color: var(--color-bg-tertiary, #f0f1f3);
-    margin-bottom: var(--space-2, 8px);
+    margin-bottom: var(--space-2);
+    border-radius: var(--radius-sm);
   }
 
   .skeleton__title {
     height: 20px;
-    width: 40%;
-    border-radius: var(--radius-sm, 6px);
-    background-color: var(--color-bg-tertiary, #f0f1f3);
-    margin-bottom: var(--space-3, 12px);
+    border-radius: var(--radius-sm);
   }
 
   .skeleton__card {
-    background-color: var(--color-bg-elevated, #fff);
-    border: 1px solid var(--color-border-subtle, #f0f1f3);
-    border-radius: var(--radius-lg, 12px);
-    padding: var(--space-5, 20px);
+    width: 100%;
   }
 
   .skeleton__card-header {
+    width: 36%;
     height: 16px;
-    width: 30%;
-    border-radius: var(--radius-sm, 6px);
-    background-color: var(--color-bg-tertiary, #f0f1f3);
-    margin-bottom: var(--space-4, 16px);
+    margin-bottom: var(--space-5);
+    border-radius: var(--radius-sm);
   }
 
   .skeleton__card-line {
-    height: 14px;
-    border-radius: var(--radius-sm, 6px);
-    background-color: var(--color-bg-tertiary, #f0f1f3);
-    margin-bottom: var(--space-2, 8px);
+    width: 72%;
+    height: 28px;
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-sm);
+  }
+
+  .skeleton__card-line--short,
+  .skeleton__line--short {
+    width: 46%;
   }
 
   .skeleton__row {
     display: flex;
     align-items: center;
-    gap: var(--space-3, 12px);
+    gap: var(--space-3);
   }
 
   .skeleton__avatar {
     width: 40px;
     height: 40px;
-    border-radius: var(--radius-full, 9999px);
-    background-color: var(--color-bg-tertiary, #f0f1f3);
+    border-radius: var(--radius-full);
     flex-shrink: 0;
   }
 
   .skeleton__lines {
     flex: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton__text,
+    .skeleton__title,
+    .skeleton__line,
+    .skeleton__card-header,
+    .skeleton__card-line,
+    .skeleton__avatar {
+      animation: none;
+    }
   }
 </style>

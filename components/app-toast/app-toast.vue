@@ -1,6 +1,6 @@
 <template>
   <view v-if="visible" class="app-toast" :class="`app-toast--${type}`">
-    <text class="app-toast__icon">{{ iconMap[type] }}</text>
+    <uni-icons class="app-toast__icon" :type="iconType" size="16" />
     <text class="app-toast__text">{{ message }}</text>
   </view>
 </template>
@@ -17,8 +17,13 @@
       };
     },
     computed: {
-      iconMap() {
-        return { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+      iconType() {
+        return {
+          success: 'checkmarkempty',
+          error: 'closeempty',
+          warning: 'info',
+          info: 'info',
+        }[this.type];
       },
     },
     beforeDestroy() {
@@ -41,42 +46,40 @@
 <style lang="scss" scoped>
   .app-toast {
     position: fixed;
-    top: var(--space-6, 24px);
+    top: var(--space-6);
     left: 50%;
-    transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: var(--space-2, 8px);
-    padding: var(--space-3, 12px) var(--space-4, 16px);
-    border-radius: var(--radius-md, 8px);
-    font-size: var(--text-sm, 13px);
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-overlay);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(-50%);
     z-index: 700;
-    box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.08));
-    animation: toast-in 0.2s ease;
+    animation: toast-in var(--transition-normal) ease;
   }
 
-  .app-toast--success {
-    background-color: var(--color-success-subtle, rgba(16, 185, 129, 0.08));
-    color: var(--color-success, #10b981);
-    border: 1px solid var(--color-success, #10b981);
+  .app-toast--success .app-toast__icon {
+    color: var(--color-success);
   }
 
-  .app-toast--error {
-    background-color: var(--color-error-subtle, rgba(239, 68, 68, 0.08));
-    color: var(--color-error, #ef4444);
-    border: 1px solid var(--color-error, #ef4444);
+  .app-toast--error .app-toast__icon {
+    color: var(--color-error);
   }
 
-  .app-toast--warning {
-    background-color: var(--color-warning-subtle, rgba(245, 158, 11, 0.08));
-    color: var(--color-warning, #f59e0b);
-    border: 1px solid var(--color-warning, #f59e0b);
+  .app-toast--warning .app-toast__icon {
+    color: var(--color-warning);
   }
 
-  .app-toast--info {
-    background-color: var(--color-bg-elevated, #fff);
-    color: var(--color-text-primary, #1a1a2e);
-    border: 1px solid var(--color-border-primary, #e5e7eb);
+  .app-toast--info .app-toast__icon {
+    color: var(--color-accent);
+  }
+
+  .app-toast__text {
+    font-size: var(--text-sm);
   }
 
   @keyframes toast-in {
@@ -84,6 +87,7 @@
       opacity: 0;
       transform: translateX(-50%) translateY(-8px);
     }
+
     to {
       opacity: 1;
       transform: translateX(-50%) translateY(0);

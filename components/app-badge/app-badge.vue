@@ -17,35 +17,36 @@
   .app-badge {
     display: inline-flex;
     align-items: center;
-    padding: 2px var(--space-2\.5, 10px);
-    font-size: var(--text-xs, 12px);
+    padding: 2px var(--space-2\.5);
+    font-size: var(--text-xs);
     font-weight: 500;
-    border-radius: var(--radius-full, 9999px);
-    line-height: var(--leading-normal, 1.5);
+    letter-spacing: var(--tracking-wide);
+    border-radius: var(--radius-full);
+    line-height: var(--leading-normal);
   }
 
   .app-badge--default {
-    background-color: var(--color-bg-tertiary, #f0f1f3);
-    color: var(--color-text-secondary, #6b7280);
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
   }
 
   .app-badge--success {
-    background-color: var(--color-success-subtle, rgba(16, 185, 129, 0.08));
-    color: var(--color-success, #10b981);
+    background-color: var(--color-success-subtle);
+    color: var(--color-success);
   }
 
   .app-badge--warning {
-    background-color: var(--color-warning-subtle, rgba(245, 158, 11, 0.08));
-    color: var(--color-warning, #f59e0b);
+    background-color: var(--color-warning-subtle);
+    color: var(--color-warning);
   }
 
   .app-badge--error {
-    background-color: var(--color-error-subtle, rgba(239, 68, 68, 0.08));
-    color: var(--color-error, #ef4444);
+    background-color: var(--color-error-subtle);
+    color: var(--color-error);
   }
 
   .app-badge--info {
-    background-color: var(--color-accent-subtle, rgba(91, 141, 239, 0.08));
-    color: var(--color-accent, #5b8def);
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent);
   }
 </style>

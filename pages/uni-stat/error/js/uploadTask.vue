@@ -7,7 +7,7 @@
           <progress
             v-if="showProgress"
             class="upload-task-item-progress"
-            :activeColor="fileTask.state !== -1 ? '#42b983' : '#ff5a5f'"
+            :activeColor="fileTask.state !== -1 ? 'var(--color-success, #42b983)' : 'var(--color-error, #ff5a5f)'"
             :percent="fileTask.progress * 100"
             active
             :duration="5"
