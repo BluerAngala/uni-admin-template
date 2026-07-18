@@ -1,29 +1,13 @@
 // ============================================
-// Design System — 总入口
-// 按依赖顺序 import 所有模块
+// Design System — Token + 主题 + 基础样式
+// 不做全局组件覆盖，组件样式由各组件自行处理
 // ============================================
 
-// 1. Token 定义
+// 1. Token 定义（CSS Variables）
 @import './tokens';
 
-// 2. 主题映射
+// 2. 主题映射（light / dark / auto）
 @import './themes';
 
-// 3. 全局基础
+// 3. 全局基础（body/link/scrollbar/page）
 @import './base';
-
-// 4. 布局覆盖
-@import './layout/sidebar';
-@import './layout/topbar';
-@import './layout/content';
-
-// 5. 组件覆盖
-@import './components/buttons';
-@import './components/tables';
-@import './components/forms';
-@import './components/cards';
-@import './components/modals';
-@import './components/badges';
-@import './components/breadcrumbs';
-@import './components/pagination';
-@import './components/dropdowns';

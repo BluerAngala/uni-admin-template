@@ -21,17 +21,28 @@
         showGetMore
         showIcon
         class="mb-m pointer"
+        :background-color="noticeColors.warning.bgColor"
+        :color="noticeColors.warning.color"
         text="检测到您未初始化db_init.json，请先右键uniCloud/database/db_init.json文件，执行初始化云数据库，否则左侧无法显示菜单等数据"
-        background-color="#fef0f0"
-        color="#f56c6c"
         @click="toAddAppId"
       />
-      <uni-notice-bar v-if="showAddAppId" showGetMore showIcon class="mb-m pointer" text="检测到您还未添加应用，点击前往应用管理添加" @click="toAddAppId" />
+      <uni-notice-bar
+        v-if="showAddAppId"
+        showGetMore
+        showIcon
+        class="mb-m pointer"
+        :background-color="noticeColors.info.bgColor"
+        :color="noticeColors.info.color"
+        text="检测到您还未添加应用，点击前往应用管理添加"
+        @click="toAddAppId"
+      />
       <uni-notice-bar
         v-if="!deviceTableData.length && !userTableData.length && !query.platform_id && complete"
         showGetMore
         showIcon
         class="mb-m pointer"
+        :background-color="noticeColors.info.bgColor"
+        :color="noticeColors.info.color"
         text="暂无数据, 统计相关功能需开通 uni 统计后才能使用, 如未开通, 点击查看具体流程"
         @click="navTo('https://uniapp.dcloud.io/uni-stat-v2.html')"
       />
@@ -129,6 +140,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import { stringifyQuery, stringifyField, stringifyGroupField, getTimeOfSomeDayAgo, division, format, parseDateTime, getFieldTotal, debounce } from '@/js_sdk/uni-stat/util.js';
 
   import { deviceFeildsMap, userFeildsMap } from './fieldsMap.js';
@@ -190,6 +202,22 @@
     },
 
     computed: {
+      ...mapState('app', ['theme']),
+
+      noticeColors() {
+        const isDark = this.theme === 'dark';
+        return {
+          warning: {
+            bgColor: isDark ? 'rgba(245, 158, 11, 0.12)' : '#fef0f0',
+            color: isDark ? '#f0b446' : '#f56c6c',
+          },
+          info: {
+            bgColor: isDark ? 'rgba(59, 130, 246, 0.12)' : '#f4f4f5',
+            color: isDark ? '#93c5fd' : '#909399',
+          },
+        };
+      },
+
       queryStr() {
         // 默认查询条件
         const defQuery = `(dimension == "hour" || dimension == "day")`;
@@ -574,4 +602,6 @@
     color: var(--color-text-primary, #1a1a2e);
     font-size: var(--text-base, 14px);
   }
+
+
 </style>
