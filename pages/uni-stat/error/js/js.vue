@@ -166,8 +166,8 @@
           </view>
         </view>
         <view class="dialog-close" @click="closeUploadPopup">
-          <view class="dialog-close-plus" style="background-color: #333" data-id="close"></view>
-          <view class="dialog-close-plus dialog-close-rotate" style="background-color: #333" data-id="close"></view>
+          <view class="dialog-close-plus" style="background-color: var(--color-text-primary, #1a1a2e)" data-id="close"></view>
+          <view class="dialog-close-plus dialog-close-rotate" style="background-color: var(--color-text-primary, #1a1a2e)" data-id="close"></view>
         </view>
       </view>
       <view class="upload-task-header">
@@ -182,7 +182,7 @@
         </view>
         <view v-if="uploadSuccessTasks.length">
           <view class="upload-task-header">
-            <text style="color: #42b983">上传成功</text>
+            <text style="color: var(--color-success, #10b981)">上传成功</text>
           </view>
           <uploadTask :uploadTasks="uploadSuccessTasks" :showProgress="false"></uploadTask>
         </view>
@@ -651,8 +651,8 @@
   }
 
   .black-theme {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--color-text-primary, #1a1a2e);
+    color: var(--color-text-inverse, #fff);
   }
 
   .dialog-close {
@@ -672,7 +672,7 @@
   .dialog-close-plus {
     width: 20px;
     height: 2px;
-    background-color: #fff;
+    background-color: var(--color-text-inverse, #fff);
     border-radius: 2px;
     transform: rotate(45deg);
   }
@@ -698,7 +698,7 @@
 
   .upload-task-header {
     font-size: 14px;
-    color: #666;
+    color: var(--color-text-secondary, #6b7280);
     padding: 15rpx 25rpx;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;

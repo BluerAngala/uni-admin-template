@@ -41,13 +41,13 @@
 
 <style>
   .upload-task-body {
-    background-color: #fff;
+    background-color: var(--color-text-inverse, #fff);
     padding: 0 25rpx;
     transition: background-color 0.4s;
   }
 
   .upload-task-body:hover {
-    background-color: #f5f5f5;
+    background-color: var(--color-bg-secondary, #f7f8fa);
   }
 
   .upload-task-item {
@@ -60,7 +60,7 @@
 
   .upload-task-item-size {
     font-size: 12px;
-    color: #999;
+    color: var(--color-text-tertiary, #9ca3af);
   }
 
   .upload-task-item-name {

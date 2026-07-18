@@ -217,6 +217,6 @@
   .flex.center {
     justify-content: center;
     align-items: center;
-    color: #666;
+    color: var(--color-text-secondary, #6b7280);
   }
 </style>

@@ -129,9 +129,9 @@
             <uni-td align="center">{{ (item.refund_fee * 0.01).toFixed(2) }}</uni-td>
             <uni-td align="center">{{ item.refund_count }}</uni-td>
             <uni-td align="center">
-              <view v-if="item.user_order_success === true" style="color: #18bc37">✔正常</view>
+              <view v-if="item.user_order_success === true" style="color: var(--color-success, #10b981)">✔正常</view>
               <view v-else-if="[-1, 0].indexOf(item.status) > -1">-</view>
-              <view v-else style="color: #e43d33">●异常</view>
+              <view v-else style="color: var(--color-error, #ef4444)">●异常</view>
             </uni-td>
             <uni-td align="center">
               <uni-dateformat :threshold="[0, 0]" :date="item.create_date"></uni-dateformat>
@@ -156,12 +156,12 @@
     </view>
 
     <uni-popup ref="popup" type="center" :animation="false">
-      <view style="padding: 30px; background-color: #ffffff; width: 500px">
+      <view style="padding: 30px; background-color: var(--color-bg-elevated, #fff); width: 500px">
         <view style="margin-bottom: 20px; text-align: center; font-size: 20px; font-weight: bold">退款确认</view>
         <uni-forms ref="refundForm" :modelValue="refundFormData" label-position="left" labelWidth="100px" :rules="refundFormRules">
           <uni-forms-item label="退款金额" name="refund_fee">
             <uni-easyinput type="text" v-model.number="refundFormData.refund_fee" placeholder="请输入退款金额" :clearable="false"></uni-easyinput>
-            <view style="color: #666; margin-top: 5px; font-size: 12px">最大可退：{{ refundFormData.max_refund_fee }}</view>
+            <view style="color: var(--color-text-secondary, #6b7280); margin-top: 5px; font-size: 12px">最大可退：{{ refundFormData.max_refund_fee }}</view>
           </uni-forms-item>
           <uni-forms-item label="退款原因" name="refund_desc">
             <uni-easyinput type="textarea" v-model="refundFormData.refund_desc" placeholder="请输入退款原因" :clearable="false" />

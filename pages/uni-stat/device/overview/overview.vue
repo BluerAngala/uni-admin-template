@@ -550,7 +550,7 @@
   .uni-stat-card-header {
     display: flex;
     justify-content: space-between;
-    color: #555;
+    color: var(--color-text-secondary, #6b7280);
     font-size: 14px;
     font-weight: 600;
     padding: 10px 0;

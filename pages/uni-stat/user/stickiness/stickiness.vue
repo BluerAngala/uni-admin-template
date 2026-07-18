@@ -423,7 +423,7 @@
 
   .label-text {
     font-size: 14px;
-    color: #666;
+    color: var(--color-text-secondary, #6b7280);
     margin: auto 0;
     margin-right: 5px;
   }

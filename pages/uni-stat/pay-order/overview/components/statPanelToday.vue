@@ -165,19 +165,19 @@
       justify-content: center;
       min-height: 17px;
       font-size: 12px;
-      color: #666;
+      color: var(--color-text-secondary, #6b7280);
     }
 
     &-item-value {
       font-size: 24px;
       line-height: 48px;
       font-weight: 700;
-      color: #333;
+      color: var(--color-text-primary, #1a1a2e);
     }
 
     &-item-contrast {
       font-size: 14px;
-      color: #666;
+      color: var(--color-text-secondary, #6b7280);
     }
   }
 
@@ -214,13 +214,13 @@
 
   .uni-stat-card-header {
     justify-content: space-between;
-    color: #555;
+    color: var(--color-text-secondary, #6b7280);
     font-size: 14px;
     font-weight: 600;
     padding: 10px 0;
     margin-bottom: 15px;
   }
   .td.main {
-    color: #e43d33;
+    color: var(--color-error, #ef4444);
   }
 </style>
