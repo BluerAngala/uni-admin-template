@@ -241,7 +241,6 @@
                 this.costomList.push(item);
               }
             });
-            console.log(this.costomList);
           });
       },
       setAllItem(platforms, _id = '', name = '全部') {
