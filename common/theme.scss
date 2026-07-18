@@ -657,6 +657,35 @@ body {
           border-right-color: darken(getTheme('left-window-bg-color'), 8%);
         }
 
+      .uni-left-window,
+      .uni-left-window > *,
+      .sidebar,
+      .uni-nav-menu,
+      .uni-nav-menu .uni-sub-menu,
+      .uni-nav-menu .uni-sub-menu__content {
+        color: getTheme('left-window-text-color') !important;
+      }
+
+      .uni-nav-menu .uni-menu-item,
+      .uni-nav-menu .uni-sub-menu__title,
+      .uni-nav-menu .uni-sub-menu__title-sub,
+      .uni-nav-menu .uni-menu-item text,
+      .uni-nav-menu .uni-sub-menu__title text,
+      .uni-nav-menu .uni-menu-group__title,
+      .uni-nav-menu [class*='icon-'] {
+        color: getTheme('left-window-text-color') !important;
+      }
+
+      .uni-nav-menu .uni-sub-menu__icon,
+      .uni-nav-menu .uni-sub-menu__icon .uni-icons {
+        color: rgba(192, 192, 208, 0.8) !important;
+      }
+
+      .uni-nav-menu .uni-menu-item.is-active,
+      .uni-nav-menu .uni-sub-menu__title:hover {
+        color: getTheme('left-window-text-active-color') !important;
+      }
+
         .theme-selector:hover,
         .lang-selector:hover {
           background-color: $bg-color-hover;

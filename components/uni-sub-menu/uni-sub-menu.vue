@@ -1,10 +1,10 @@
 <template>
   <view class="uni-sub-menu">
     <view class="uni-sub-menu__title" :class="{ 'is-disabled': disabled }" :style="{ paddingLeft: paddingLeft }" @click="select">
-      <view class="uni-sub-menu__title-sub" :style="{ color: disabled ? '#7f8096' : textColor }">
+      <view class="uni-sub-menu__title-sub" :style="{ color: disabled ? '#999' : textColor }">
         <slot name="title"></slot>
       </view>
-      <uni-icons class="uni-sub-menu__icon" :class="{ transition: isOpen }" type="down" color="#7f8096" size="14"></uni-icons>
+      <uni-icons class="uni-sub-menu__icon" :class="{ transition: isOpen }" type="down" color="#bbb" size="14"></uni-icons>
     </view>
     <view class="uni-sub-menu__content" :class="{ 'uni-sub-menu--close': !isOpen }" :style="{ 'background-color': backgroundColor }">
       <view id="content--hook">
@@ -40,7 +40,7 @@
       // 展开菜单的背景色
       backgroundColor: {
         type: String,
-        default: '#121226',
+        default: '#f5f5f5',
       },
     },
     data() {
@@ -48,7 +48,7 @@
         height: 0,
         oldheight: 0,
         isOpen: false,
-        textColor: '#c0c0d0',
+        textColor: '#303133',
       };
     },
     computed: {
@@ -117,15 +117,15 @@
     padding-right: 10px;
     height: 56px;
     line-height: 56px;
-    color: #c0c0d0;
+    color: #303133;
     cursor: pointer;
     /* border-bottom: 1px #f5f5f5 solid; */
   }
 
   .uni-sub-menu__title:hover {
-    color: #5b8def;
+    color: #42b983;
     outline: none;
-    background-color: rgba(255, 255, 255, 0.06);
+    background-color: #ebebeb;
   }
 
   .uni-sub-menu__title-sub {
@@ -154,11 +154,11 @@
 
   .is-disabled {
     /* background-color: #f5f5f5; */
-    color: #7f8096;
+    color: red;
   }
   .uni-sub-menu__title.is-disabled:hover {
     background-color: inherit;
-    color: #7f8096;
+    color: #999;
     cursor: not-allowed;
   }
 </style>

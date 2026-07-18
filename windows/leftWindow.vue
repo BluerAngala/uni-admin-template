@@ -4,12 +4,14 @@
       ref="menu"
       :value="currentMenu"
       :staticMenu="staticMenu"
+      :backgroundColor="menuBackgroundColor"
+      :textColor="menuTextColor"
+      :activeTextColor="menuActiveTextColor"
       collection="opendb-admin-menus"
       :page-size="500"
       :field="field"
       where="enable==true"
       orderby="sort asc"
-      active-text-color="#5b8def"
       @select="select"
     >
     </uni-data-menu>
@@ -28,9 +30,18 @@
       };
     },
     computed: {
-      ...mapState('app', ['inited', 'navMenu', 'active']),
+      ...mapState('app', ['inited', 'navMenu', 'active', 'theme']),
       userInfo() {
         return this.$uniIdPagesStore.store.userInfo;
+      },
+      menuBackgroundColor() {
+        return this.theme === 'dark' ? '#16162a' : '#fff';
+      },
+      menuTextColor() {
+        return this.theme === 'dark' ? '#c0c0d0' : '#303133';
+      },
+      menuActiveTextColor() {
+        return this.theme === 'dark' ? '#5b8def' : '#409eff';
       },
     },
 

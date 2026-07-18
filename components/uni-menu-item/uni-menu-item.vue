@@ -37,8 +37,8 @@
     data() {
       return {
         active: false,
-        activeTextColor: '#5b8def',
-        textColor: '#c0c0d0',
+        activeTextColor: '#42B983',
+        textColor: '#303133',
         activeBackgroundColor: '',
       };
     },
@@ -105,7 +105,7 @@
     padding: 0 20px;
     height: 56px;
     line-height: 56px;
-    color: #c0c0d0;
+    color: #303133;
     transition: all 0.3s;
     cursor: pointer;
     // border-bottom: 1px #f5f5f5 solid;
@@ -113,7 +113,7 @@
 
   .uni-menu-item:hover {
     outline: none;
-    background-color: rgba(255, 255, 255, 0.06);
+    background-color: #ebebeb;
     transition: all 0.3s;
   }
 
@@ -124,12 +124,12 @@
 
   .is-disabled {
     // background-color: #f5f5f5;
-    color: #7f8096;
+    color: #999;
   }
 
   .uni-menu-item.is-disabled:hover {
     background-color: inherit;
-    color: #7f8096;
+    color: #999;
     cursor: not-allowed;
   }
 </style>

@@ -1,6 +1,14 @@
 <template>
   <view>
-    <uni-nav-menu :active="value" activeKey="value" :activeTextColor="activeTextColor" :uniqueOpened="uniqueOpened" @select="onSelect">
+    <uni-nav-menu
+      :active="value"
+      activeKey="value"
+      :activeTextColor="activeTextColor"
+      :backgroundColor="backgroundColor"
+      :textColor="textColor"
+      :uniqueOpened="uniqueOpened"
+      @select="onSelect"
+    >
       <uni-menu-sidebar :data="userMenu"></uni-menu-sidebar>
       <uni-menu-sidebar :data="staticMenu"></uni-menu-sidebar>
     </uni-nav-menu>
@@ -29,6 +37,14 @@
       activeTextColor: {
         type: String,
         default: '#42B983',
+      },
+      backgroundColor: {
+        type: String,
+        default: '#fff',
+      },
+      textColor: {
+        type: String,
+        default: '#303133',
       },
       // 是否只保持一个子菜单的展开
       uniqueOpened: {
