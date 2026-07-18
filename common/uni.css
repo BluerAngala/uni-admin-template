@@ -236,3 +236,243 @@ button:after { border-width: 0; }
 .uni-embed-hide-top .uni-top-window { display: none !important; }
 /* #endif */
 .uni-system-choose-location { z-index: 1000; }
+
+/* ============================================
+   毛玻璃效果 — 暗色模式下生效
+   ============================================ */
+/* #ifdef H5 */
+[data-theme="dark"] .uni-stat--x {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+}
+
+[data-theme="dark"] .uni-page-body,
+[data-theme="dark"] uni-page-body {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+}
+
+[data-theme="dark"] .modal {
+  background-color: rgba(20, 20, 35, 0.8);
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+[data-theme="dark"] .uni-header {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border-bottom-color: var(--glass-border, rgba(255,255,255,0.08));
+}
+
+[data-theme="dark"] button[type="default"] {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+
+[data-theme="dark"] button[type="default"]:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] button[type="default"][plain] {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .uni-search {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+
+[data-theme="dark"] .uni-input-border,
+[data-theme="dark"] .uni-textarea-border {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+/* #endif */
+
+/* ============================================
+   毛玻璃效果 — 暗色模式下生效
+   ============================================ */
+/* #ifdef H5 */
+[data-theme="dark"] .uni-stat--x {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+}
+
+[data-theme="dark"] .uni-page-body,
+[data-theme="dark"] uni-page-body {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+}
+
+[data-theme="dark"] .modal {
+  background-color: rgba(20, 20, 35, 0.8);
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+[data-theme="dark"] .uni-header {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border-bottom-color: var(--glass-border, rgba(255,255,255,0.08));
+}
+
+[data-theme="dark"] button[type="default"] {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+
+[data-theme="dark"] button[type="default"]:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] button[type="default"][plain] {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .uni-search {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+
+[data-theme="dark"] .uni-input-border,
+[data-theme="dark"] .uni-textarea-border {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+/* #endif */
+
+/* ============================================
+   毛玻璃效果 — 暗色模式下生效
+   ============================================ */
+/* #ifdef H5 */
+[data-theme="dark"] .uni-stat--x {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+}
+
+[data-theme="dark"] .uni-page-body,
+[data-theme="dark"] uni-page-body {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+}
+
+[data-theme="dark"] .modal {
+  background-color: rgba(20, 20, 35, 0.8);
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+[data-theme="dark"] .uni-header {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border-bottom-color: var(--glass-border, rgba(255,255,255,0.08));
+}
+
+[data-theme="dark"] button[type="default"] {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+
+[data-theme="dark"] button[type="default"]:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] button[type="default"][plain] {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .uni-search {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+
+[data-theme="dark"] .uni-input-border,
+[data-theme="dark"] .uni-textarea-border {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+/* #endif */
+
+/* ============================================
+   毛玻璃效果 — 暗色模式下生效
+   ============================================ */
+/* #ifdef H5 */
+[data-theme="dark"] .uni-stat--x {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+}
+
+[data-theme="dark"] .uni-page-body,
+[data-theme="dark"] uni-page-body {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+}
+
+[data-theme="dark"] .modal {
+  background-color: rgba(20, 20, 35, 0.8);
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+[data-theme="dark"] .uni-header {
+  background-color: var(--glass-bg, rgba(255,255,255,0.05));
+  border-bottom-color: var(--glass-border, rgba(255,255,255,0.08));
+}
+
+[data-theme="dark"] button[type="default"] {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+
+[data-theme="dark"] button[type="default"]:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] button[type="default"][plain] {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .uni-search {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+
+[data-theme="dark"] .uni-input-border,
+[data-theme="dark"] .uni-textarea-border {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f0f0f5);
+}
+/* #endif */
