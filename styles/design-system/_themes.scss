@@ -3,91 +3,91 @@
 // ============================================
 
 // ------------------------------------------
-// Default（亮色）主题
+// Default（亮色）主题 — 现代明亮
 // ------------------------------------------
 [data-theme="default"] {
-  // 背景
+  // 背景 — 干净白灰
   --color-bg-primary:    #ffffff;
-  --color-bg-secondary:  #f7f8fa;
-  --color-bg-tertiary:   #f0f1f3;
+  --color-bg-secondary:  #f9fafb;
+  --color-bg-tertiary:   #f3f4f6;
   --color-bg-elevated:   #ffffff;
 
-  // 文字
-  --color-text-primary:   #1a1a2e;
+  // 文字 — 清晰层次
+  --color-text-primary:   #111827;
   --color-text-secondary: #6b7280;
   --color-text-tertiary:  #9ca3af;
   --color-text-inverse:   #ffffff;
 
-  // 边框
+  // 边框 — 极细
   --color-border-primary: #e5e7eb;
-  --color-border-subtle:  #f0f1f3;
+  --color-border-subtle:  #f3f4f6;
 
-  // 强调色
-  --color-accent:         #5b8def;
-  --color-accent-hover:   #4a7de0;
-  --color-accent-active:  #3b6dd0;
-  --color-accent-subtle:  rgba(91, 141, 239, 0.08);
+  // 强调色 — 鲜亮蓝
+  --color-accent:         #3b82f6;
+  --color-accent-hover:   #2563eb;
+  --color-accent-active:  #1d4ed8;
+  --color-accent-subtle:  rgba(59, 130, 246, 0.08);
 
   // 语义色
-  --color-success:        #10b981;
-  --color-success-subtle: rgba(16, 185, 129, 0.08);
+  --color-success:        #22c55e;
+  --color-success-subtle: rgba(34, 197, 94, 0.08);
   --color-warning:        #f59e0b;
   --color-warning-subtle: rgba(245, 158, 11, 0.08);
   --color-error:          #ef4444;
   --color-error-subtle:   rgba(239, 68, 68, 0.08);
 
   // 遮罩
-  --color-mask:           rgba(0, 0, 0, 0.4);
+  --color-mask:           rgba(0, 0, 0, 0.5);
 
   // 阴影
-  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
 }
 
 // ------------------------------------------
-// Dark 主题
+// Dark 主题 — 现代深色（参考 Vercel/Linear）
 // ------------------------------------------
 [data-theme="dark"] {
-  // 背景
-  --color-bg-primary:    #0f0f1a;
-  --color-bg-secondary:  #16162a;
-  --color-bg-tertiary:   #1e1e32;
-  --color-bg-elevated:   #1a1a2e;
+  // 背景 — 三层灰度，层次分明
+  --color-bg-primary:    #0a0a0b;
+  --color-bg-secondary:  #111113;
+  --color-bg-tertiary:   #18181b;
+  --color-bg-elevated:   #1c1c1f;
 
-  // 文字
-  --color-text-primary:   #e8e8f0;
-  --color-text-secondary: #9e9eb0;
-  --color-text-tertiary:  #6b7290;
-  --color-text-inverse:   #1a1a2e;
+  // 文字 — 高对比度
+  --color-text-primary:   #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-tertiary:  #71717a;
+  --color-text-inverse:   #0a0a0b;
 
-  // 边框
-  --color-border-primary: #2a2a42;
-  --color-border-subtle:  #1e1e32;
+  // 边框 — 极细线条
+  --color-border-primary: #27272a;
+  --color-border-subtle:  #1e1e20;
 
-  // 强调色（dark 下微调亮度）
-  --color-accent:         #5b8def;
-  --color-accent-hover:   #6b9df0;
-  --color-accent-active:  #4a7de0;
-  --color-accent-subtle:  rgba(91, 141, 239, 0.12);
+  // 强调色 — 鲜亮蓝
+  --color-accent:         #3b82f6;
+  --color-accent-hover:   #60a5fa;
+  --color-accent-active:  #2563eb;
+  --color-accent-subtle:  rgba(59, 130, 246, 0.15);
 
   // 语义色
-  --color-success:        #42d885;
-  --color-success-subtle: rgba(16, 185, 129, 0.12);
-  --color-warning:        #f0b446;
-  --color-warning-subtle: rgba(245, 158, 11, 0.12);
-  --color-error:          #ff6b60;
-  --color-error-subtle:   rgba(239, 68, 68, 0.12);
+  --color-success:        #22c55e;
+  --color-success-subtle: rgba(34, 197, 94, 0.15);
+  --color-warning:        #f59e0b;
+  --color-warning-subtle: rgba(245, 158, 11, 0.15);
+  --color-error:          #ef4444;
+  --color-error-subtle:   rgba(239, 68, 68, 0.15);
 
-  // 遮罩（dark 下更深）
-  --color-mask:           rgba(0, 0, 0, 0.6);
+  // 遮罩
+  --color-mask:           rgba(0, 0, 0, 0.7);
 
-  // 阴影（dark 下用更重的阴影区分层级）
-  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.2);
-  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.5);
+  // 阴影 — 极简
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.6);
 }
 
 // ------------------------------------------
