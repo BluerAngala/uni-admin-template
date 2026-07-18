@@ -476,3 +476,70 @@ button:after { border-width: 0; }
   color: var(--color-text-primary, #f0f0f5);
 }
 /* #endif */
+
+/* ============================================
+   毛玻璃布局效果 — 暗色模式
+   ============================================ */
+/* #ifdef H5 */
+[data-theme="dark"] .sidebar {
+  background-color: rgba(15, 15, 26, 0.6);
+  border-right-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .topbar {
+  background-color: rgba(15, 15, 26, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .topbar__dropdown {
+  background-color: rgba(20, 20, 35, 0.85);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+[data-theme="dark"] .uni-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme="dark"] .uni-menu-item.is-active {
+  background-color: rgba(129, 140, 248, 0.15) !important;
+}
+
+[data-theme="dark"] .uni-sub-menu__title:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme="dark"] .topbar__user:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .topbar__action:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .topbar__avatar {
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+}
+
+[data-theme="dark"] .sidebar__logo {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+/* #endif */
+
+/* ============================================
+   暗色模式渐变背景
+   ============================================ */
+/* #ifdef H5 */
+[data-theme="dark"] uni-main {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%) !important;
+}
+
+[data-theme="dark"] uni-page-wrapper {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%) !important;
+}
+/* #endif */
