@@ -1,153 +1,98 @@
 // ============================================
-// 主题映射 — Default / Dark / Auto
+// 主题映射 — 暗夜毛玻璃风格
+// 完全参照 Glassmorphism-Admin-Panel-UI
 // ============================================
 
 // ------------------------------------------
-// Default（亮色）主题 — 现代明亮
+// 全局 CSS 变量（默认暗色主题）
 // ------------------------------------------
-[data-theme="default"] {
+:root {
   // 字体
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
 
-  // 背景 — 干净白灰
-  --color-bg-primary:    #ffffff;
-  --color-bg-secondary:  #f9fafb;
-  --color-bg-tertiary:   #f3f4f6;
-  --color-bg-elevated:   #ffffff;
+  // 基础色调
+  --background: 0 0% 4%;
+  --foreground: 0 0% 98%;
+  --card-bg-hsl: 20 15% 8%;
 
-  // 文字 — 清晰层次
-  --color-text-primary:   #111827;
-  --color-text-secondary: #6b7280;
-  --color-text-tertiary:  #9ca3af;
-  --color-text-inverse:   #ffffff;
+  // 主题色（靛蓝灰 — 可动态调节）
+  --theme-primary: 215 25% 63%;
+  --theme-primary-rgb: 148, 162, 180;
+  --theme-gradient-from: #94a2b4;
+  --theme-gradient-to: #7a8a9e;
 
-  // 边框 — 极细
-  --color-border-primary: #e5e7eb;
-  --color-border-subtle:  #f3f4f6;
+  // 毛玻璃参数（可从设置页面调节）
+  --glass-opacity: 0.06;
+  --glass-blur: 16px;
+  --glass-border-opacity: 0.10;
+  --glass-saturation: 150%;
+  --glass-hover-opacity-add: 0.02;
+  --glass-hover-border-add: 0.05;
 
-  // 强调色 — 鲜亮蓝
-  --color-accent:         #3b82f6;
-  --color-accent-hover:   #2563eb;
-  --color-accent-active:  #1d4ed8;
-  --color-accent-subtle:  rgba(59, 130, 246, 0.08);
+  // 透明度层级
+  --ui-opacity-5: 0.05;
+  --ui-opacity-10: 0.10;
+  --ui-opacity-15: 0.15;
+  --ui-opacity-20: 0.20;
+  --ui-opacity-40: 0.40;
+  --ui-opacity-60: 0.60;
+  --ui-opacity-80: 0.80;
 
-  // 语义色
-  --color-success:        #22c55e;
-  --color-success-subtle: rgba(34, 197, 94, 0.08);
-  --color-warning:        #f59e0b;
-  --color-warning-subtle: rgba(245, 158, 11, 0.08);
-  --color-error:          #ef4444;
-  --color-error-subtle:   rgba(239, 68, 68, 0.08);
+  // 文字色（rgba 形式，便于统一调整）
+  --text-primary: rgba(255, 255, 255, 1);
+  --text-secondary: rgba(255, 255, 255, 0.80);
+  --text-tertiary: rgba(255, 255, 255, 0.60);
+  --text-muted: rgba(255, 255, 255, 0.40);
 
-  // 遮罩
-  --color-mask:           rgba(0, 0, 0, 0.5);
+  // 渐变透明度
+  --bg-gradient-opacity-1: 0.12;
+  --bg-gradient-opacity-2: 0.10;
+  --bg-gradient-opacity-3: 0.04;
+
+  // 圆角
+  --radius: 1rem; // 16px
+  --radius-lg: 1.25rem; // 20px
+  --radius-md: 0.75rem; // 12px
+  --radius-sm: 0.5rem; // 8px
 
   // 阴影
-  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-  --shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+  // 背景色
+  --theme-bg-color: #0a0a0a;
+
+  // 语义色
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: var(--theme-gradient-from);
 }
 
 // ------------------------------------------
-// Dark 主题 — 现代深色（参考 Vercel/Linear）
+// 兼容旧 token（逐步迁移用）
 // ------------------------------------------
-// ------------------------------------------
-// Dark 主题 — 暗夜毛玻璃风格
-// 参考 Glassmorphism-Admin-Panel-UI
-// ------------------------------------------
-// ------------------------------------------
-// Dark 主题 — 暗夜毛玻璃风格
-// 参考 Glassmorphism-Admin-Panel-UI
-// ------------------------------------------
+[data-theme="default"],
 [data-theme="dark"] {
-  // 字体
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-
-  // 背景 — 深色渐变底色
-  --color-bg-primary:    #0f0f1a;
-  --color-bg-secondary:  #131320;
-  --color-bg-tertiary:   #1a1a2e;
-  --color-bg-elevated:   rgba(255, 255, 255, 0.05);
-
-  // 毛玻璃卡片
-  --glass-bg:            rgba(255, 255, 255, 0.05);
-  --glass-border:        rgba(255, 255, 255, 0.08);
-  --glass-blur:          20px;
-
-  // 文字 — 高对比度
-  --color-text-primary:   #f0f0f5;
-  --color-text-secondary: #9898b0;
-  --color-text-tertiary:  #6b6b80;
-  --color-text-inverse:   #0f0f1a;
-
-  // 边框 — 半透明
-  --color-border-primary: rgba(255, 255, 255, 0.12);
-  --color-border-subtle:  rgba(255, 255, 255, 0.06);
-
-  // 强调色 — 亮紫蓝
-  --color-accent:         #818cf8;
-  --color-accent-hover:   #a5b4fc;
-  --color-accent-active:  #6366f1;
-  --color-accent-subtle:  rgba(129, 140, 248, 0.15);
-
-  // 语义色
-  --color-success:        #34d399;
-  --color-success-subtle: rgba(52, 211, 153, 0.15);
-  --color-warning:        #fbbf24;
-  --color-warning-subtle: rgba(251, 191, 36, 0.15);
-  --color-error:          #f87171;
-  --color-error-subtle:   rgba(248, 113, 113, 0.15);
-
-  // 遮罩
-  --color-mask:           rgba(0, 0, 0, 0.7);
-
-  // 阴影
-  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
-
-  // 渐变背景
-  --gradient-bg: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
-}
-
-
-
-// ------------------------------------------
-// Auto 模式 — 跟随系统偏好
-// ------------------------------------------
-@media (prefers-color-scheme: dark) {
-  [data-theme="auto"] {
-    --color-bg-primary:    #0f0f1a;
-    --color-bg-secondary:  #16162a;
-    --color-bg-tertiary:   #1e1e32;
-    --color-bg-elevated:   #1a1a2e;
-
-    --color-text-primary:   #e8e8f0;
-    --color-text-secondary: #9e9eb0;
-    --color-text-tertiary:  #6b7290;
-    --color-text-inverse:   #1a1a2e;
-
-    --color-border-primary: #2a2a42;
-    --color-border-subtle:  #1e1e32;
-
-    --color-accent:         #5b8def;
-    --color-accent-hover:   #6b9df0;
-    --color-accent-active:  #4a7de0;
-    --color-accent-subtle:  rgba(91, 141, 239, 0.12);
-
-    --color-success-subtle: rgba(16, 185, 129, 0.12);
-    --color-warning-subtle: rgba(245, 158, 11, 0.12);
-    --color-error-subtle:   rgba(239, 68, 68, 0.12);
-
-    --color-mask:           rgba(0, 0, 0, 0.6);
-
-    --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.2);
-    --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.3);
-    --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.4);
-    --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.5);
-  }
+  --color-bg-primary: var(--theme-bg-color);
+  --color-bg-secondary: rgba(255, 255, 255, var(--ui-opacity-5));
+  --color-bg-tertiary: rgba(255, 255, 255, var(--ui-opacity-10));
+  --color-bg-elevated: rgba(255, 255, 255, var(--glass-opacity));
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-inverse: #0a0a0a;
+  --color-border-primary: rgba(255, 255, 255, var(--glass-border-opacity));
+  --color-border-subtle: rgba(255, 255, 255, calc(var(--glass-border-opacity) - 0.04));
+  --color-accent: var(--theme-gradient-from);
+  --color-accent-hover: var(--theme-gradient-to);
+  --color-accent-active: var(--theme-gradient-from);
+  --color-accent-subtle: rgba(var(--theme-primary-rgb), var(--ui-opacity-15));
+  --color-success-subtle: rgba(34, 197, 94, var(--ui-opacity-15));
+  --color-warning-subtle: rgba(245, 158, 11, var(--ui-opacity-15));
+  --color-error-subtle: rgba(239, 68, 68, var(--ui-opacity-15));
+  --color-mask: rgba(0, 0, 0, 0.7);
 }

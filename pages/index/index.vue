@@ -47,18 +47,62 @@
         @click="navTo('https://uniapp.dcloud.io/uni-stat-v2.html')"
       />
 
-      <!-- 概览卡片 -->
-      <view class="stat-cards" v-if="complete">
-        <app-stat-card label="总设备数" :value="summaryStats.totalDevices" />
-        <app-stat-card label="活跃设备" :value="summaryStats.activeDevices" :change="summaryStats.activeDevicesChange" />
-        <app-stat-card label="总用户数" :value="summaryStats.totalUsers" />
-        <app-stat-card label="活跃用户" :value="summaryStats.activeUsers" :change="summaryStats.activeUsersChange" />
+      <!-- KPI 概览卡片 -->
+      <view class="kpi-grid" v-if="complete">
+        <view class="kpi-card">
+          <view class="kpi-card__header">
+            <view class="kpi-card__icon kpi-card__icon--blue">
+              <text class="kpi-card__icon-text">📊</text>
+            </view>
+            <text class="kpi-card__label">总设备数</text>
+          </view>
+          <text class="kpi-card__value">{{ summaryStats.totalDevices }}</text>
+          <view class="kpi-card__footer">
+            <text class="kpi-card__sub">今日 {{ summaryStats.activeDevices }}</text>
+          </view>
+        </view>
+        <view class="kpi-card">
+          <view class="kpi-card__header">
+            <view class="kpi-card__icon kpi-card__icon--green">
+              <text class="kpi-card__icon-text">📈</text>
+            </view>
+            <text class="kpi-card__label">活跃设备</text>
+          </view>
+          <text class="kpi-card__value">{{ summaryStats.activeDevices }}</text>
+          <view class="kpi-card__footer">
+            <text class="kpi-card__sub">较昨日 {{ summaryStats.activeDevicesChange >= 0 ? '+' : '' }}{{ summaryStats.activeDevicesChange }}%</text>
+          </view>
+        </view>
+        <view class="kpi-card">
+          <view class="kpi-card__header">
+            <view class="kpi-card__icon kpi-card__icon--purple">
+              <text class="kpi-card__icon-text">👥</text>
+            </view>
+            <text class="kpi-card__label">总用户数</text>
+          </view>
+          <text class="kpi-card__value">{{ summaryStats.totalUsers }}</text>
+          <view class="kpi-card__footer">
+            <text class="kpi-card__sub">今日 {{ summaryStats.activeUsers }}</text>
+          </view>
+        </view>
+        <view class="kpi-card">
+          <view class="kpi-card__header">
+            <view class="kpi-card__icon kpi-card__icon--amber">
+              <text class="kpi-card__icon-text">🔥</text>
+            </view>
+            <text class="kpi-card__label">活跃用户</text>
+          </view>
+          <text class="kpi-card__value">{{ summaryStats.activeUsers }}</text>
+          <view class="kpi-card__footer">
+            <text class="kpi-card__sub">较昨日 {{ summaryStats.activeUsersChange >= 0 ? '+' : '' }}{{ summaryStats.activeUsersChange }}%</text>
+          </view>
+        </view>
       </view>
-      <view class="stat-cards" v-else>
-        <app-skeleton variant="card" />
-        <app-skeleton variant="card" />
-        <app-skeleton variant="card" />
-        <app-skeleton variant="card" />
+      <view class="kpi-grid" v-else>
+        <view class="kpi-card kpi-card--loading"><view class="kpi-skeleton"></view></view>
+        <view class="kpi-card kpi-card--loading"><view class="kpi-skeleton"></view></view>
+        <view class="kpi-card kpi-card--loading"><view class="kpi-skeleton"></view></view>
+        <view class="kpi-card kpi-card--loading"><view class="kpi-skeleton"></view></view>
       </view>
 
       <!-- 平台选择 -->
