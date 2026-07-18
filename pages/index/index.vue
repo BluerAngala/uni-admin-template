@@ -54,6 +54,12 @@
         <app-stat-card label="总用户数" :value="summaryStats.totalUsers" />
         <app-stat-card label="活跃用户" :value="summaryStats.activeUsers" :change="summaryStats.activeUsersChange" />
       </view>
+      <view class="stat-cards" v-else>
+        <app-skeleton variant="card" />
+        <app-skeleton variant="card" />
+        <app-skeleton variant="card" />
+        <app-skeleton variant="card" />
+      </view>
 
       <!-- 平台选择 -->
       <view class="uni-stat--x mb-m">
