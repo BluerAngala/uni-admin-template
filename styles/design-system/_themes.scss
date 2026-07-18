@@ -1,6 +1,50 @@
 // ============================================
-// 主题映射 — Dark / Auto
+// 主题映射 — Default / Dark / Auto
 // ============================================
+
+// ------------------------------------------
+// Default（亮色）主题
+// ------------------------------------------
+[data-theme="default"] {
+  // 背景
+  --color-bg-primary:    #ffffff;
+  --color-bg-secondary:  #f7f8fa;
+  --color-bg-tertiary:   #f0f1f3;
+  --color-bg-elevated:   #ffffff;
+
+  // 文字
+  --color-text-primary:   #1a1a2e;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary:  #9ca3af;
+  --color-text-inverse:   #ffffff;
+
+  // 边框
+  --color-border-primary: #e5e7eb;
+  --color-border-subtle:  #f0f1f3;
+
+  // 强调色
+  --color-accent:         #5b8def;
+  --color-accent-hover:   #4a7de0;
+  --color-accent-active:  #3b6dd0;
+  --color-accent-subtle:  rgba(91, 141, 239, 0.08);
+
+  // 语义色
+  --color-success:        #10b981;
+  --color-success-subtle: rgba(16, 185, 129, 0.08);
+  --color-warning:        #f59e0b;
+  --color-warning-subtle: rgba(245, 158, 11, 0.08);
+  --color-error:          #ef4444;
+  --color-error-subtle:   rgba(239, 68, 68, 0.08);
+
+  // 遮罩
+  --color-mask:           rgba(0, 0, 0, 0.4);
+
+  // 阴影
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.12);
+}
 
 // ------------------------------------------
 // Dark 主题
@@ -29,8 +73,11 @@
   --color-accent-subtle:  rgba(91, 141, 239, 0.12);
 
   // 语义色
+  --color-success:        #42d885;
   --color-success-subtle: rgba(16, 185, 129, 0.12);
+  --color-warning:        #f0b446;
   --color-warning-subtle: rgba(245, 158, 11, 0.12);
+  --color-error:          #ff6b60;
   --color-error-subtle:   rgba(239, 68, 68, 0.12);
 
   // 遮罩（dark 下更深）
