@@ -335,13 +335,13 @@
   .reset-password-btn {
     /* height: 100%; */
     line-height: 36px;
-    color: #007aff;
+    color: var(--color-accent, #007aff);
     text-decoration: underline;
     cursor: pointer;
   }
 
   .cancel-reset-password-btn {
-    color: #007aff;
+    color: var(--color-accent, #007aff);
     padding-right: 10px;
     cursor: pointer;
   }

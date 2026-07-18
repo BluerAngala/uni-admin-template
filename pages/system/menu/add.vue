@@ -154,7 +154,7 @@
 
   .icon-modal {
     width: 350px;
-    background-color: #1a1a2e;
+    background-color: var(--modal-bg, #fff);
     height: 500px;
     overflow-y: scroll;
   }
