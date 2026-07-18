@@ -518,7 +518,9 @@ body {
       @include uni-picker;
       @include uni-calendar;
       @include uni-popup;
-      @include uni-surface-overrides;
+      @if getTheme('bg-color') == #1a1a2e {
+        @include uni-surface-overrides;
+      }
       // 页面
       .link-btn {
         color: $primary-color !important;
@@ -560,113 +562,105 @@ body {
         }
       }
 
-      // ──────────────────────────────
-      // 暗色基础样式覆盖（各主题从 $themes 取各自值）
-      // ──────────────────────────────
-      $bg-color: getTheme('bg-color');
-      $text-color: getTheme('text-color');
-      $text-color-grey: getTheme('text-color-grey');
-      $bg-color-grey: getTheme('bg-color-grey');
-      $bg-color-hover: getTheme('bg-color-hover');
-      $border-color: getTheme('border-color');
+      @if getTheme('bg-color') == #1a1a2e {
+        // ──────────────────────────────
+        // 暗色基础样式覆盖
+        // ──────────────────────────────
+        $bg-color: getTheme('bg-color');
+        $text-color: getTheme('text-color');
+        $text-color-grey: getTheme('text-color-grey');
+        $bg-color-grey: getTheme('bg-color-grey');
+        $bg-color-hover: getTheme('bg-color-hover');
+        $border-color: getTheme('border-color');
 
-      // 页面主体背景
-      background-color: $bg-color;
-      color: $text-color;
+        background-color: $bg-color;
+        color: $text-color;
 
-      .uni-app--showleftwindow {
-        uni-main {
-          background-color: $bg-color-grey;
+        .uni-app--showleftwindow {
+          uni-main {
+            background-color: $bg-color-grey;
+          }
+          uni-page-wrapper {
+            background-color: $bg-color-grey;
+          }
+          uni-page-body {
+            background-color: $bg-color;
+            box-shadow: -1px -1px 5px 0 rgba(0, 0, 0, 0.15);
+          }
         }
-        uni-page-wrapper {
-          background-color: $bg-color-grey;
-        }
-        uni-page-body {
+
+        .uni-container {
           background-color: $bg-color;
-          box-shadow: -1px -1px 5px 0 rgba(0, 0, 0, 0.15);
         }
-      }
 
-      .uni-container {
-        background-color: $bg-color;
-      }
-
-      .uni-header {
-        border-bottom-color: $bg-color-grey;
-      }
-
-      // 文字颜色
-      .uni-title {
-        color: $text-color;
-      }
-      .uni-sub-title {
-        color: $text-color-grey;
-      }
-      .label-text {
-        color: $text-color;
-      }
-
-      // 统计卡片 / 面板
-      .uni-stat--x {
-        background-color: $bg-color;
-        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
-      }
-
-      // Modal
-      .modal {
-        background-color: $bg-color;
-      }
-
-      // Tabs
-      .uni-tabs__header {
-        background-color: $bg-color-grey;
-        border-bottom-color: $border-color;
-      }
-      .uni-tabs__item.is-active {
-        background-color: $bg-color;
-      }
-
-      // 输入类
-      .uni-search,
-      .uni-input-border,
-      .uni-textarea-border {
-        color: $text-color;
-        border-color: $border-color;
-        background-color: $bg-color;
-      }
-
-      // 下拉菜单（顶栏用户菜单 / 主题菜单 / 语言菜单）
-      .navbar-menu,
-      .theme-menu,
-      .lang-menu {
-        background-color: $bg-color;
-        border-color: $border-color;
-        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.35);
-      }
-      .popup-menu__arrow {
-        border-bottom-color: $border-color;
-        &::after {
-          border-bottom-color: $bg-color;
+        .uni-header {
+          border-bottom-color: $bg-color-grey;
         }
-      }
 
-      // 顶部导航
-      .header {
-        background-color: getTheme('top-window-bg-color') !important;
-        color: getTheme('top-window-text-color');
-        border-bottom-color: darken(getTheme('top-window-bg-color'), 8%);
-      }
+        .uni-title {
+          color: $text-color;
+        }
+        .uni-sub-title {
+          color: $text-color-grey;
+        }
+        .label-text {
+          color: $text-color;
+        }
 
-      // 左侧菜单
-      .sidebar {
-        background-color: getTheme('left-window-bg-color');
-        border-right-color: darken(getTheme('left-window-bg-color'), 8%);
-      }
+        .uni-stat--x {
+          background-color: $bg-color;
+          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+        }
 
-      // 顶栏 hover 高亮
-      .theme-selector:hover,
-      .lang-selector:hover {
-        background-color: $bg-color-hover;
+        .modal {
+          background-color: $bg-color;
+        }
+
+        .uni-tabs__header {
+          background-color: $bg-color-grey;
+          border-bottom-color: $border-color;
+        }
+        .uni-tabs__item.is-active {
+          background-color: $bg-color;
+        }
+
+        .uni-search,
+        .uni-input-border,
+        .uni-textarea-border {
+          color: $text-color;
+          border-color: $border-color;
+          background-color: $bg-color;
+        }
+
+        .navbar-menu,
+        .theme-menu,
+        .lang-menu {
+          background-color: $bg-color;
+          border-color: $border-color;
+          box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.35);
+        }
+        .popup-menu__arrow {
+          border-bottom-color: $border-color;
+          &::after {
+            border-bottom-color: $bg-color;
+          }
+        }
+
+        .header {
+          background-color: getTheme('top-window-bg-color') !important;
+          color: getTheme('top-window-text-color');
+          border-bottom-color: darken(getTheme('top-window-bg-color'), 8%);
+        }
+
+        .sidebar {
+          background-color: getTheme('left-window-bg-color');
+          border-right-color: darken(getTheme('left-window-bg-color'), 8%);
+        }
+
+        .theme-selector:hover,
+        .lang-selector:hover {
+          background-color: $bg-color-hover;
+        }
       }
     }
   }

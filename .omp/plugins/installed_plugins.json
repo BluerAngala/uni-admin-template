@@ -1,4 +1,14 @@
 {
   "version": 2,
-  "plugins": {}
+  "plugins": {
+    "uni-app-devkit@uni-app-devkit": [
+      {
+        "scope": "project",
+        "installPath": "/Users/bluer/.omp/plugins/cache/plugins/uni-app-devkit___uni-app-devkit___0.0.0",
+        "version": "0.0.0",
+        "installedAt": "2026-07-18T06:24:33.508Z",
+        "lastUpdated": "2026-07-18T06:24:33.508Z"
+      }
+    ]
+  }
 }

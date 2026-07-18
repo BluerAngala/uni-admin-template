@@ -1,6 +1,6 @@
 {
   "plugins": {
-    "uni-app-dev": {
+    "uni-app-devkit": {
       "version": "0.0.0",
       "enabledFeatures": null,
       "enabled": true
