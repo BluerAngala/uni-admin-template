@@ -130,7 +130,6 @@ styles/design-system/
   --color-bg-primary: #08080f;
   // ...
 }
-}
 ```
 
 ### 添加新主题
