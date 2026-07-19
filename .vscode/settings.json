@@ -4,7 +4,9 @@
     "*.vue": "vue",
     "*.nvue": "vue",
     "*.scss": "scss",
-    "*.css": "css"
+    "*.css": "css",
+    "manifest.json": "jsonc",
+    "pages.json": "jsonc"
   },
 
   // Volar 设置：关闭模板类型检查（uni-app 组件非标准 Vue 组件）
