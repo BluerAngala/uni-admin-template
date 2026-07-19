@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./"],
+      "@dcloudio/*": ["./node_modules/@dcloudio/*"]
+    },
+    "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": false,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["es6", "dom"],
+    "types": ["@dcloudio/types"]
+  },
+  "include": [
+    "**/*.js",
+    "**/*.vue",
+    "**/*.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "uni_modules",
+    "dist",
+    "__pycache__"
+  ]
+}
