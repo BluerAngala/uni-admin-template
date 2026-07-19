@@ -1,9 +1,5 @@
 <template>
   <scroll-view class="sidebar" scroll-y="true">
-    <view class="sidebar__logo">
-      <image class="sidebar__logo-img" src="/static/logo.png" mode="aspectFit" />
-      <text class="sidebar__logo-text">uni-admin</text>
-    </view>
     <uni-data-menu
       ref="menu"
       :value="currentMenu"
@@ -145,28 +141,6 @@
   }
   /* #endif */
 
-  /* Logo 区域 */
-  .sidebar__logo {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2\.5);
-    padding: var(--space-3) var(--space-4) var(--space-4);
-    margin: 0 var(--space-3) var(--space-3);
-    border-bottom: 1px solid var(--color-border-subtle);
-  }
-
-  .sidebar__logo-img {
-    width: 32px;
-    height: 32px;
-    border-radius: var(--radius-md);
-  }
-
-  .sidebar__logo-text {
-    font-size: var(--text-lg);
-    font-weight: 700;
-    color: var(--color-text-primary);
-    letter-spacing: var(--tracking-tight);
-  }
 
   .uni-nav-menu {
     padding: 0 var(--space-3);

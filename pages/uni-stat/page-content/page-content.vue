@@ -61,7 +61,7 @@
         <view class="uni-stat-right-btn">
           <button type="primary" size="mini" @click="pageTo('/pages/uni-stat/page-rule/page-rule')">页面规则</button>
         </view>
-        <uni-table :loading="loading" border stripe :emptyText="errorMessage || $t('common.empty')">
+        <uni-table :loading="loading" stripe :emptyText="errorMessage || $t('common.empty')">
           <uni-tr>
             <block v-for="(mapper, index) in fieldsMap" :key="index">
               <uni-th v-if="mapper.title" :key="index" align="center">

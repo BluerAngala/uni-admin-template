@@ -65,7 +65,7 @@
             <!-- #endif -->
           </view>
         </view>
-        <uni-table :loading="loading" border stripe :emptyText="errorMessage || $t('common.empty')">
+        <uni-table :loading="loading" stripe :emptyText="errorMessage || $t('common.empty')">
           <uni-tr>
             <block v-for="(mapper, index) in fieldsMap" :key="index">
               <uni-th v-if="mapper.title" :key="index" align="center">

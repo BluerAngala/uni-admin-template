@@ -71,15 +71,15 @@
 </script>
 
 <style lang="scss">
-	$border-color:#EBEEF5;
+	$border-color: var(--color-border-subtle, rgba(0, 0, 0, 0.06));
 
 	.uni-table-td {
 		display: table-cell;
 		padding: 8px 10px;
 		font-size: 14px;
-		border-bottom: 1px $border-color solid;
+		border-bottom: 1px solid var(--color-border-subtle, rgba(0, 0, 0, 0.04));
 		font-weight: 400;
-		color: #606266;
+		color: var(--color-text-secondary, #606266);
 		line-height: 23px;
 		box-sizing: border-box;
 	}

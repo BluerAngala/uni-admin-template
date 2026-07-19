@@ -30,7 +30,7 @@
         loadtime="manual"
         @load="onqueryload"
       >
-        <uni-table ref="table" :loading="loading" :emptyText="error.message || $t('common.empty')" border stripe type="selection" @selection-change="selectionChange">
+        <uni-table ref="table" :loading="loading" :emptyText="error.message || $t('common.empty')" stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'permission_id')" sortable @sort-change="sortChange($event, 'permission_id')"
               >权限标识</uni-th

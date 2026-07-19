@@ -63,7 +63,7 @@
         <view class="mb-m">
           <uni-link color="" href="https://ask.dcloud.net.cn/article/35974" text="如何自定义渠道包?"></uni-link>
         </view>
-        <uni-table :loading="loading" border stripe :emptyText="errorMessage || $t('common.empty')">
+        <uni-table :loading="loading" stripe :emptyText="errorMessage || $t('common.empty')">
           <uni-tr>
             <block v-for="(mapper, index) in fieldsMap.slice(0, fieldsMap.length - 1)" :key="index">
               <uni-th v-if="mapper.title" :key="index" align="center">

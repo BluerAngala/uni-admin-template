@@ -69,7 +69,7 @@
             <view>受访页 TOP10</view>
             <view class="uni-stat-card-header-link" @click="navTo('/pages/uni-stat/page-res/page-res')">查看更多 </view>
           </view>
-          <uni-table :loading="loading" border stripe emptyText="暂无数据">
+          <uni-table :loading="loading" stripe emptyText="暂无数据">
             <uni-tr>
               <block v-for="(mapper, index) in resFieldsMap" :key="index">
                 <uni-th v-if="mapper.title" :key="index" align="center">
@@ -104,7 +104,7 @@
             <view>入口页 TOP10</view>
             <view class="uni-stat-card-header-link" @click="navTo('/pages/uni-stat/page-ent/page-ent')">查看更多 </view>
           </view>
-          <uni-table :loading="loading" border stripe emptyText="暂无数据">
+          <uni-table :loading="loading" stripe emptyText="暂无数据">
             <uni-tr>
               <block v-for="(mapper, index) in entFieldsMap" :key="index">
                 <uni-th v-if="mapper.title" :key="index" align="center">

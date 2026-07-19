@@ -205,8 +205,8 @@ export default {
 </script>
 
 <style lang="scss">
-$border-color: #ebeef5;
-$uni-primary: #007aff !default;
+$border-color: var(--color-border-subtle, rgba(0, 0, 0, 0.06));
+$uni-primary: var(--color-accent, #007aff);
 
 .uni-table-th {
 	padding: 12px 10px;
@@ -214,10 +214,11 @@ $uni-primary: #007aff !default;
 	display: table-cell;
 	box-sizing: border-box;
 	/* #endif */
-	font-size: 14px;
-	font-weight: bold;
-	color: #909399;
-	border-bottom: 1px $border-color solid;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-text-tertiary, #909399);
+	border-bottom: 1px solid var(--color-border-subtle, rgba(0, 0, 0, 0.06));
+	letter-spacing: 0.04em;
 }
 
 .uni-table-th-row {

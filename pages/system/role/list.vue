@@ -29,7 +29,7 @@
         loadtime="manual"
         @load="onqueryload"
       >
-        <uni-table ref="table" :loading="loading" :emptyText="error.message || $t('common.empty')" border stripe type="selection" @selection-change="selectionChange">
+        <uni-table ref="table" :loading="loading" :emptyText="error.message || $t('common.empty')" stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'role_id')" sortable @sort-change="sortChange($event, 'role_id')">唯一ID</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'role_name')" sortable @sort-change="sortChange($event, 'role_name')">名称</uni-th>

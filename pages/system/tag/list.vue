@@ -29,7 +29,7 @@
         loadtime="manual"
         @load="onqueryload"
       >
-        <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
+        <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'tagid')" sortable @sort-change="sortChange($event, 'tagid')">标签的tagid</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'name')" sortable @sort-change="sortChange($event, 'name')">标签名称</uni-th>

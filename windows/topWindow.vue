@@ -1,8 +1,12 @@
 <template>
   <view class="topbar">
     <view class="topbar__left">
+      <view class="topbar__brand">
+        <image class="topbar__brand-img" src="/static/logo.png" mode="aspectFit" />
+        <text class="topbar__brand-text hide-on-phone">uni-admin</text>
+      </view>
       <view class="topbar__menu-btn pointer" @click="toggleSidebar">
-        <uni-icons class="topbar__menu-icon" type="bars" size="18" />
+        <text class="topbar__menu-sep">|</text>
       </view>
       <text class="topbar__title hide-on-phone">{{ navigationBarTitleText }}</text>
     </view>
@@ -232,6 +236,32 @@
     gap: var(--space-2);
   }
 
+  .topbar__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .topbar__brand-img {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-md);
+  }
+
+  .topbar__brand-text {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .topbar__menu-sep {
+    font-size: var(--text-lg);
+    color: var(--color-text-tertiary);
+    font-weight: 300;
+    user-select: none;
+  }
+
   .topbar__title {
     color: var(--color-text-primary);
     font-size: var(--text-sm);
@@ -357,6 +387,12 @@
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
     /* #endif */
+  }
+
+  /* Dark mode — solid dropdown bg */
+  [data-theme='dark'] .topbar__dropdown {
+    background-color: #141420;
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
   .topbar__dropdown--user {

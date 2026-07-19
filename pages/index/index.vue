@@ -55,7 +55,7 @@
 
       <app-section title="设备概览">
         <app-surface padding="none">
-        <uni-table :loading="loading" border stripe emptyText="暂无数据">
+        <uni-table :loading="loading" stripe emptyText="暂无数据">
           <uni-tr>
             <block v-for="(mapper, index) in deviceTableFields" :key="index">
               <uni-th v-if="mapper.title" :key="index" align="center">{{ mapper.title }}</uni-th>
@@ -80,7 +80,7 @@
 
       <app-section title="注册用户概览">
         <app-surface padding="none">
-        <uni-table :loading="loading" border stripe emptyText="暂无数据">
+        <uni-table :loading="loading" stripe emptyText="暂无数据">
           <uni-tr>
             <block v-for="(mapper, index) in userTableFields" :key="index">
               <uni-th v-if="mapper.title" :key="index" align="center">{{ mapper.title }}</uni-th>

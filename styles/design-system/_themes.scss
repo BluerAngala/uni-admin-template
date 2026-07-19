@@ -1,28 +1,28 @@
 // Semantic theme maps. `default` and `dark` must each define every UI role.
 :root,
 [data-theme='default'] {
-  --color-bg-primary: #f8f9fc;
-  --color-bg-secondary: #f0f2f7;
-  --color-bg-tertiary: #e8ebf2;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f9f9fb;
+  --color-bg-tertiary: #f3f3f7;
   --color-surface: #ffffff;
   --color-surface-raised: #ffffff;
-  --color-surface-inset: #f5f6fa;
+  --color-surface-inset: #f7f7fa;
   --color-surface-overlay: #ffffff;
 
-  --color-text-primary: #0f1729;
-  --color-text-secondary: #4b5672;
-  --color-text-tertiary: #7c879e;
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: #3a3a4a;
+  --color-text-tertiary: #8a8a9a;
   --color-text-inverse: #ffffff;
 
-  --color-border-subtle: rgba(15, 23, 42, 0.07);
-  --color-border-strong: rgba(15, 23, 42, 0.12);
-  --color-focus-ring: rgba(99, 91, 255, 0.28);
-  --color-mask: rgba(15, 23, 42, 0.36);
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-border-strong: rgba(0, 0, 0, 0.1);
+  --color-focus-ring: rgba(99, 91, 255, 0.2);
+  --color-mask: rgba(0, 0, 0, 0.3);
 
   --color-accent: #635bff;
   --color-accent-hover: #5147e5;
   --color-accent-active: #4338ca;
-  --color-accent-subtle: #ede9fe;
+  --color-accent-subtle: #f0eeff;
   --color-success: #16a34a;
   --color-success-subtle: #ecfdf5;
   --color-warning: #d97706;
@@ -30,41 +30,55 @@
   --color-error: #dc2626;
   --color-error-subtle: #fef2f2;
 
-  --color-table-header: #f8f9fc;
-  --color-table-row-hover: #f3f4f9;
-  --color-menu-bg: #fafbfd;
-  --color-menu-hover: #f0f2f7;
+  --color-table-header: #fafafa;
+  --color-table-row-hover: #f7f7fa;
+  --color-menu-bg: #ffffff;
+  --color-menu-hover: #f5f3ff;
   --color-menu-active: #ede9fe;
   --color-input-bg: #ffffff;
-  --color-input-disabled: #f0f2f7;
-  --color-scrollbar: rgba(15, 23, 42, 0.12);
-  --color-scrollbar-hover: rgba(15, 23, 42, 0.22);
+  --color-input-disabled: #f5f5f7;
+  --color-scrollbar: rgba(0, 0, 0, 0.1);
+  --color-scrollbar-hover: rgba(0, 0, 0, 0.2);
 
-  /* Topbar glass effect */
-  --color-topbar-bg: rgba(255, 255, 255, 0.72);
-  --color-topbar-border: rgba(15, 23, 42, 0.06);
+  /* Topbar — frosted white with purple tint */
+  --color-topbar-bg: rgba(255, 255, 255, 0.8);
+  --color-topbar-border: rgba(0, 0, 0, 0.05);
 
-  /* Sidebar refinement */
-  --color-sidebar-bg: #fafbfd;
+  /* Sidebar — clean white */
+  --color-sidebar-bg: #ffffff;
   --color-sidebar-active-indicator: var(--color-accent);
+
+  /* Purple-tinted shadows for light mode */
+  --shadow-xs: 0 1px 2px rgba(99, 91, 255, 0.04);
+  --shadow-sm: 0 1px 3px rgba(99, 91, 255, 0.04), 0 1px 2px rgba(99, 91, 255, 0.06);
+  --shadow-md: 0 4px 12px rgba(99, 91, 255, 0.06), 0 1px 3px rgba(99, 91, 255, 0.08);
+  --shadow-lg: 0 12px 32px rgba(99, 91, 255, 0.08), 0 2px 6px rgba(99, 91, 255, 0.06);
+  --shadow-xl: 0 24px 64px rgba(99, 91, 255, 0.1), 0 4px 12px rgba(99, 91, 255, 0.06);
+
+  /* Light glass tokens */
+  --glass-bg-card: #ffffff;
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-blur: 20px;
+  --glass-glow: rgba(99, 91, 255, 0.04);
+  --glass-accent-glow: radial-gradient(ellipse at 20% 0%, rgba(99, 91, 255, 0.03) 0%, transparent 60%);
 }
 
 [data-theme='dark'] {
-  --color-bg-primary: #0c1021;
-  --color-bg-secondary: #111729;
-  --color-bg-tertiary: #1a2236;
-  --color-surface: #151c2e;
-  --color-surface-raised: #1a2338;
-  --color-surface-inset: #0e1424;
-  --color-surface-overlay: #1a2338;
+  --color-bg-primary: #08080f;
+  --color-bg-secondary: #0e0e18;
+  --color-bg-tertiary: #141420;
+  --color-surface: rgba(255, 255, 255, 0.04);
+  --color-surface-raised: rgba(255, 255, 255, 0.06);
+  --color-surface-inset: #0a0a14;
+  --color-surface-overlay: rgba(255, 255, 255, 0.08);
 
   --color-text-primary: #f0f2f8;
   --color-text-secondary: #9ca3c0;
   --color-text-tertiary: #6b7490;
   --color-text-inverse: #0f1729;
 
-  --color-border-subtle: rgba(255, 255, 255, 0.06);
-  --color-border-strong: rgba(255, 255, 255, 0.1);
+  --color-border-subtle: rgba(255, 255, 255, 0.07);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
   --color-focus-ring: rgba(129, 120, 255, 0.35);
   --color-mask: rgba(0, 0, 0, 0.6);
 
@@ -79,19 +93,30 @@
   --color-error: #f87171;
   --color-error-subtle: rgba(248, 113, 113, 0.1);
 
-  --color-table-header: #151c2e;
-  --color-table-row-hover: #1a2338;
-  --color-menu-bg: #111729;
-  --color-menu-hover: #1a2236;
+  --color-table-header: rgba(255, 255, 255, 0.03);
+  --color-table-row-hover: rgba(255, 255, 255, 0.05);
+  --color-menu-bg: #0a0a14;
+  --color-menu-hover: rgba(255, 255, 255, 0.06);
   --color-menu-active: rgba(129, 120, 255, 0.12);
-  --color-input-bg: #111729;
-  --color-input-disabled: #1a2236;
+  --color-input-bg: rgba(255, 255, 255, 0.04);
+  --color-input-disabled: rgba(255, 255, 255, 0.02);
   --color-scrollbar: rgba(255, 255, 255, 0.08);
   --color-scrollbar-hover: rgba(255, 255, 255, 0.16);
 
-  --color-topbar-bg: rgba(12, 16, 33, 0.78);
-  --color-topbar-border: rgba(255, 255, 255, 0.05);
+  --color-topbar-bg: #000000;
+  --color-topbar-border: rgba(255, 255, 255, 0.06);
 
-  --color-sidebar-bg: #111729;
+  --color-sidebar-bg: #000000;
   --color-sidebar-active-indicator: var(--color-accent);
+
+  /* Glass effect tokens */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-card: linear-gradient(160deg, rgba(30, 25, 55, 0.5) 0%, rgba(12, 12, 25, 0.7) 50%, rgba(8, 8, 18, 0.9) 100%);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 20px;
+  --glass-glow: rgba(129, 120, 255, 0.06);
+  --glass-accent-glow: radial-gradient(ellipse at 20% 0%, rgba(129, 120, 255, 0.08) 0%, transparent 60%);
+
+  --topbar-gradient: linear-gradient(90deg, #000000 0%, #06050e 40%, #0a0818 100%);
+  --sidebar-gradient: linear-gradient(180deg, #000000 0%, #060510 50%, #0a081a 100%);
 }

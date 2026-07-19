@@ -2,7 +2,7 @@
   <!-- 历史数据统计面板（最近7天，本月，本季度，本月，总和 -->
   <view class="uni-stat--x p-m">
     <view class="uni-stat-card-header">今日数据</view>
-    <uni-table :loading="loading" border stripe emptyText="暂无更多数据" style="min-height: 100px">
+    <uni-table :loading="loading" stripe emptyText="暂无更多数据" style="min-height: 100px">
       <!-- 表头行 -->
       <uni-tr>
         <uni-th align="center" class="th"></uni-th>

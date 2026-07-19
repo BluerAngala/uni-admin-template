@@ -77,8 +77,8 @@
 </script>
 
 <style lang="scss">
-	$uni-primary: #007aff !default;
-	$border-color: #DCDFE6;
+	$uni-primary: var(--color-accent, #635bff);
+	$border-color: var(--color-border-strong, rgba(0, 0, 0, 0.15));
 	$disable:0.4;
 
 	.uni-table-checkbox {
@@ -87,7 +87,7 @@
 		align-items: center;
 		justify-content: center;
 		position: relative;
-		margin: 5px 0;
+		margin: 2px 0;
 		cursor: pointer;
 
 		// 多选样式
@@ -99,9 +99,17 @@
 			position: relative;
 			width: 16px;
 			height: 16px;
-			border: 1px solid $border-color;
-			border-radius: 2px;
-			background-color: #fff;
+			border: 1px solid var(--color-border-strong, rgba(0, 0, 0, 0.15));
+			border-radius: 3px;
+			background-color: var(--color-bg-primary);
+			/* 浅色模式 — 提高边框可见度 */
+			[data-theme='default'] & {
+				border-color: rgba(0, 0, 0, 0.25);
+			}
+			/* 暗色模式 — 提高边框可见度 */
+			[data-theme='dark'] & {
+				border-color: rgba(255, 255, 255, 0.35);
+			}
 			z-index: 1;
 
 			.checkbox__inner-icon {
@@ -115,7 +123,7 @@
 				left: 5px;
 				height: 7px;
 				width: 3px;
-				border: 1px solid #fff;
+				border: 1px solid var(--color-text-inverse, #fff);
 				border-left: 0;
 				border-top: 0;
 				opacity: 0;
@@ -143,7 +151,7 @@
 					border: none;
 					border-radius: 2px;
 					transform: scale(0.5);
-					background-color: #fff;
+					background-color: var(--color-text-inverse, #fff);
 				}
 			}
 			&:hover{
@@ -154,8 +162,8 @@
 				/* #ifdef H5 */
 				cursor: not-allowed;
 				/* #endif */
-				background-color: #F2F6FC;
-				border-color: $border-color;
+				background: rgba(0, 0, 0, 0.03);
+				border-color: var(--color-border-subtle, rgba(0, 0, 0, 0.06));
 			}
 
 			// 选中

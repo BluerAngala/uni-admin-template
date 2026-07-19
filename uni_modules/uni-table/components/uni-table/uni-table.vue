@@ -301,7 +301,7 @@ export default {
 </script>
 
 <style lang="scss">
-$border-color: #ebeef5;
+$border-color: var(--color-border-subtle, rgba(0, 0, 0, 0.06));
 
 .uni-table-scroll {
 	width: 100%;
@@ -313,23 +313,21 @@ $border-color: #ebeef5;
 .uni-table {
 	position: relative;
 	width: 100%;
-	border-radius: 5px;
-	// box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
-	background-color: #fff;
+	border-radius: 10px;
+	background-color: var(--color-surface, #fff);
 	/* #ifndef APP-NVUE */
 	box-sizing: border-box;
 	display: table;
 	overflow-x: auto;
 	::v-deep .uni-table-tr:nth-child(n + 2) {
 		&:hover {
-			background-color: #f5f7fa;
+			background-color: var(--color-table-row-hover, #f5f7fa);
 		}
 	}
 	::v-deep .uni-table-thead {
 		.uni-table-tr {
-			// background-color: #f5f7fa;
 			&:hover {
-				background-color:#fafafa;
+				background-color: transparent;
 			}
 		}
 	}
@@ -350,7 +348,7 @@ $border-color: #ebeef5;
 .table--stripe {
 	/* #ifndef APP-NVUE */
 	::v-deep .uni-table-tr:nth-child(2n + 3) {
-		background-color: #fafafa;
+		background-color: var(--color-table-row-hover, #fafafa);
 	}
 	/* #endif */
 }
@@ -375,7 +373,7 @@ $border-color: #ebeef5;
 	left: 0;
 	text-align: center;
 	font-size: 14px;
-	color: #999;
+	color: var(--color-text-tertiary, #999);
 }
 
 .uni-table-mask {
@@ -384,7 +382,7 @@ $border-color: #ebeef5;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: var(--color-mask, rgba(255, 255, 255, 0.8));
 	z-index: 99;
 	/* #ifndef APP-NVUE */
 	display: flex;

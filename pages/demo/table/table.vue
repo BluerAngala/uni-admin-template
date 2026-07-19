@@ -17,7 +17,7 @@
     </view>
     <view class="uni-container">
       <!-- 表格组件 -->
-      <uni-table :loading="loading" border stripe type="selection" :emptyText="$t('common.empty')" @selection-change="selectionChange">
+      <uni-table :loading="loading" stripe type="selection" :emptyText="$t('common.empty')" @selection-change="selectionChange">
         <uni-tr>
           <!-- 表头列 -->
           <uni-th width="150" align="center">日期</uni-th>

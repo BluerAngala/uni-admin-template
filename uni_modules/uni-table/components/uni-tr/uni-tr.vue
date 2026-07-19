@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style lang="scss">
-$border-color: #ebeef5;
+$border-color: var(--color-border-subtle, rgba(0, 0, 0, 0.06));
 
 .uni-table-tr {
 	/* #ifndef APP-NVUE */
@@ -142,18 +142,17 @@ $border-color: #ebeef5;
 }
 
 .checkbox {
-	padding: 0 8px;
+	padding: 0 12px;
 	width: 26px;
-	padding-left: 12px;
 	/* #ifndef APP-NVUE */
 	display: table-cell;
 	vertical-align: middle;
 	/* #endif */
-	color: #333;
+	color: var(--color-text-secondary, #333);
 	font-weight: 500;
-	border-bottom: 1px $border-color solid;
+	border-bottom: 1px solid var(--color-border-subtle, rgba(0, 0, 0, 0.06));
 	font-size: 14px;
-	// text-align: center;
+	background-color: var(--color-bg-primary);
 }
 
 .tr-table--border {

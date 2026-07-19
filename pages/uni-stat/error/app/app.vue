@@ -81,7 +81,7 @@
           :options="options"
           @load="onqueryload"
         >
-          <uni-table ref="table" :loading="loading" border stripe :emptyText="errorMessage || $t('common.empty')" style="overflow-y: scroll">
+          <uni-table ref="table" :loading="loading" stripe :emptyText="errorMessage || $t('common.empty')" style="overflow-y: scroll">
             <uni-tr>
               <block v-for="(mapper, index) in fieldsMap" :key="index">
                 <uni-th v-if="mapper.title" :key="index" align="center" :style="{ minWidth: `${mapper.title.length * 15 + 80}px` }">

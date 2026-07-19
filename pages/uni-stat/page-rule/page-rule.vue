@@ -37,7 +37,7 @@
         loadtime="manual"
         @load="onqueryload"
       >
-        <uni-table ref="table" :loading="loading" :emptyText="errorMessage || error.message || '没有更多数据'" border stripe>
+        <uni-table ref="table" :loading="loading" :emptyText="errorMessage || error.message || '没有更多数据'" stripe>
           <uni-tr>
             <uni-th align="center">序号</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'title')">页面标题</uni-th>

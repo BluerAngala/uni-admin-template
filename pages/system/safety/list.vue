@@ -20,7 +20,7 @@
         :page-current="options.pageCurrent"
         v-slot:default="{ data, pagination, loading, error }"
       >
-        <uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe>
+        <uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" stripe>
           <uni-tr>
             <uni-th align="center">序号</uni-th>
             <uni-th align="center">用户名</uni-th>

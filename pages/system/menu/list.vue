@@ -40,7 +40,7 @@
           :page-current="options.pageCurrent"
           v-slot:default="{ data, pagination, loading, error }"
         >
-          <uni-table :loading="loading" class="table-pc" :emptyText="errMsg || $t('common.empty')" border stripe>
+          <uni-table :loading="loading" class="table-pc" :emptyText="errMsg || $t('common.empty')" stripe>
             <uni-tr>
               <uni-th align="center">排序</uni-th>
               <uni-th width="200" align="center">名称</uni-th>
@@ -82,7 +82,7 @@
         <view class="uni-group"></view>
       </view>
       <view class="uni-container">
-        <uni-table ref="pluginMenusTable" type="selection" border stripe @selection-change="pluginMenuSelectChange">
+        <uni-table ref="pluginMenusTable" type="selection" stripe @selection-change="pluginMenuSelectChange">
           <uni-tr>
             <uni-th align="center">名称（标识）</uni-th>
             <uni-th align="center">URL</uni-th>
