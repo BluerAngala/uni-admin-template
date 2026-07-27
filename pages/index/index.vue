@@ -269,12 +269,10 @@
     }
 
     &__status {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       gap: var(--space-4);
       margin-left: auto;
       flex-shrink: 0;
-      min-width: 320px;
     }
 
     &__avatar {
@@ -337,8 +335,8 @@
   .status-item {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+    padding: var(--space-2-5) var(--space-3-5);
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-lg);
@@ -353,29 +351,28 @@
 
   .status-orb {
     position: relative;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 
     &__core {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: #4ade80;
       box-shadow:
-        0 0 0 3px rgba(74, 222, 128, 0.2),
-        0 0 12px rgba(74, 222, 128, 0.5),
-        0 0 24px rgba(74, 222, 128, 0.2);
+        0 0 0 2px rgba(74, 222, 128, 0.2),
+        0 0 8px rgba(74, 222, 128, 0.5);
       z-index: 2;
       position: relative;
 
       &::after {
         content: '';
         position: absolute;
-        inset: 2px;
+        inset: 1.5px;
         border-radius: 50%;
         background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.8), transparent);
       }
@@ -385,7 +382,7 @@
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      border: 2px solid rgba(74, 222, 128, 0.3);
+      border: 1.5px solid rgba(74, 222, 128, 0.3);
       animation: ripple 2.5s ease-out infinite;
 
       &--2 {
@@ -414,21 +411,17 @@
   }
 
   .status-name {
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: var(--tracking-normal);
   }
 
   .status-value {
-    color: #fff;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    letter-spacing: var(--tracking-tight);
-    background: linear-gradient(to right, #4ade80, #22d3ee);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: var(--tracking-normal);
   }
 
   @keyframes heroGradient {
@@ -661,6 +654,12 @@
         margin-left: 0;
         width: 100%;
         min-width: 0;
+        flex-wrap: wrap;
+      }
+
+      .status-item {
+        flex: 1;
+        min-width: 120px;
       }
 
       &__avatar {
