@@ -16,6 +16,12 @@
               <text class="hero__date">{{ todayDate }}</text>
             </view>
           </view>
+          <view class="hero__health">
+            <view class="hero__health-item" v-for="(item, i) in healthItems" :key="i">
+              <view class="hero__health-dot" :class="'hero__health-dot--' + item.status" />
+              <text class="hero__health-label">{{ item.label }}</text>
+            </view>
+          </view>
           <view class="hero__glow" />
         </view>
 
@@ -79,17 +85,6 @@
             </view>
           </view>
         </app-section>
-
-        <!-- ========== SYSTEM HEALTH ========== -->
-        <view class="health-bar">
-          <view class="health-bar__inner">
-            <view class="health-item" v-for="(item, i) in healthItems" :key="i">
-              <view class="health-item__dot" :class="'health-item__dot--' + item.status" />
-              <text class="health-item__label">{{ item.label }}</text>
-              <text class="health-item__status">{{ item.statusText }}</text>
-            </view>
-          </view>
-        </view>
       </view>
     </app-page>
 
@@ -125,10 +120,10 @@
           { label: '标签管理', icon: 'admin-icons-manager-tag', url: '/pages/system/tag/list' },
         ],
         healthItems: [
-          { label: '数据库', status: 'healthy', statusText: '正常' },
-          { label: '云函数', status: 'healthy', statusText: '正常' },
-          { label: '存储空间', status: 'healthy', statusText: '正常' },
-          { label: '认证服务', status: 'healthy', statusText: '正常' },
+          { label: '数据库', status: 'healthy' },
+          { label: '云函数', status: 'healthy' },
+          { label: '存储空间', status: 'healthy' },
+          { label: '认证服务', status: 'healthy' },
         ],
       };
     },
@@ -326,6 +321,45 @@
       color: rgba(255, 255, 255, 0.5);
       font-size: var(--text-sm);
     }
+
+    &__health {
+      position: absolute;
+      bottom: var(--space-5);
+      right: var(--space-8);
+      display: flex;
+      gap: var(--space-4);
+      align-items: center;
+    }
+
+    &__health-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1-5);
+      padding: var(--space-1) var(--space-2-5);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+    }
+
+    &__health-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+
+      &--healthy {
+        background: #4ade80;
+        box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+        animation: dotPulse 2s ease-in-out infinite;
+      }
+    }
+
+    &__health-label {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 11px;
+      font-weight: 500;
+    }
   }
 
   @keyframes heroGradient {
@@ -451,6 +485,11 @@
     50% { opacity: 0.6; }
   }
 
+  @keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(74, 222, 128, 0.5); }
+    50% { box-shadow: 0 0 14px rgba(74, 222, 128, 0.8); }
+  }
+
   // ============================
   // SECTION LABEL
   // ============================
@@ -543,60 +582,7 @@
   }
 
   // ============================
-  // SYSTEM HEALTH BAR
-  // ============================
-  .health-bar {
-    margin-top: var(--space-8);
-    padding: var(--space-5) var(--space-6);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-xl);
-
-    &__inner {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      gap: var(--space-4);
-    }
-  }
-
-  .health-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-
-    &__dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-
-      &--healthy {
-        background: #22c55e;
-        box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
-        animation: dotPulse 2s ease-in-out infinite;
-      }
-    }
-
-    &__label {
-      color: var(--color-text-tertiary);
-      font-size: var(--text-sm);
-    }
-
-    &__status {
-      color: #22c55e;
-      font-size: var(--text-xs);
-      font-weight: 600;
-    }
-  }
-
-  @keyframes dotPulse {
-    0%, 100% { box-shadow: 0 0 6px rgba(34, 197, 94, 0.5); }
-    50% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.8); }
-  }
-
-  // ============================
-  // RESPONSIVE
+  // SECTION LABEL
   // ============================
   @media screen and (max-width: 1023px) {
     .bento-grid {
@@ -639,6 +625,21 @@
         width: 200px;
         height: 200px;
       }
+
+      &__health {
+        position: static;
+        margin-top: var(--space-4);
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+
+      &__health-item {
+        padding: 2px var(--space-2);
+      }
+
+      &__health-label {
+        font-size: 10px;
+      }
     }
 
     .bento-grid {
@@ -657,12 +658,6 @@
     .action--lg {
       grid-column: auto;
       grid-row: auto;
-    }
-
-    .health-bar__inner {
-      flex-wrap: wrap;
-      gap: var(--space-3);
-      justify-content: flex-start;
     }
   }
 </style>
