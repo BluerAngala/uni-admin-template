@@ -39,28 +39,7 @@
           <view class="hero__glow" />
         </view>
 
-        <!-- ========== STATS - Bento Grid ========== -->
-        <view class="bento-grid">
-          <view class="bento-card bento-card--featured" v-if="stats[0]">
-            <view class="bento-card__gradient bento-card__gradient--blue" />
-            <view class="bento-card__icon">
-              <text class="admin-icons-manager-user" />
-            </view>
-            <text class="bento-card__value" :data-target="stats[0].value">{{ displayValue(stats[0]) }}</text>
-            <text class="bento-card__label">{{ stats[0].label }}</text>
-            <view class="bento-card__bar">
-              <view class="bento-card__bar-fill" />
-            </view>
-          </view>
-
-          <view class="bento-card" v-for="(stat, i) in stats.slice(1)" :key="i">
-            <view class="bento-card__glow" />
-            <text class="bento-card__value" :data-target="stat.value">{{ displayValue(stat) }}</text>
-            <text class="bento-card__label">{{ stat.label }}</text>
-          </view>
-        </view>
-
-        <!-- ========== QUICK ACTIONS - Bento ========== -->
+        <!-- ========== QUICK ACTIONS ========== -->
         <app-section title="">
           <text class="section-label">快捷入口</text>
           <view class="actions-grid">
@@ -97,12 +76,6 @@
     },
     data() {
       return {
-        stats: [
-          { label: '系统用户', target: 0, current: 0 },
-          { label: '应用总数', target: 0, current: 0 },
-          { label: '角色数量', target: 0, current: 0 },
-          { label: '菜单项', target: 0, current: 0 },
-        ],
         quickActions: [
           { label: '用户管理', icon: 'admin-icons-manager-user', url: '/pages/system/user/list' },
           { label: '角色管理', icon: 'admin-icons-manager-role', url: '/pages/system/role/list' },
@@ -143,51 +116,8 @@
       },
     },
     created() {
-      this.loadStats();
     },
     methods: {
-      displayValue(stat) {
-        if (stat.target === undefined || stat.target === null) return '—';
-        return stat.target;
-      },
-      async loadStats() {
-        try {
-          const db = uniCloud.database();
-          const [userRes, appRes, roleRes, menuRes] = await Promise.all([
-            db.collection('uni-id-users').count(),
-            db.collection('opendb-app-list').count(),
-            db.collection('uni-id-roles').count(),
-            db.collection('opendb-admin-menus').count(),
-          ]);
-          this.stats[0].target = userRes.result?.total ?? 0;
-          this.stats[1].target = appRes.result?.total ?? 0;
-          this.stats[2].target = roleRes.result?.total ?? 0;
-          this.stats[3].target = menuRes.result?.total ?? 0;
-          this.$nextTick(this.animateCounters);
-        } catch (e) {
-          console.warn('Stats load failed:', e);
-        }
-      },
-      animateCounters() {
-        this.stats.forEach((stat, index) => {
-          const target = stat.target;
-          if (!target) return;
-          const duration = 1200;
-          const steps = 30;
-          const increment = target / steps;
-          let current = 0;
-          let step = 0;
-          const timer = setInterval(() => {
-            step++;
-            current = Math.min(Math.round(increment * step), target);
-            this.stats[index].current = current;
-            if (step >= steps) {
-              clearInterval(timer);
-              this.stats[index].current = target;
-            }
-          }, duration / steps);
-        });
-      },
       navTo(url) {
         if (url.indexOf('http') === 0) {
           // #ifdef H5
@@ -439,119 +369,6 @@
   }
 
   // ============================
-  // BENTO STATS GRID
-  // ============================
-  .bento-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: var(--space-4);
-    margin-bottom: var(--space-8);
-  }
-
-  .bento-card {
-    position: relative;
-    padding: var(--space-6) var(--space-5);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    &--featured {
-      grid-row: span 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-height: 180px;
-    }
-
-    &__gradient {
-      position: absolute;
-      inset: 0;
-      opacity: 0.06;
-      border-radius: inherit;
-
-      &--blue {
-        background: linear-gradient(135deg, var(--color-accent) 0%, #7c3aed 100%);
-      }
-    }
-
-    &__glow {
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 91, 255, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    &__icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-lg);
-      background: rgba(99, 91, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: var(--color-accent);
-      margin-bottom: var(--space-4);
-    }
-
-    &__value {
-      display: block;
-      color: var(--color-text-primary);
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: var(--tracking-tight);
-      line-height: 1;
-      margin-bottom: var(--space-1);
-      transition: all var(--transition-normal);
-    }
-
-    &--featured &__value {
-      font-size: 42px;
-    }
-
-    &__label {
-      display: block;
-      color: var(--color-text-tertiary);
-      font-size: var(--text-xs);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    &__bar {
-      margin-top: var(--space-4);
-      height: 3px;
-      background: rgba(99, 91, 255, 0.1);
-      border-radius: var(--radius-full);
-      overflow: hidden;
-
-      &-fill {
-        height: 100%;
-        width: 72%;
-        background: linear-gradient(90deg, var(--color-accent), #7c3aed);
-        border-radius: var(--radius-full);
-        animation: barShimmer 2s ease-in-out infinite;
-      }
-    }
-  }
-
-  @keyframes barShimmer {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-  }
-
-  // ============================
   // SECTION LABEL
   // ============================
   .section-label {
@@ -622,16 +439,6 @@
   // SECTION LABEL
   // ============================
   @media screen and (max-width: 1023px) {
-    .bento-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .bento-card--featured {
-      grid-column: span 2;
-      grid-row: auto;
-      min-height: 120px;
-    }
-
     .actions-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -675,15 +482,6 @@
         width: 200px;
         height: 200px;
       }
-    }
-
-    .bento-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .bento-card--featured {
-      grid-column: auto;
-      min-height: auto;
     }
 
     .actions-grid {
