@@ -160,11 +160,49 @@ const uniId = require('uni-id-common')
 const uniPay = require('uni-pay')
 ```
 
+## ⚠️ uni_modules 与虚拟合并机制
+
+uni_modules 可以包含自己的 `uniCloud/` 目录（云函数 + 数据库 schema）。
+
+**HBuilderX** 会将 uni_modules 内的 uniCloud 内容以**快捷方式**形式，虚拟显示到项目 `uniCloud-alipay/` 目录下（图标带小箭头）。文件实际物理位置在 `uni_modules/<id>/uniCloud/`。
+
+**VSCode** 不做虚拟合并，只显示真实文件系统。因此 `uniCloud-alipay/` 目录下看起来"空"——不代表云端没有，只是文件在 uni_modules 里。
+
+### 已有 uni_modules 云函数/公共模块
+
+| 来源 | 内容 |
+|---|---|
+| `uni_modules/uni-id-pages` | `cloudfunctions/uni-id-co` — 用户认证云对象 |
+| `uni_modules/uni-captcha` | `cloudfunctions/uni-captcha-co` + `common/uni-captcha` — 验证码 |
+| `uni_modules/uni-id-common` | `common/uni-id-common` — uni-id 公共模块 |
+| `uni_modules/uni-config-center` | `common/uni-config-center` — 配置中心 |
+| `uni_modules/uni-cloud-s2s` | `common/uni-cloud-s2s` — 服务端通信 |
+| `uni_modules/uni-open-bridge-common` | `common/uni-open-bridge-common` — 开放平台桥接 |
+
+### 已有 uni_modules 数据库 schema
+
+| 来源 | 表 |
+|---|---|
+| `uni_modules/uni-id-pages` | `opendb-department`、`opendb-device`、`opendb-frv-logs`、`uni-id-device`、`uni-id-log` |
+| `uni_modules/uni-captcha` | `opendb-verify-codes` |
+| `uni_modules/uni-open-bridge-common` | `opendb-open-data` |
+
+### 命名冲突规则
+
+| 新建内容 | 风险 | 结论 |
+|---|---|---|
+| 新建云函数/云对象，名字不跟上面表格重复 | 无冲突 | ✅ 安全 |
+| 新建数据库 schema，集合名不跟上面表格重复 | 无冲突 | ✅ 安全 |
+| 新建的叫 `uni-id-co` 或 `opendb-department` | 会与 uni_modules 冲突，部署时相互覆盖 | ❌ 禁止 |
+
+**开发前先查上表，避免重名。**
+
 ## 开发 checklist
 
 - [ ] 确定用云对象还是云函数
 - [ ] 文件名和目录名一致（云对象必须 `.obj.js` 后缀）
 - [ ] `_before()` 中做了权限校验（云对象）
 - [ ] 数据库操作前检查参数合法性
+- [ ] 云函数/数据库表名不与 uni_modules 冲突
 - [ ] 错误信息对前端友好（用户能看懂）
 - [ ] 如需定时触发，在 `uniCloud` 控制台配置定时器

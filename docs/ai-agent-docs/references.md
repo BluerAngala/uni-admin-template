@@ -37,7 +37,7 @@
 | 文档 | 链接 | 说明 |
 |---|---|---|
 | HBuilderX 官方文档 | https://hx.dcloud.net.cn/ | 编辑器、调试器、运行配置、插件市场 |
-| uni_modules 插件规范 | https://uniapp.dcloud.net.cn/plugin/uni_modules.html | 插件开发、package.json 字段、依赖管理 |
+| uni_modules 插件规范 | https://uniapp.dcloud.net.cn/plugin/uni_modules.html | 插件开发、package.json 字段、依赖管理、云端虚拟合并机制 |
 | uni 统计（uni-stat） | https://uniapp.dcloud.net.cn/uni-stat.html | 应用统计配置、后台数据面板 |
 | uni 升级中心 | https://uniapp.dcloud.net.cn/uniCloud/upgrade-center.html | App 版本管理、OTA 热更新 |
 

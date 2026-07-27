@@ -18,9 +18,13 @@
 │  uni-id-pages   opendb-admin-menus   uniCloud DB     │
 │  （认证/Token）  （动态菜单树）       （JQL 查询）     │
 ├─────────────────────────────────────────────────────┤
-│  uniCloud-alipay/                                    │
-│  ├── cloudfunctions/  （云函数 + 云对象）              │
-│  └── database/        （~140 个 opendb 数据表）       │
+├── uniCloud-alipay/                                    │
+│  ├── cloudfunctions/   （项目自有云函数，不含 uni_modules 的）  │
+│  └── database/         （项目自有表 schema）                  │
+├── uni_modules/         ← 36 个包，部分自带云函数/数据库 schema │
+│  └── uni-id-pages/uniCloud/                             │
+│      ├── cloudfunctions/uni-id-co     （认证云对象）        │
+│      └── database/                   （uni-id 表 schema）  │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -57,9 +61,9 @@ H5 平台支持嵌入模式：通过 URL 参数 `hideLeftWindow`/`hideTopWindow`
 | `store/` | Vuex — 3 个模块：`app`（主题/菜单/路由）、`user`（用户信息）、`error`（调试日志） |
 | `components/` | 自定义组件：`uni-data-menu`、`uni-stat-*`、`batch-sms`、`download-excel` |
 | `windows/` | 布局窗口：`topWindow.vue`（顶部导航栏）、`leftWindow.vue`（左侧菜单栏） |
-| `uniCloud-alipay/cloudfunctions/` | 7 个云函数/云对象 + `uni-stat` 公共模块 |
-| `uniCloud-alipay/database/` | ~140 个 opendb schema 文件 |
-| `uni_modules/` | 36 个 DCloud 官方/社区包 |
+| `uniCloud-alipay/cloudfunctions/` | 项目自有云函数/云对象（不含 uni_modules 贡献的） |
+| `uniCloud-alipay/database/` | 项目自有表 schema（不含 uni_modules 贡献的） |
+| `uni_modules/` | 36 个 DCloud 官方/社区包 — 部分含云函数、数据库 schema、页面、组件 |
 | `common/` | 全局样式：`uni.css`、`theme.scss`、图标字体 |
 | `i18n/` | 国际化：`zh-Hans.json`、`zh-Hant.json`、`en.json` |
 | `mock/uni-stat/` | 统计模块的 Mock 数据 |

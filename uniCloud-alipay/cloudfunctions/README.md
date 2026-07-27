@@ -1,30 +1,33 @@
 # cloudfunctions/
 
-云函数公共模块目录。云函数本体部署于 uniCloud 支付宝云服务空间，通过 HBuilderX 上传部署，本仓库仅跟踪公共模块。
+项目自有云函数、公共模块目录。
 
-## 公共模块
+## 本目录内容
 
-| 模块 | 路径 | 功能 |
+| 模块 | 路径 | 说明 |
 |---|---|---|
-| `uni-stat` | `common/uni-stat/` | uni-app 统计核心引擎 — 渠道、设备、用户、事件、页面、留存、错误日志等统计维度 |
+| `uni-stat` | `common/uni-stat/` | 统计核心引擎 — 渠道、设备、用户、事件、页面、留存、错误日志 |
 
-### uni-stat 统计引擎
+## uni_modules 贡献的云函数
 
-被多个云函数（`uni-stat-cron` 定时任务、`uni-stat-receiver` 数据接收器）共享引用：
+以下云函数/公共模块实际位于 `uni_modules/` 下，部署时自动合并到云端：
 
-```
-common/uni-stat/
-├── index.js            # 模块入口
-├── package.json        # 模块元数据
-├── shared/             # 共享工具（API 创建、错误处理、通用方法）
-└── stat/               # 统计主逻辑
-    ├── stat.js         # 统计入口
-    ├── receiver.js     # 数据接收处理
-    ├── lib/            # 工具库（日期处理、加密工具）
-    └── mod/            # 各统计模块（渠道、设备、事件、留存、页面、错误日志等）
-```
+| 来源 | 内容 |
+|---|---|
+| `uni_modules/uni-id-pages` | `uni-id-co` — 用户认证云对象（登录、注册、Token 等） |
+| `uni_modules/uni-captcha` | `uni-captcha-co` + `common/uni-captcha` — 验证码 |
+| `uni_modules/uni-id-common` | `common/uni-id-common` — uni-id 公共模块（Token 校验） |
+| `uni_modules/uni-config-center` | `common/uni-config-center` — 配置中心 |
+| `uni_modules/uni-cloud-s2s` | `common/uni-cloud-s2s` — 服务端通信 |
+| `uni_modules/uni-open-bridge-common` | `common/uni-open-bridge-common` — 开放平台桥接 |
 
-## 引用方式
+> 在 HBuilderX 中，以上 uni_modules 内容会以**快捷方式图标**显示在本目录下。VSCode 无此功能，所以本目录看起来"空"。
+
+## ⚠️ 命名冲突警告
+
+**新建云函数时，名字不能和 uni_modules 贡献的云函数重名**，否则部署时相互覆盖。完整清单见 `docs/ai-agent-docs/cloud-dev.md`。
+
+## 引用公共模块
 
 在云函数的 `package.json` 中声明依赖：
 
@@ -37,7 +40,3 @@ common/uni-stat/
 ```
 
 云函数中通过 `require('uni-stat')` 引入。
-
-## 部署方式
-
-HBuilderX 中，在云函数目录或 uni_modules 中右键 → "上传部署到 uniCloud"。公共模块随引用它的云函数一同上传。
