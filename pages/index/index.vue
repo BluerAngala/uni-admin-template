@@ -254,8 +254,8 @@
 
     &__divider {
       width: 1px;
-      height: 64px;
-      background: rgba(255, 255, 255, 0.15);
+      height: 80px;
+      background: rgba(255, 255, 255, 0.12);
       flex-shrink: 0;
     }
 
@@ -315,28 +315,51 @@
     &__health {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-3) var(--space-6);
+      gap: var(--space-3);
       flex: 1;
-      max-width: 360px;
+      max-width: 380px;
       margin-left: auto;
     }
 
     &__health-item {
       display: flex;
       align-items: center;
-      gap: var(--space-2-5);
+      gap: var(--space-3);
+      padding: var(--space-2-5) var(--space-3);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(12px);
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.15);
+        transform: translateY(-1px);
+      }
     }
 
     &__health-dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       flex-shrink: 0;
+      position: relative;
 
       &--healthy {
         background: #4ade80;
-        box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+        box-shadow:
+          0 0 0 3px rgba(74, 222, 128, 0.15),
+          0 0 12px rgba(74, 222, 128, 0.4);
         animation: dotPulse 2s ease-in-out infinite;
+
+        &::after {
+          content: '';
+          position: absolute;
+          inset: 2px;
+          border-radius: 50%;
+          background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.6), transparent);
+        }
       }
     }
 
@@ -347,15 +370,21 @@
     }
 
     &__health-label {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: var(--text-xs);
-      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     &__health-status {
       color: #fff;
       font-size: var(--text-base);
       font-weight: 600;
+      letter-spacing: var(--tracking-tight);
+      background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.85));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   }
 
@@ -608,13 +637,17 @@
         position: static;
         margin-top: var(--space-3);
         grid-template-columns: 1fr 1fr;
-        gap: var(--space-2) var(--space-4);
+        gap: var(--space-2);
         max-width: none;
       }
 
+      &__health-item {
+        padding: var(--space-1-5) var(--space-2-5);
+      }
+
       &__health-dot {
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
       }
 
       &__health-status {
