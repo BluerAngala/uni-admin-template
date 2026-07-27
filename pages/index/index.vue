@@ -563,13 +563,13 @@
   // QUICK ACTIONS - Uniform Grid
   // ============================
   .actions-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
     gap: var(--space-4);
   }
 
   .action {
     position: relative;
+    flex: 1;
     padding: var(--space-5);
     background-color: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
@@ -629,7 +629,12 @@
     }
 
     .actions-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      flex-wrap: wrap;
+    }
+
+    .action {
+      flex: none;
+      width: calc(33.33% - var(--space-3));
     }
   }
 
@@ -689,7 +694,12 @@
     }
 
     .actions-grid {
-      grid-template-columns: 1fr;
+      flex-wrap: wrap;
+    }
+
+    .action {
+      flex: none;
+      width: calc(50% - var(--space-2));
     }
   }
 </style>
