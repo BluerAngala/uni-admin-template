@@ -13,13 +13,15 @@ uniCloud-alipay/
 
 ## 数据库
 
-共 9 个表：
+共 10 个表（本目录管理），另加 uni_modules 自带的 4 个：
 
-| 前缀 | 分类 | 数量 |
+| 前缀 | 分类 | 数量（本目录） |
 |---|---|---|
-| `opendb-*` | DCloud 标准表（菜单、应用） | 2 |
+| `opendb-*` | DCloud 标准表（菜单、应用） | 3 |
 | `uni-id-*` | 用户认证表 | 5 |
 | `uni-stat-*` | 统计数据表 | 2 |
+
+> uni_modules 自带：`opendb-department`、`opendb-device`、`opendb-verify-codes`、`uni-id-device`，部署时自动创建。
 
 具体表结构见 `database/` 目录下的 `.schema.json`（字段定义 + JQL 权限规则）、`.index.json`（索引）、`.init_data.json`（初始数据）。
 
