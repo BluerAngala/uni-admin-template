@@ -49,37 +49,15 @@
         <!-- ========== QUICK ACTIONS - Bento ========== -->
         <app-section title="">
           <text class="section-label">快捷入口</text>
-          <view class="actions-bento">
-            <view
-              class="action action--lg"
-              v-for="(action, i) in quickActions.slice(0, 1)"
-              :key="'lg-' + i"
-              @click="navTo(action.url)"
-              hover-class="action--hover"
-            >
-              <view class="action__bg" />
-              <text :class="action.icon" />
-              <text class="action__label">{{ action.label }}</text>
-            </view>
-
+          <view class="actions-grid">
             <view
               class="action"
-              v-for="(action, i) in quickActions.slice(1, 3)"
-              :key="'md-' + i"
+              v-for="(action, i) in quickActions"
+              :key="i"
               @click="navTo(action.url)"
               hover-class="action--hover"
             >
-              <text :class="action.icon" />
-              <text class="action__label">{{ action.label }}</text>
-            </view>
-
-            <view
-              class="action"
-              v-for="(action, i) in quickActions.slice(3)"
-              :key="'sm-' + i"
-              @click="navTo(action.url)"
-              hover-class="action--hover"
-            >
+              <view class="action__bar" />
               <text :class="action.icon" />
               <text class="action__label">{{ action.label }}</text>
             </view>
@@ -503,23 +481,17 @@
   }
 
   // ============================
-  // QUICK ACTIONS BENTO
+  // QUICK ACTIONS - Uniform Grid
   // ============================
-  .actions-bento {
+  .actions-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-4);
-
-    // lg card spans full height
-    > .action--lg {
-      grid-row: span 2;
-    }
   }
 
   .action {
     position: relative;
-    padding: var(--space-5) var(--space-5);
+    padding: var(--space-5);
     background-color: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
@@ -533,7 +505,7 @@
       border-color: var(--color-accent);
     }
 
-    &__bg {
+    &__bar {
       position: absolute;
       top: 0;
       left: 0;
@@ -544,16 +516,11 @@
       transition: opacity var(--transition-fast);
     }
 
-    &:hover &__bg {
+    &:hover &__bar {
       opacity: 1;
     }
 
-    & > .admin-icons-manager-user,
-    & > .admin-icons-manager-role,
-    & > .admin-icons-manager-permission,
-    & > .admin-icons-manager-menu,
-    & > .admin-icons-manager-app,
-    & > .admin-icons-manager-tag {
+    & > [class^='admin-icons-'] {
       font-size: 22px;
       color: var(--color-accent);
       display: block;
@@ -565,19 +532,6 @@
       color: var(--color-text-primary);
       font-size: var(--text-base);
       font-weight: 600;
-    }
-
-    &--lg {
-      padding: var(--space-6);
-
-      & > .admin-icons-manager-user {
-        font-size: 28px;
-        margin-bottom: var(--space-4);
-      }
-
-      .action__label {
-        font-size: var(--text-lg);
-      }
     }
   }
 
@@ -595,13 +549,8 @@
       min-height: 120px;
     }
 
-    .actions-bento {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .action--lg {
-      grid-column: span 2;
-      grid-row: auto;
+    .actions-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
@@ -651,13 +600,8 @@
       min-height: auto;
     }
 
-    .actions-bento {
+    .actions-grid {
       grid-template-columns: 1fr;
-    }
-
-    .action--lg {
-      grid-column: auto;
-      grid-row: auto;
     }
   }
 </style>
