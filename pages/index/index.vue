@@ -259,6 +259,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: var(--space-10);
       width: 100%;
     }
 
@@ -271,10 +272,10 @@
     &__status {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-4);
+      gap: var(--space-5);
       margin-left: auto;
       flex-shrink: 0;
-      min-width: 320px;
+      min-width: 380px;
     }
 
     &__avatar {
@@ -337,8 +338,8 @@
   .status-item {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+    padding: var(--space-3-5) var(--space-5);
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-lg);
