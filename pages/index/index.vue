@@ -15,11 +15,15 @@
               <text class="hero__name">{{ displayName }}</text>
               <text class="hero__date">{{ todayDate }}</text>
             </view>
-          </view>
-          <view class="hero__health">
-            <view class="hero__health-item" v-for="(item, i) in healthItems" :key="i">
-              <view class="hero__health-dot" :class="'hero__health-dot--' + item.status" />
-              <text class="hero__health-label">{{ item.label }}</text>
+            <view class="hero__divider" />
+            <view class="hero__health">
+              <view class="hero__health-item" v-for="(item, i) in healthItems" :key="i">
+                <view class="hero__health-dot" :class="'hero__health-dot--' + item.status" />
+                <view class="hero__health-info">
+                  <text class="hero__health-label">{{ item.label }}</text>
+                  <text class="hero__health-status">{{ item.statusText }}</text>
+                </view>
+              </view>
             </view>
           </view>
           <view class="hero__glow" />
@@ -98,10 +102,10 @@
           { label: '标签管理', icon: 'admin-icons-manager-tag', url: '/pages/system/tag/list' },
         ],
         healthItems: [
-          { label: '数据库', status: 'healthy' },
-          { label: '云函数', status: 'healthy' },
-          { label: '存储空间', status: 'healthy' },
-          { label: '认证服务', status: 'healthy' },
+          { label: '数据库', status: 'healthy', statusText: '正常' },
+          { label: '云函数', status: 'healthy', statusText: '正常' },
+          { label: '存储空间', status: 'healthy', statusText: '正常' },
+          { label: '认证服务', status: 'healthy', statusText: '正常' },
         ],
       };
     },
@@ -244,7 +248,15 @@
       z-index: 2;
       display: flex;
       align-items: center;
-      gap: var(--space-6);
+      gap: var(--space-8);
+      width: 100%;
+    }
+
+    &__divider {
+      width: 1px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.15);
+      flex-shrink: 0;
     }
 
     &__avatar {
@@ -301,42 +313,49 @@
     }
 
     &__health {
-      position: absolute;
-      bottom: var(--space-5);
-      right: var(--space-8);
-      display: flex;
-      gap: var(--space-4);
-      align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3) var(--space-6);
+      flex: 1;
+      max-width: 360px;
+      margin-left: auto;
     }
 
     &__health-item {
       display: flex;
       align-items: center;
-      gap: var(--space-1-5);
-      padding: var(--space-1) var(--space-2-5);
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-full);
+      gap: var(--space-2-5);
     }
 
     &__health-dot {
-      width: 6px;
-      height: 6px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       flex-shrink: 0;
 
       &--healthy {
         background: #4ade80;
-        box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+        box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
         animation: dotPulse 2s ease-in-out infinite;
       }
     }
 
+    &__health-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
     &__health-label {
-      color: rgba(255, 255, 255, 0.75);
-      font-size: 11px;
-      font-weight: 500;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: var(--text-xs);
+      letter-spacing: 0.06em;
+    }
+
+    &__health-status {
+      color: #fff;
+      font-size: var(--text-base);
+      font-weight: 600;
     }
   }
 
@@ -559,6 +578,16 @@
       padding: var(--space-8) var(--space-5);
       min-height: 140px;
 
+      &__content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-4);
+      }
+
+      &__divider {
+        display: none;
+      }
+
       &__avatar {
         width: 52px;
         height: 52px;
@@ -577,17 +606,19 @@
 
       &__health {
         position: static;
-        margin-top: var(--space-4);
-        flex-wrap: wrap;
-        gap: var(--space-2);
+        margin-top: var(--space-3);
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2) var(--space-4);
+        max-width: none;
       }
 
-      &__health-item {
-        padding: 2px var(--space-2);
+      &__health-dot {
+        width: 8px;
+        height: 8px;
       }
 
-      &__health-label {
-        font-size: 10px;
+      &__health-status {
+        font-size: var(--text-sm);
       }
     }
 
