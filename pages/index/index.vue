@@ -15,6 +15,24 @@
               <text class="hero__name">{{ displayName }}</text>
               <text class="hero__date">{{ todayDate }}</text>
             </view>
+            <view class="hero__status">
+              <view
+                class="status-item"
+                v-for="(item, i) in healthItems"
+                :key="i"
+                :style="{ animationDelay: i * 0.15 + 's' }"
+              >
+                <view class="status-orb">
+                  <view class="status-orb__ring" />
+                  <view class="status-orb__ring status-orb__ring--2" />
+                  <view class="status-orb__core" />
+                </view>
+                <view class="status-info">
+                  <text class="status-name">{{ item.label }}</text>
+                  <text class="status-value">{{ item.statusText }}</text>
+                </view>
+              </view>
+            </view>
           </view>
           <view class="hero__glow" />
         </view>
@@ -90,6 +108,12 @@
           { label: '菜单管理', icon: 'admin-icons-manager-menu', url: '/pages/system/menu/list' },
           { label: '应用管理', icon: 'admin-icons-manager-app', url: '/pages/system/app/list' },
           { label: '标签管理', icon: 'admin-icons-manager-tag', url: '/pages/system/tag/list' },
+        ],
+        healthItems: [
+          { label: '数据库', statusText: '运行正常' },
+          { label: '云函数', statusText: '运行正常' },
+          { label: '存储空间', statusText: '运行正常' },
+          { label: '认证服务', statusText: '运行正常' },
         ],
       };
     },
@@ -233,6 +257,15 @@
       display: flex;
       align-items: center;
       gap: var(--space-6);
+      width: 100%;
+    }
+
+    &__status {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+      margin-left: auto;
+      flex-shrink: 0;
     }
 
     &__avatar {
@@ -287,6 +320,106 @@
       color: rgba(255, 255, 255, 0.5);
       font-size: var(--text-sm);
     }
+  }
+
+  // ============================
+  // STATUS ORBS with Ripple
+  // ============================
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2-5) var(--space-3);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+    transition: background var(--transition-fast), border-color var(--transition-fast);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  .status-orb {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &__core {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow:
+        0 0 0 3px rgba(74, 222, 128, 0.2),
+        0 0 12px rgba(74, 222, 128, 0.5),
+        0 0 24px rgba(74, 222, 128, 0.2);
+      z-index: 2;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 2px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.8), transparent);
+      }
+    }
+
+    &__ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(74, 222, 128, 0.3);
+      animation: ripple 2.5s ease-out infinite;
+
+      &--2 {
+        animation-delay: 1s;
+        border-color: rgba(74, 222, 128, 0.15);
+        border-width: 1px;
+      }
+    }
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(2.8);
+      opacity: 0;
+    }
+  }
+
+  .status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .status-name {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .status-value {
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+    background: linear-gradient(to right, #4ade80, #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   @keyframes heroGradient {
@@ -507,6 +640,11 @@
         flex-direction: column;
         align-items: flex-start;
         gap: var(--space-4);
+      }
+
+      &__status {
+        margin-left: 0;
+        width: 100%;
       }
 
       &__avatar {
