@@ -12,51 +12,28 @@
 | `*.index.json` | 索引定义（单字段/复合索引、排序方向） |
 | `*.init_data.json` | 初始数据（安装或初始化时导入的默认记录） |
 
-注：部分集合只有 `index.json`（仅定义索引）或只有 `init_data.json`（仅提供初始数据），其 schema 由 uni_modules 或云端定义。
+注：部分集合只有 `index.json`（仅定义索引），其 schema 由 uni_modules 或云端定义。
 
 ## 表清单
 
-### opendb 系列 — DCloud 标准表
+### 后台管理核心表
 
 | 表名 | schema | index | init_data | 说明 |
 |---|---|---|---|---|
-| `opendb-admin-menus` | ✅ | ✅ | ✅ | 管理后台菜单树 |
-| `opendb-app-list` | ✅ | ✅ | ✅ | 应用列表 |
-| `opendb-app-versions` | ✅ | ✅ | ✅ | 应用版本管理 |
-| `opendb-department` | — | ✅ | ✅ | 部门组织 |
-| `opendb-device` | — | ✅ | ✅ | 设备信息 |
-| `opendb-feedback` | — | ✅ | ✅ | 用户反馈 |
-| `opendb-poi` | — | ✅ | ✅ | POI 地理位置 |
-| `opendb-tempdata` | ✅ | — | ✅ | 临时数据存储 |
-| `opendb-verify-codes` | — | ✅ | ✅ | 验证码记录 |
-| `opendb-frv-logs` | — | — | ✅ | 人脸识别日志 |
-| `opendb-open-data` | — | — | ✅ | 开放数据 |
-| `opendb-sign-in` | — | — | ✅ | 签到数据 |
+| `opendb-admin-menus` | ✅ | ✅ | ✅ 2.9KB | 管理后台菜单树 |
+| `opendb-app-list` | ✅ | ✅ | — | 应用列表 |
+| `uni-id-users` | — | ✅ | ✅ 264B | 用户账号 |
+| `uni-id-roles` | — | ✅ | ✅ 167B | 角色定义 |
+| `uni-id-permissions` | — | ✅ | — | 权限定义 |
+| `uni-id-tag` | ✅ | ✅ | — | 用户标签 |
+| `uni-id-log` | — | ✅ | — | 登录日志 |
 
-### uni-id 系列 — 用户认证表
+### 统计（uni-stat 看板用）
 
 | 表名 | schema | index | init_data | 说明 |
 |---|---|---|---|---|
-| `uni-id-users` | — | ✅ | ✅ | 用户账号 |
-| `uni-id-roles` | — | ✅ | ✅ | 角色定义 |
-| `uni-id-permissions` | — | ✅ | ✅ | 权限定义 |
-| `uni-id-log` | — | ✅ | ✅ | 登录日志 |
-| `uni-id-tag` | ✅ | ✅ | ✅ | 用户标签 |
-| `uni-id-scores` | ✅ | — | ✅ | 用户积分 |
-| `uni-id-device` | — | — | ✅ | 用户设备关联 |
-
-### uni-stat 系列 — 统计数据表
-
-| 表名 | schema | index | init_data | 说明 |
-|---|---|---|---|---|
-| `uni-stat-app-platforms` | ✅ | ✅ | ✅ | 应用平台定义 |
-| `uni-stat-result` | ✅ | ✅ | ✅ | 统计结果 |
-
-### uni-pay 系列 — 支付表
-
-| 表名 | schema | index | init_data | 说明 |
-|---|---|---|---|---|
-| `uni-pay-orders` | ✅ | ✅ | ✅ | 支付订单 |
+| `uni-stat-app-platforms` | ✅ | ✅ | ✅ 2.1KB | 应用平台定义 |
+| `uni-stat-result` | ✅ | ✅ | — | 统计结果 |
 
 ## JQL 权限规则
 
