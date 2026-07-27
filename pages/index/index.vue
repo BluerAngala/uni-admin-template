@@ -48,13 +48,13 @@
       </app-section>
 
       <app-section title="平台选择">
-        <app-surface padding="compact">
+        <view class="card-wrapper card-wrapper--tabs">
           <uni-stat-tabs type="boldLine" mode="platform" v-model="query.platform_id" />
-        </app-surface>
+        </view>
       </app-section>
 
       <app-section title="设备概览">
-        <app-surface padding="none">
+        <view class="card-wrapper">
         <uni-table :loading="loading" stripe emptyText="暂无数据">
           <uni-tr>
             <block v-for="(mapper, index) in deviceTableFields" :key="index">
@@ -75,11 +75,11 @@
             </block>
           </uni-tr>
         </uni-table>
-        </app-surface>
+        </view>
       </app-section>
 
       <app-section title="注册用户概览">
-        <app-surface padding="none">
+        <view class="card-wrapper">
         <uni-table :loading="loading" stripe emptyText="暂无数据">
           <uni-tr>
             <block v-for="(mapper, index) in userTableFields" :key="index">
@@ -100,7 +100,7 @@
             </block>
           </uni-tr>
         </uni-table>
-        </app-surface>
+        </view>
       </app-section>
     </view>
     </app-page>
@@ -118,7 +118,6 @@
   import AppPage from '@/components/app-page/app-page.vue';
   import AppPageHeader from '@/components/app-page-header/app-page-header.vue';
   import AppSection from '@/components/app-section/app-section.vue';
-  import AppSurface from '@/components/app-surface/app-surface.vue';
   import AppStatCard from '@/components/app-stat-card/app-stat-card.vue';
 
   export default {
@@ -126,7 +125,6 @@
       AppPage,
       AppPageHeader,
       AppSection,
-      AppSurface,
       AppStatCard,
     },
     data() {
@@ -297,7 +295,6 @@
             }
           }
         }
-
         // 按顺序合并所有的字段
         tableFields = [...tableFields, ...today, ...yesterday, ...other];
 
@@ -437,7 +434,7 @@
       async checkdbInit() {
         // 获取uniCloud数据库的实例
         const db = uniCloud.database();
-        // 查询'opendb-app-list'集合的数据数量
+        // 查询'opendb-admin-menus'集合的数据数量
         let res = await db.collection('opendb-admin-menus').count();
         // 如果查询结果为空或total为0，则显示添加App ID的标识
         this.showdbInit = !res.result || res.result.total === 0 ? true : false;
@@ -464,6 +461,23 @@
   .uni-stat-tooltip-s {
     width: 400px;
     white-space: normal;
+  }
+
+  /* 统一三个区域的卡片容器 */
+  .card-wrapper {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+  }
+
+  .card-wrapper--tabs {
+    padding: var(--space-4);
+  }
+
+  /* 覆盖 theme.scss 的 !important，让表格背景一致 */
+  .card-wrapper ::v-deep .uni-table,
+  .card-wrapper ::v-deep .uni-table-scroll {
+    background-color: var(--color-surface) !important;
   }
 
   @media screen and (max-width: 1023px) {
