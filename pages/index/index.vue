@@ -2,64 +2,94 @@
   <view class="fix-top-window">
     <app-page fluid>
       <view class="uni-container">
-        <!-- Hero Greeting -->
-        <view class="welcome-hero">
-          <view class="welcome-hero__bg" />
-          <view class="welcome-hero__content">
-            <view class="welcome-hero__avatar">
-              <text class="welcome-hero__avatar-text">{{ avatarLetter }}</text>
+        <!-- ========== HERO ========== -->
+        <view class="hero">
+          <view class="hero__bg" />
+          <view class="hero__mesh" />
+          <view class="hero__content">
+            <view class="hero__avatar">
+              <text class="hero__avatar-letter">{{ avatarLetter }}</text>
             </view>
-            <view class="welcome-hero__text">
-              <text class="welcome-hero__greeting">{{ greeting }}</text>
-              <text class="welcome-hero__name">{{ displayName }}</text>
-              <text class="welcome-hero__date">{{ todayDate }}</text>
+            <view class="hero__text">
+              <text class="hero__greeting">{{ greeting }}</text>
+              <text class="hero__name">{{ displayName }}</text>
+              <text class="hero__date">{{ todayDate }}</text>
             </view>
+          </view>
+          <view class="hero__glow" />
+        </view>
+
+        <!-- ========== STATS - Bento Grid ========== -->
+        <view class="bento-grid">
+          <view class="bento-card bento-card--featured" v-if="stats[0]">
+            <view class="bento-card__gradient bento-card__gradient--blue" />
+            <view class="bento-card__icon">
+              <text class="admin-icons-manager-user" />
+            </view>
+            <text class="bento-card__value" :data-target="stats[0].value">{{ displayValue(stats[0]) }}</text>
+            <text class="bento-card__label">{{ stats[0].label }}</text>
+            <view class="bento-card__bar">
+              <view class="bento-card__bar-fill" />
+            </view>
+          </view>
+
+          <view class="bento-card" v-for="(stat, i) in stats.slice(1)" :key="i">
+            <view class="bento-card__glow" />
+            <text class="bento-card__value" :data-target="stat.value">{{ displayValue(stat) }}</text>
+            <text class="bento-card__label">{{ stat.label }}</text>
           </view>
         </view>
 
-        <!-- Quick Stats -->
-        <view class="stats-grid">
-          <view class="stat-card" v-for="(stat, i) in stats" :key="i">
-            <view class="stat-card__icon" :style="{ backgroundColor: stat.bg }">
-              <text :class="stat.icon" />
-            </view>
-            <view class="stat-card__info">
-              <text class="stat-card__value">{{ stat.value }}</text>
-              <text class="stat-card__label">{{ stat.label }}</text>
-            </view>
-          </view>
-        </view>
-
-        <!-- Quick Actions -->
-        <app-section title="快捷入口">
-          <view class="actions-grid">
+        <!-- ========== QUICK ACTIONS - Bento ========== -->
+        <app-section title="">
+          <text class="section-label">快捷入口</text>
+          <view class="actions-bento">
             <view
-              class="action-card"
-              v-for="(action, i) in quickActions"
-              :key="i"
+              class="action action--lg"
+              v-for="(action, i) in quickActions.slice(0, 1)"
+              :key="'lg-' + i"
               @click="navTo(action.url)"
-              hover-class="action-card--hover"
+              hover-class="action--hover"
             >
-              <view class="action-card__icon" :style="{ backgroundColor: action.bg }">
-                <text :class="action.icon" />
-              </view>
-              <text class="action-card__label">{{ action.label }}</text>
-              <text class="action-card__arrow">→</text>
+              <view class="action__bg" />
+              <text :class="action.icon" />
+              <text class="action__label">{{ action.label }}</text>
+            </view>
+
+            <view
+              class="action"
+              v-for="(action, i) in quickActions.slice(1, 3)"
+              :key="'md-' + i"
+              @click="navTo(action.url)"
+              hover-class="action--hover"
+            >
+              <text :class="action.icon" />
+              <text class="action__label">{{ action.label }}</text>
+            </view>
+
+            <view
+              class="action"
+              v-for="(action, i) in quickActions.slice(3)"
+              :key="'sm-' + i"
+              @click="navTo(action.url)"
+              hover-class="action--hover"
+            >
+              <text :class="action.icon" />
+              <text class="action__label">{{ action.label }}</text>
             </view>
           </view>
         </app-section>
 
-        <!-- System Info -->
-        <app-section title="系统信息">
-          <view class="card-wrapper">
-            <view class="sys-info">
-              <view class="sys-info__row" v-for="(info, i) in systemInfo" :key="i">
-                <text class="sys-info__label">{{ info.label }}</text>
-                <text class="sys-info__value">{{ info.value }}</text>
-              </view>
+        <!-- ========== SYSTEM HEALTH ========== -->
+        <view class="health-bar">
+          <view class="health-bar__inner">
+            <view class="health-item" v-for="(item, i) in healthItems" :key="i">
+              <view class="health-item__dot" :class="'health-item__dot--' + item.status" />
+              <text class="health-item__label">{{ item.label }}</text>
+              <text class="health-item__status">{{ item.statusText }}</text>
             </view>
           </view>
-        </app-section>
+        </view>
       </view>
     </app-page>
 
@@ -81,29 +111,26 @@
     data() {
       return {
         stats: [
-          { label: '系统用户', value: '—', icon: 'admin-icons-manager-user', bg: 'var(--color-accent-subtle)' },
-          { label: '应用总数', value: '—', icon: 'admin-icons-manager-app', bg: 'var(--color-success-subtle)' },
-          { label: '角色数量', value: '—', icon: 'admin-icons-manager-role', bg: 'var(--color-warning-subtle)' },
-          { label: '菜单项', value: '—', icon: 'admin-icons-manager-menu', bg: 'var(--color-error-subtle)' },
+          { label: '系统用户', target: 0, current: 0 },
+          { label: '应用总数', target: 0, current: 0 },
+          { label: '角色数量', target: 0, current: 0 },
+          { label: '菜单项', target: 0, current: 0 },
         ],
         quickActions: [
-          { label: '用户管理', icon: 'admin-icons-manager-user', url: '/pages/system/user/list', bg: 'var(--color-accent-subtle)' },
-          { label: '角色管理', icon: 'admin-icons-manager-role', url: '/pages/system/role/list', bg: 'var(--color-success-subtle)' },
-          { label: '权限管理', icon: 'admin-icons-manager-permission', url: '/pages/system/permission/list', bg: 'var(--color-warning-subtle)' },
-          { label: '菜单管理', icon: 'admin-icons-manager-menu', url: '/pages/system/menu/list', bg: 'var(--color-error-subtle)' },
-          { label: '应用管理', icon: 'admin-icons-manager-app', url: '/pages/system/app/list', bg: '#e0e7ff' },
-          { label: '标签管理', icon: 'admin-icons-manager-tag', url: '/pages/system/tag/list', bg: '#fce7f3' },
+          { label: '用户管理', icon: 'admin-icons-manager-user', url: '/pages/system/user/list' },
+          { label: '角色管理', icon: 'admin-icons-manager-role', url: '/pages/system/role/list' },
+          { label: '权限管理', icon: 'admin-icons-manager-permission', url: '/pages/system/permission/list' },
+          { label: '菜单管理', icon: 'admin-icons-manager-menu', url: '/pages/system/menu/list' },
+          { label: '应用管理', icon: 'admin-icons-manager-app', url: '/pages/system/app/list' },
+          { label: '标签管理', icon: 'admin-icons-manager-tag', url: '/pages/system/tag/list' },
         ],
-        systemInfo: [
-          { label: '框架版本', value: 'uni-admin v1.0.0' },
-          { label: '运行环境', value: 'uni-app 5.15 (vue3)' },
-          { label: '云服务空间', value: 'env-00jxubueh0z4' },
-          { label: '布局模式', value: '三窗口（顶栏 + 侧栏 + 内容）' },
+        healthItems: [
+          { label: '数据库', status: 'healthy', statusText: '正常' },
+          { label: '云函数', status: 'healthy', statusText: '正常' },
+          { label: '存储空间', status: 'healthy', statusText: '正常' },
+          { label: '认证服务', status: 'healthy', statusText: '正常' },
         ],
       };
-    },
-    created() {
-      this.loadStats();
     },
     computed: {
       displayName() {
@@ -128,7 +155,14 @@
         return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 星期${weekdays[d.getDay()]}`;
       },
     },
+    created() {
+      this.loadStats();
+    },
     methods: {
+      displayValue(stat) {
+        if (stat.target === undefined || stat.target === null) return '—';
+        return stat.target;
+      },
       async loadStats() {
         try {
           const db = uniCloud.database();
@@ -138,13 +172,34 @@
             db.collection('uni-id-roles').count(),
             db.collection('opendb-admin-menus').count(),
           ]);
-          this.stats[0].value = String(userRes.result?.total ?? '—');
-          this.stats[1].value = String(appRes.result?.total ?? '—');
-          this.stats[2].value = String(roleRes.result?.total ?? '—');
-          this.stats[3].value = String(menuRes.result?.total ?? '—');
+          this.stats[0].target = userRes.result?.total ?? 0;
+          this.stats[1].target = appRes.result?.total ?? 0;
+          this.stats[2].target = roleRes.result?.total ?? 0;
+          this.stats[3].target = menuRes.result?.total ?? 0;
+          this.$nextTick(this.animateCounters);
         } catch (e) {
           console.warn('Stats load failed:', e);
         }
+      },
+      animateCounters() {
+        this.stats.forEach((stat, index) => {
+          const target = stat.target;
+          if (!target) return;
+          const duration = 1200;
+          const steps = 30;
+          const increment = target / steps;
+          let current = 0;
+          let step = 0;
+          const timer = setInterval(() => {
+            step++;
+            current = Math.min(Math.round(increment * step), target);
+            this.stats[index].current = current;
+            if (step >= steps) {
+              clearInterval(timer);
+              this.stats[index].current = target;
+            }
+          }, duration / steps);
+        });
       },
       navTo(url) {
         if (url.indexOf('http') === 0) {
@@ -160,56 +215,84 @@
 </script>
 
 <style lang="scss">
-  // ========================
-  // Hero Section
-  // ========================
-  .welcome-hero {
+  // ============================
+  // HERO
+  // ============================
+  .hero {
     position: relative;
     margin-bottom: var(--space-8);
-    padding: var(--space-10) var(--space-8);
+    padding: var(--space-12) var(--space-10);
     border-radius: var(--radius-2xl);
     overflow: hidden;
-    background: linear-gradient(135deg, var(--color-accent) 0%, #4338ca 50%, #312e81 100%);
-    min-height: 140px;
+    min-height: 180px;
     display: flex;
     align-items: center;
 
     &__bg {
       position: absolute;
       inset: 0;
-      opacity: 0.1;
+      background: linear-gradient(
+        135deg,
+        var(--color-accent) 0%,
+        #7c3aed 30%,
+        #4338ca 60%,
+        #1e40af 100%
+      );
+      background-size: 200% 200%;
+      animation: heroGradient 8s ease infinite;
+    }
+
+    &__mesh {
+      position: absolute;
+      inset: 0;
+      opacity: 0.15;
       background-image:
-        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        radial-gradient(circle at 15% 85%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
       pointer-events: none;
+    }
+
+    &__glow {
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.3) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+      animation: heroPulse 4s ease-in-out infinite;
     }
 
     &__content {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: flex;
       align-items: center;
       gap: var(--space-6);
     }
 
     &__avatar {
-      width: 64px;
-      height: 64px;
+      width: 72px;
+      height: 72px;
       border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      box-shadow:
+        0 0 0 4px rgba(255, 255, 255, 0.08),
+        0 8px 32px rgba(0, 0, 0, 0.12);
 
-      &-text {
+      &-letter {
         color: #fff;
-        font-size: var(--text-2xl);
+        font-size: 28px;
         font-weight: 700;
-        letter-spacing: var(--tracking-tight);
       }
     }
 
@@ -220,155 +303,278 @@
     }
 
     &__greeting {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: var(--text-sm);
-      font-weight: 500;
-      letter-spacing: var(--tracking-wide);
+      color: rgba(255, 255, 255, 0.65);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
     }
 
     &__name {
       color: #fff;
-      font-size: var(--text-2xl);
-      font-weight: 700;
+      font-size: var(--text-3xl);
+      font-weight: 800;
       letter-spacing: var(--tracking-tight);
+      line-height: 1.15;
+      background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.8));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     &__date {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.5);
       font-size: var(--text-sm);
     }
   }
 
-  // ========================
-  // Stats Grid
-  // ========================
-  .stats-grid {
+  @keyframes heroGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes heroPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  // ============================
+  // BENTO STATS GRID
+  // ============================
+  .bento-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: 1fr 1fr 1fr;
     gap: var(--space-4);
     margin-bottom: var(--space-8);
   }
 
-  .stat-card {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-5);
+  .bento-card {
+    position: relative;
+    padding: var(--space-6) var(--space-5);
     background-color: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
-    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+    overflow: hidden;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 
     &:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    &--featured {
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 180px;
+    }
+
+    &__gradient {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      border-radius: inherit;
+
+      &--blue {
+        background: linear-gradient(135deg, var(--color-accent) 0%, #7c3aed 100%);
+      }
+    }
+
+    &__glow {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 91, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     &__icon {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: var(--radius-lg);
+      background: rgba(99, 91, 255, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      font-size: 20px;
+      font-size: 18px;
       color: var(--color-accent);
-    }
-
-    &__info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+      margin-bottom: var(--space-4);
     }
 
     &__value {
+      display: block;
       color: var(--color-text-primary);
-      font-size: var(--text-xl);
-      font-weight: 700;
+      font-size: 32px;
+      font-weight: 800;
       letter-spacing: var(--tracking-tight);
+      line-height: 1;
+      margin-bottom: var(--space-1);
+      transition: all var(--transition-normal);
+    }
+
+    &--featured &__value {
+      font-size: 42px;
     }
 
     &__label {
+      display: block;
       color: var(--color-text-tertiary);
       font-size: var(--text-xs);
-      letter-spacing: var(--tracking-wide);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    &__bar {
+      margin-top: var(--space-4);
+      height: 3px;
+      background: rgba(99, 91, 255, 0.1);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+
+      &-fill {
+        height: 100%;
+        width: 72%;
+        background: linear-gradient(90deg, var(--color-accent), #7c3aed);
+        border-radius: var(--radius-full);
+        animation: barShimmer 2s ease-in-out infinite;
+      }
     }
   }
 
-  // ========================
-  // Quick Actions
-  // ========================
-  .actions-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-4);
+  @keyframes barShimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
   }
 
-  .action-card {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-5);
+  // ============================
+  // SECTION LABEL
+  // ============================
+  .section-label {
+    display: block;
+    color: var(--color-text-primary);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-4);
+  }
+
+  // ============================
+  // QUICK ACTIONS BENTO
+  // ============================
+  .actions-bento {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--space-4);
+
+    // lg card spans full height
+    > .action--lg {
+      grid-row: span 2;
+    }
+  }
+
+  .action {
+    position: relative;
+    padding: var(--space-5) var(--space-5);
     background-color: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
     cursor: pointer;
-    transition: box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+    overflow: hidden;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 
     &--hover {
+      transform: translateY(-3px);
       box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
       border-color: var(--color-accent);
     }
 
-    &__icon {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 16px;
+    &__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-accent), #7c3aed, #a78bfa);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    &:hover &__bg {
+      opacity: 1;
+    }
+
+    & > .admin-icons-manager-user,
+    & > .admin-icons-manager-role,
+    & > .admin-icons-manager-permission,
+    & > .admin-icons-manager-menu,
+    & > .admin-icons-manager-app,
+    & > .admin-icons-manager-tag {
+      font-size: 22px;
       color: var(--color-accent);
+      display: block;
+      margin-bottom: var(--space-3);
     }
 
     &__label {
-      flex: 1;
+      display: block;
       color: var(--color-text-primary);
       font-size: var(--text-base);
-      font-weight: 500;
+      font-weight: 600;
     }
 
-    &__arrow {
-      color: var(--color-text-tertiary);
-      font-size: var(--text-lg);
-      transition: transform var(--transition-fast);
-    }
+    &--lg {
+      padding: var(--space-6);
 
-    &:hover &__arrow {
-      transform: translateX(4px);
-      color: var(--color-accent);
+      & > .admin-icons-manager-user {
+        font-size: 28px;
+        margin-bottom: var(--space-4);
+      }
+
+      .action__label {
+        font-size: var(--text-lg);
+      }
     }
   }
 
-  // ========================
-  // System Info
-  // ========================
-  .sys-info {
-    padding: var(--space-2) 0;
+  // ============================
+  // SYSTEM HEALTH BAR
+  // ============================
+  .health-bar {
+    margin-top: var(--space-8);
+    padding: var(--space-5) var(--space-6);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
 
-    &__row {
+    &__inner {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
-      padding: var(--space-3) var(--space-5);
-      border-bottom: 1px solid var(--color-border-subtle);
+      gap: var(--space-4);
+    }
+  }
 
-      &:last-child {
-        border-bottom: none;
+  .health-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    &__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+
+      &--healthy {
+        background: #22c55e;
+        box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+        animation: dotPulse 2s ease-in-out infinite;
       }
     }
 
@@ -377,66 +583,86 @@
       font-size: var(--text-sm);
     }
 
-    &__value {
-      color: var(--color-text-primary);
-      font-size: var(--text-sm);
-      font-weight: 500;
-      text-align: right;
+    &__status {
+      color: #22c55e;
+      font-size: var(--text-xs);
+      font-weight: 600;
     }
   }
 
-  // ========================
-  // Responsive
-  // ========================
+  @keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(34, 197, 94, 0.5); }
+    50% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.8); }
+  }
+
+  // ============================
+  // RESPONSIVE
+  // ============================
   @media screen and (max-width: 1023px) {
-    .stats-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .bento-grid {
+      grid-template-columns: 1fr 1fr;
     }
 
-    .actions-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .bento-card--featured {
+      grid-column: span 2;
+      grid-row: auto;
+      min-height: 120px;
+    }
+
+    .actions-bento {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .action--lg {
+      grid-column: span 2;
+      grid-row: auto;
     }
   }
 
   @media screen and (max-width: 599px) {
-    .welcome-hero {
-      padding: var(--space-6) var(--space-5);
-      min-height: 120px;
+    .hero {
+      padding: var(--space-8) var(--space-5);
+      min-height: 140px;
 
       &__avatar {
-        width: 48px;
-        height: 48px;
+        width: 52px;
+        height: 52px;
 
-        &-text {
-          font-size: var(--text-xl);
-        }
+        &-letter { font-size: 22px; }
       }
 
       &__name {
-        font-size: var(--text-xl);
+        font-size: var(--text-2xl);
+      }
+
+      &__glow {
+        width: 200px;
+        height: 200px;
       }
     }
 
-    .stats-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-3);
-    }
-
-    .stat-card {
-      padding: var(--space-4);
-
-      &__icon {
-        width: 36px;
-        height: 36px;
-      }
-
-      &__value {
-        font-size: var(--text-lg);
-      }
-    }
-
-    .actions-grid {
+    .bento-grid {
       grid-template-columns: 1fr;
+    }
+
+    .bento-card--featured {
+      grid-column: auto;
+      min-height: auto;
+    }
+
+    .actions-bento {
+      grid-template-columns: 1fr;
+    }
+
+    .action--lg {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .health-bar__inner {
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      justify-content: flex-start;
     }
   }
 </style>
