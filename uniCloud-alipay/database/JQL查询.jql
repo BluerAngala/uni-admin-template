@@ -10,11 +10,14 @@
 
 // ==========================================
 // 清理已删除菜单（项目精简后需要）
-// 选中下面两行之一运行：
+// 逐行选中按 F5 运行
 // ==========================================
 
-// 预览要删除的菜单（安全，先运行这个看看）
-db.collection('opendb-admin-menus').where("menu_id.indexOf('uni-stat') === 0 || menu_id === 'system_update'").get();
+// 第一步：预览要删除的菜单
+db.collection('opendb-admin-menus').where({menu_id:{$regex:'^uni-stat'}}).get()
 
-// 执行删除（确认无误后选中这行运行）
-// db.collection('opendb-admin-menus').where("menu_id.indexOf('uni-stat') === 0 || menu_id === 'system_update'").remove();
+// 第二步：删除 uni-stat 菜单
+db.collection('opendb-admin-menus').where({menu_id:{$regex:'^uni-stat'}}).remove()
+
+// 第三步：删除 App升级中心 菜单
+db.collection('opendb-admin-menus').where({menu_id:'system_update'}).remove()
