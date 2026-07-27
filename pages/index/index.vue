@@ -1,108 +1,66 @@
 <template>
   <view class="fix-top-window">
     <app-page fluid>
-    <view class="uni-container">
-      <app-page-header :title="greeting + '，' + displayName" :description="todayDate">
-        <template #breadcrumb>
-          <uni-stat-breadcrumb class="uni-stat-breadcrumb-on-phone" />
-        </template>
-      </app-page-header>
-
-      <!-- 提示条 -->
-      <uni-notice-bar
-        v-if="showdbInit"
-        showGetMore
-        showIcon
-        class="mb-m pointer"
-        text="检测到您未初始化db_init.json，请先右键uniCloud/database/db_init.json文件，执行初始化云数据库，否则左侧无法显示菜单等数据"
-        @click="toAddAppId"
-      />
-      <uni-notice-bar
-        v-if="showAddAppId"
-        showGetMore
-        showIcon
-        class="mb-m pointer"
-        text="检测到您还未添加应用，点击前往应用管理添加"
-        @click="toAddAppId"
-      />
-      <uni-notice-bar
-        v-if="!deviceTableData.length && !userTableData.length && !query.platform_id && complete"
-        showGetMore
-        showIcon
-        class="mb-m pointer"
-        text="暂无数据, 统计相关功能需开通 uni 统计后才能使用, 如未开通, 点击查看具体流程"
-        @click="navTo('https://uniapp.dcloud.io/uni-stat-v2.html')"
-      />
-
-      <app-section class="dashboard-metrics">
-        <view class="kpi-grid">
-          <app-stat-card label="总设备数" :value="summaryStats.totalDevices" :loading="!complete">
-            <template #meta>今日 {{ summaryStats.activeDevices }}</template>
-          </app-stat-card>
-          <app-stat-card label="活跃设备" :value="summaryStats.activeDevices" :change="summaryStats.activeDevicesChange" :loading="!complete" />
-          <app-stat-card label="总用户数" :value="summaryStats.totalUsers" :loading="!complete">
-            <template #meta>今日 {{ summaryStats.activeUsers }}</template>
-          </app-stat-card>
-          <app-stat-card label="活跃用户" :value="summaryStats.activeUsers" :change="summaryStats.activeUsersChange" :loading="!complete" />
+      <view class="uni-container">
+        <!-- Hero Greeting -->
+        <view class="welcome-hero">
+          <view class="welcome-hero__bg" />
+          <view class="welcome-hero__content">
+            <view class="welcome-hero__avatar">
+              <text class="welcome-hero__avatar-text">{{ avatarLetter }}</text>
+            </view>
+            <view class="welcome-hero__text">
+              <text class="welcome-hero__greeting">{{ greeting }}</text>
+              <text class="welcome-hero__name">{{ displayName }}</text>
+              <text class="welcome-hero__date">{{ todayDate }}</text>
+            </view>
+          </view>
         </view>
-      </app-section>
 
-      <app-section title="平台选择">
-        <view class="card-wrapper card-wrapper--tabs">
-          <uni-stat-tabs type="boldLine" mode="platform" v-model="query.platform_id" />
+        <!-- Quick Stats -->
+        <view class="stats-grid">
+          <view class="stat-card" v-for="(stat, i) in stats" :key="i">
+            <view class="stat-card__icon" :style="{ backgroundColor: stat.bg }">
+              <text :class="stat.icon" />
+            </view>
+            <view class="stat-card__info">
+              <text class="stat-card__value">{{ stat.value }}</text>
+              <text class="stat-card__label">{{ stat.label }}</text>
+            </view>
+          </view>
         </view>
-      </app-section>
 
-      <app-section title="设备概览">
-        <view class="card-wrapper">
-        <uni-table :loading="loading" stripe emptyText="暂无数据">
-          <uni-tr>
-            <block v-for="(mapper, index) in deviceTableFields" :key="index">
-              <uni-th v-if="mapper.title" :key="index" align="center">{{ mapper.title }}</uni-th>
-            </block>
-          </uni-tr>
-          <uni-tr v-for="(item, i) in deviceTableData" :key="i">
-            <block v-for="(mapper, index) in deviceTableFields" :key="index">
-              <uni-td v-if="mapper.field === 'appid'" align="center">
-                <view v-if="item.appid" @click="navTo('/pages/uni-stat/device/overview/overview', item.appid)" class="link-btn-color">
-                  {{ item[mapper.field] !== undefined ? item[mapper.field] : '-' }}
-                </view>
-                <view v-else @click="navTo('/pages/system/app/add')" class="link-btn-color"> 需添加此应用的 appid </view>
-              </uni-td>
-              <uni-td v-else :key="index" align="center">
-                {{ item[mapper.field] !== undefined ? item[mapper.field] : '-' }}
-              </uni-td>
-            </block>
-          </uni-tr>
-        </uni-table>
-        </view>
-      </app-section>
+        <!-- Quick Actions -->
+        <app-section title="快捷入口">
+          <view class="actions-grid">
+            <view
+              class="action-card"
+              v-for="(action, i) in quickActions"
+              :key="i"
+              @click="navTo(action.url)"
+              hover-class="action-card--hover"
+            >
+              <view class="action-card__icon" :style="{ backgroundColor: action.bg }">
+                <text :class="action.icon" />
+              </view>
+              <text class="action-card__label">{{ action.label }}</text>
+              <text class="action-card__arrow">→</text>
+            </view>
+          </view>
+        </app-section>
 
-      <app-section title="注册用户概览">
-        <view class="card-wrapper">
-        <uni-table :loading="loading" stripe emptyText="暂无数据">
-          <uni-tr>
-            <block v-for="(mapper, index) in userTableFields" :key="index">
-              <uni-th v-if="mapper.title" :key="index" align="center">{{ mapper.title }}</uni-th>
-            </block>
-          </uni-tr>
-          <uni-tr v-for="(item, i) in userTableData" :key="i">
-            <block v-for="(mapper, index) in userTableFields" :key="index">
-              <uni-td v-if="mapper.field === 'appid'" align="center">
-                <view v-if="item.appid" @click="navTo('/pages/uni-stat/user/overview/overview', item.appid)" class="link-btn-color">
-                  {{ item[mapper.field] !== undefined ? item[mapper.field] : '-' }}
-                </view>
-                <view v-else @click="navTo('/pages/system/app/add')" class="link-btn-color"> 需添加此应用的 appid </view>
-              </uni-td>
-              <uni-td v-else :key="index" align="center">
-                {{ item[mapper.field] !== undefined ? item[mapper.field] : '-' }}
-              </uni-td>
-            </block>
-          </uni-tr>
-        </uni-table>
-        </view>
-      </app-section>
-    </view>
+        <!-- System Info -->
+        <app-section title="系统信息">
+          <view class="card-wrapper">
+            <view class="sys-info">
+              <view class="sys-info__row" v-for="(info, i) in systemInfo" :key="i">
+                <text class="sys-info__label">{{ info.label }}</text>
+                <text class="sys-info__value">{{ info.value }}</text>
+              </view>
+            </view>
+          </view>
+        </app-section>
+      </view>
     </app-page>
 
     <!-- #ifndef H5 -->
@@ -112,99 +70,49 @@
 </template>
 
 <script>
-  import { stringifyQuery, stringifyField, stringifyGroupField, getTimeOfSomeDayAgo, division, format, parseDateTime, getFieldTotal, debounce } from '@/js_sdk/uni-stat/util.js';
-
-  import { deviceFeildsMap, userFeildsMap } from './fieldsMap.js';
   import AppPage from '@/components/app-page/app-page.vue';
-  import AppPageHeader from '@/components/app-page-header/app-page-header.vue';
   import AppSection from '@/components/app-section/app-section.vue';
-  import AppStatCard from '@/components/app-stat-card/app-stat-card.vue';
 
   export default {
     components: {
       AppPage,
-      AppPageHeader,
       AppSection,
-      AppStatCard,
     },
     data() {
       return {
-        query: {
-          platform_id: '',
-          start_time: [getTimeOfSomeDayAgo(1), new Date().getTime()],
-        },
-        deviceTableData: [],
-        userTableData: [],
-        // panelData: panelOption,
-        // 每页数据量
-        pageSize: 10,
-        // 当前页
-        pageCurrent: 1,
-        // 数据总量
-        total: 0,
-        loading: false,
-        complete: false,
-        statSetting: {
-          mode: '',
-          day: 7,
-        },
-        statModeList: [
-          { value: 'open', text: '开启' },
-          { value: 'close', text: '关闭' },
-          { value: 'auto', text: '节能' },
+        stats: [
+          { label: '系统用户', value: '—', icon: 'admin-icons-manager-user', bg: 'var(--color-accent-subtle)' },
+          { label: '应用总数', value: '—', icon: 'admin-icons-manager-app', bg: 'var(--color-success-subtle)' },
+          { label: '角色数量', value: '—', icon: 'admin-icons-manager-role', bg: 'var(--color-warning-subtle)' },
+          { label: '菜单项', value: '—', icon: 'admin-icons-manager-menu', bg: 'var(--color-error-subtle)' },
         ],
-        showAddAppId: false,
-        showdbInit: false,
+        quickActions: [
+          { label: '用户管理', icon: 'admin-icons-manager-user', url: '/pages/system/user/list', bg: 'var(--color-accent-subtle)' },
+          { label: '角色管理', icon: 'admin-icons-manager-role', url: '/pages/system/role/list', bg: 'var(--color-success-subtle)' },
+          { label: '权限管理', icon: 'admin-icons-manager-permission', url: '/pages/system/permission/list', bg: 'var(--color-warning-subtle)' },
+          { label: '菜单管理', icon: 'admin-icons-manager-menu', url: '/pages/system/menu/list', bg: 'var(--color-error-subtle)' },
+          { label: '应用管理', icon: 'admin-icons-manager-app', url: '/pages/system/app/list', bg: '#e0e7ff' },
+          { label: '标签管理', icon: 'admin-icons-manager-tag', url: '/pages/system/tag/list', bg: '#fce7f3' },
+        ],
+        systemInfo: [
+          { label: '框架版本', value: 'uni-admin v1.0.0' },
+          { label: '运行环境', value: 'uni-app 5.15 (vue3)' },
+          { label: '云服务空间', value: 'env-00jxubueh0z4' },
+          { label: '布局模式', value: '三窗口（顶栏 + 侧栏 + 内容）' },
+        ],
       };
     },
-    onReady() {
-      // 创建一个防抖函数，延迟执行getAllData方法
-      this.debounceGet = debounce(() => {
-        this.getAllData(this.queryStr);
-      }, 300);
-
-      // 执行防抖函数
-      this.debounceGet();
-
-      // 检查appId
-      this.checkAppId();
-
-      this.checkdbInit();
+    created() {
+      this.loadStats();
     },
-
-    watch: {
-      query: {
-        deep: true,
-        handler(newVal) {
-          // 监听query对象的变化，并在变化时执行防抖函数
-          this.debounceGet(this.queryStr);
-        },
-      },
-    },
-
     computed: {
-      queryStr() {
-        // 默认查询条件
-        const defQuery = `(dimension == "hour" || dimension == "day")`;
-        // 将query对象转换为查询字符串并与默认查询条件合并
-        return stringifyQuery(this.query) + ' && ' + defQuery;
-      },
-
-      deviceTableFields() {
-        // 返回设备表格的字段映射
-        return this.tableFieldsMap(deviceFeildsMap);
-      },
-
-      userTableFields() {
-        // 返回用户表格的字段映射
-        return this.tableFieldsMap(userFeildsMap);
-      },
-
       displayName() {
-        const u = this.$uniIdPagesStore.store.userInfo || {};
+        const u = this.$uniIdPagesStore?.store?.userInfo || {};
         return u.nickname || u.username || u.mobile || u.email || 'Admin';
       },
-
+      avatarLetter() {
+        return (this.displayName || 'A')[0].toUpperCase();
+      },
       greeting() {
         const h = new Date().getHours();
         if (h < 6) return '夜深了';
@@ -214,237 +122,37 @@
         if (h < 18) return '下午好';
         return '晚上好';
       },
-
       todayDate() {
         const d = new Date();
         const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
         return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 星期${weekdays[d.getDay()]}`;
       },
-
-      summaryStats() {
-        const sum = (arr, key) => {
-          let total = 0;
-          for (const item of arr) {
-            const v = parseFloat(String(item[key] || '0').replace(/,/g, ''));
-            if (!isNaN(v)) total += v;
-          }
-          return total;
-        };
-        const fmt = (n) => {
-          if (n >= 10000) return (n / 10000).toFixed(1) + '万';
-          if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
-          return String(n);
-        };
-        const pct = (today, yesterday) => {
-          if (!yesterday || yesterday === 0) return 0;
-          return Math.round(((today - yesterday) / yesterday) * 100);
-        };
-
-        const activeDevicesToday = sum(this.deviceTableData, 'active_device_count_value');
-        const activeDevicesYesterday = sum(this.deviceTableData, 'active_device_count_contrast');
-        const activeUsersToday = sum(this.userTableData, 'active_user_count_value');
-        const activeUsersYesterday = sum(this.userTableData, 'active_user_count_contrast');
-
-        return {
-          totalDevices: fmt(sum(this.deviceTableData, 'total_devices_value')),
-          activeDevices: fmt(activeDevicesToday),
-          activeDevicesChange: pct(activeDevicesToday, activeDevicesYesterday),
-          totalUsers: fmt(sum(this.userTableData, 'total_users_value')),
-          activeUsers: fmt(activeUsersToday),
-          activeUsersChange: pct(activeUsersToday, activeUsersYesterday),
-        };
-      },
     },
-
     methods: {
-      getAllData(queryStr) {
-        // 获取设备数据
-        this.getApps(this.queryStr, deviceFeildsMap, 'device');
-        // 获取用户数据
-        this.getApps(this.queryStr, userFeildsMap, 'user');
-      },
-
-      tableFieldsMap(fieldsMap) {
-        let tableFields = [];
-        const today = [];
-        const yesterday = [];
-        const other = [];
-
-        for (const mapper of fieldsMap) {
-          if (mapper.field) {
-            if (mapper.hasOwnProperty('value')) {
-              // 如果字段映射中有'value'属性，则根据映射生成今天和昨天的字段
-              const t = JSON.parse(JSON.stringify(mapper));
-              const y = JSON.parse(JSON.stringify(mapper));
-
-              if (mapper.field !== 'total_users' && mapper.field !== 'total_devices') {
-                t.title = '今日' + mapper.title;
-                t.field = mapper.field + '_value';
-                y.title = '昨日' + mapper.title;
-                y.field = mapper.field + '_contrast';
-
-                today.push(t);
-                yesterday.push(y);
-              } else {
-                t.field = mapper.field + '_value';
-                other.push(t);
-              }
-            } else {
-              // 将其他字段直接添加到tableFields中
-              tableFields.push(mapper);
-            }
-          }
+      async loadStats() {
+        try {
+          const db = uniCloud.database();
+          const [userRes, appRes, roleRes, menuRes] = await Promise.all([
+            db.collection('uni-id-users').count(),
+            db.collection('opendb-app-list').count(),
+            db.collection('uni-id-roles').count(),
+            db.collection('opendb-admin-menus').count(),
+          ]);
+          this.stats[0].value = String(userRes.result?.total ?? '—');
+          this.stats[1].value = String(appRes.result?.total ?? '—');
+          this.stats[2].value = String(roleRes.result?.total ?? '—');
+          this.stats[3].value = String(menuRes.result?.total ?? '—');
+        } catch (e) {
+          console.warn('Stats load failed:', e);
         }
-        // 按顺序合并所有的字段
-        tableFields = [...tableFields, ...today, ...yesterday, ...other];
-
-        return tableFields;
       },
-
-      getApps(query, fieldsMap, type = 'device') {
-        this.loading = true;
-        const db = uniCloud.database();
-        const appDaily = db.collection('uni-stat-result').where(query).getTemp();
-        const appList = db.collection('opendb-app-list').getTemp();
-        db.collection(appDaily, appList)
-          .field(`${stringifyField(fieldsMap, '', 'value')},stat_date,appid,dimension`)
-          .groupBy(`appid,dimension,stat_date`)
-          .groupField(stringifyGroupField(fieldsMap, '', 'value'))
-          .orderBy(`appid`, 'desc')
-          .get()
-          .then((res) => {
-            let { data } = res.result;
-            // console.log('data: ', JSON.parse(JSON.stringify(data)));
-            this[`${type}TableData`] = [];
-            if (!data.length) return;
-            let appids = [],
-              todays = [],
-              yesterdays = [],
-              isToday = parseDateTime(getTimeOfSomeDayAgo(0), '', ''),
-              isYesterday = parseDateTime(getTimeOfSomeDayAgo(1), '', '');
-            for (const item of data) {
-              const { appid, name } = (item.appid && item.appid[0]) || {};
-              item.appid = appid;
-              item.name = name;
-
-              if (appids.indexOf(item.appid) < 0) {
-                appids.push(item.appid);
-              }
-              if (item.dimension === 'hour' && item.stat_date === isToday) {
-                todays.push(item);
-              }
-              if (item.dimension === 'day' && item.stat_date === isYesterday) {
-                yesterdays.push(item);
-              }
-            }
-            const keys = fieldsMap.map((f) => f.field).filter(Boolean);
-            for (const appid of appids) {
-              const rowData = {};
-              const t = todays.find((item) => item.appid === appid);
-              const y = yesterdays.find((item) => item.appid === appid);
-              const appInfo = t || y || {};
-              for (const key of keys) {
-                if (key === 'appid' || key === 'name') {
-                  rowData[key] = key === 'appid' ? appInfo[key] || appid : appInfo[key];
-                } else {
-                  const value = t && t[key];
-                  const contrast = y && y[key];
-                  rowData[key + '_value'] = format(value);
-                  rowData[key + '_contrast'] = format(contrast);
-                }
-              }
-              if (appid) {
-                rowData[`total_${type}s_value`] = '获取中...';
-              }
-              this[`${type}TableData`].push(rowData);
-              if (appid) {
-                // total_users 不准确，置空后由 getFieldTotal 处理, appid 不存在时暂不处理
-                if (t) {
-                  t[`total_${type}s`] = 0;
-                }
-                const query = JSON.parse(JSON.stringify(this.query));
-                query.start_time = [getTimeOfSomeDayAgo(0), new Date().getTime()];
-                query.appid = appid;
-                getFieldTotal.call(this, query, `total_${type}s`).then((total) => {
-                  this[`${type}TableData`].find((item) => item.appid === appid)[`total_${type}s_value`] = total;
-                });
-              }
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-            // err.message 错误信息
-            // err.code 错误码
-          })
-          .finally(() => {
-            this.loading = false;
-            this.complete = true;
-          });
-      },
-
-      navTo(url, id) {
-        if (url.indexOf('http') > -1) {
-          // 如果url中包含'http'，则在新窗口中打开该链接
+      navTo(url) {
+        if (url.indexOf('http') === 0) {
           // #ifdef H5
           window.open(url);
           // #endif
         } else {
-          if (id) {
-            // 如果有提供id参数，则将其添加到url中作为查询参数
-            url = `${url}?appid=${id}`;
-          }
-          // 使用uni.navigateTo方法进行页面跳转
-          uni.navigateTo({
-            url,
-          });
-        }
-      },
-
-      toUrl(url) {
-        // #ifdef H5
-        // 在新窗口中打开url链接（仅适用于H5平台）
-        window.open(url, '_blank');
-        // #endif
-      },
-
-      toAddAppId() {
-        // 隐藏添加App ID的标识
-        this.showAddAppId = false;
-        // 使用uni.navigateTo方法进行页面跳转到指定路径
-        uni.navigateTo({
-          url: '/pages/system/app/list',
-          events: {
-            // 注册事件，用于在目标页面刷新数据后执行回调
-            refreshData: () => {
-              this.checkAppId();
-            },
-          },
-        });
-      },
-
-      async checkAppId() {
-        // 获取uniCloud数据库的实例
-        const db = uniCloud.database();
-        // 查询'opendb-app-list'集合的数据数量
-        let res = await db.collection('opendb-app-list').count();
-        // 如果查询结果为空或total为0，则显示添加App ID的标识
-        this.showAddAppId = !res.result || res.result.total === 0 ? true : false;
-      },
-
-      async checkdbInit() {
-        // 获取uniCloud数据库的实例
-        const db = uniCloud.database();
-        // 查询'opendb-admin-menus'集合的数据数量
-        let res = await db.collection('opendb-admin-menus').count();
-        // 如果查询结果为空或total为0，则显示添加App ID的标识
-        this.showdbInit = !res.result || res.result.total === 0 ? true : false;
-        if (this.showdbInit) {
-          uni.showModal({
-            title: '重要提示',
-            content: `检测到您未初始化数据库，请先右键uni-admin项目根目下的 uniCloud/database 目录，执行初始化云数据库，否则左侧无法显示菜单等数据`,
-            showCancel: false,
-            confirmText: '我知道了',
-          });
+          uni.navigateTo({ url });
         }
       },
     },
@@ -452,42 +160,282 @@
 </script>
 
 <style lang="scss">
-  .kpi-grid {
+  // ========================
+  // Hero Section
+  // ========================
+  .welcome-hero {
+    position: relative;
+    margin-bottom: var(--space-8);
+    padding: var(--space-10) var(--space-8);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #4338ca 50%, #312e81 100%);
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+
+    &__bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.1;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    &__content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    &__avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      &-text {
+        color: #fff;
+        font-size: var(--text-2xl);
+        font-weight: 700;
+        letter-spacing: var(--tracking-tight);
+      }
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    &__greeting {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    &__name {
+      color: #fff;
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+    }
+
+    &__date {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: var(--text-sm);
+    }
+  }
+
+  // ========================
+  // Stats Grid
+  // ========================
+  .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-4);
+    margin-bottom: var(--space-8);
   }
 
-  .uni-stat-tooltip-s {
-    width: 400px;
-    white-space: normal;
-  }
-
-  /* 统一三个区域的卡片容器 */
-  .card-wrapper {
+  .stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5);
     background-color: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    &__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+      color: var(--color-accent);
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    &__value {
+      color: var(--color-text-primary);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+    }
+
+    &__label {
+      color: var(--color-text-tertiary);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wide);
+    }
   }
 
-  .card-wrapper--tabs {
-    padding: var(--space-4);
+  // ========================
+  // Quick Actions
+  // ========================
+  .actions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
   }
 
-  /* 覆盖 theme.scss 的 !important，让表格背景一致 */
-  .card-wrapper ::v-deep .uni-table,
-  .card-wrapper ::v-deep .uni-table-scroll {
-    background-color: var(--color-surface) !important;
+  .action-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+
+    &--hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+      border-color: var(--color-accent);
+    }
+
+    &__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+      color: var(--color-accent);
+    }
+
+    &__label {
+      flex: 1;
+      color: var(--color-text-primary);
+      font-size: var(--text-base);
+      font-weight: 500;
+    }
+
+    &__arrow {
+      color: var(--color-text-tertiary);
+      font-size: var(--text-lg);
+      transition: transform var(--transition-fast);
+    }
+
+    &:hover &__arrow {
+      transform: translateX(4px);
+      color: var(--color-accent);
+    }
   }
 
+  // ========================
+  // System Info
+  // ========================
+  .sys-info {
+    padding: var(--space-2) 0;
+
+    &__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-3) var(--space-5);
+      border-bottom: 1px solid var(--color-border-subtle);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    &__label {
+      color: var(--color-text-tertiary);
+      font-size: var(--text-sm);
+    }
+
+    &__value {
+      color: var(--color-text-primary);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-align: right;
+    }
+  }
+
+  // ========================
+  // Responsive
+  // ========================
   @media screen and (max-width: 1023px) {
-    .kpi-grid {
+    .stats-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .actions-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media screen and (max-width: 599px) {
-    .kpi-grid {
+    .welcome-hero {
+      padding: var(--space-6) var(--space-5);
+      min-height: 120px;
+
+      &__avatar {
+        width: 48px;
+        height: 48px;
+
+        &-text {
+          font-size: var(--text-xl);
+        }
+      }
+
+      &__name {
+        font-size: var(--text-xl);
+      }
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+
+    .stat-card {
+      padding: var(--space-4);
+
+      &__icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      &__value {
+        font-size: var(--text-lg);
+      }
+    }
+
+    .actions-grid {
       grid-template-columns: 1fr;
     }
   }
