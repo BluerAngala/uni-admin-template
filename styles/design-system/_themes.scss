@@ -1,0 +1,95 @@
+// Semantic theme maps. `default` and `dark` must each define every UI role.
+:root,
+[data-theme='default'] {
+  --color-bg-primary: #faf9f7;
+  --color-bg-secondary: #f5f3ef;
+  --color-bg-tertiary: #edeae5;
+  --color-surface: #faf9f7;
+  --color-surface-raised: #ffffff;
+  --color-surface-inset: #f3f0eb;
+  --color-surface-overlay: #ffffff;
+
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4a4640;
+  --color-text-tertiary: #8c8780;
+  --color-text-inverse: #ffffff;
+
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-border-strong: rgba(0, 0, 0, 0.12);
+  --color-focus-ring: rgba(99, 91, 255, 0.2);
+  --color-mask: rgba(250, 249, 247, 0.8);
+
+  --color-accent: #635bff;
+  --color-accent-hover: #5147e5;
+  --color-accent-active: #4338ca;
+  --color-accent-subtle: #f3f0ff;
+  --color-success: #16a34a;
+  --color-success-subtle: #ecfdf5;
+  --color-warning: #d97706;
+  --color-warning-subtle: #fffbeb;
+  --color-error: #dc2626;
+  --color-error-subtle: #fef2f2;
+
+  --color-table-header: #f7f5f0;
+  --color-table-row-hover: #f0ede8;
+  --color-menu-bg: #faf8f5;
+  --color-menu-hover: #f0ede8;
+  --color-menu-active: #ede9fe;
+  --color-input-bg: #faf9f7;
+  --color-input-disabled: #f0ede8;
+  --color-scrollbar: rgba(0, 0, 0, 0.1);
+  --color-scrollbar-hover: rgba(0, 0, 0, 0.2);
+
+  --color-topbar-bg: rgba(250, 249, 247, 0.85);
+  --color-topbar-border: rgba(0, 0, 0, 0.05);
+
+  --color-sidebar-bg: #faf8f5;
+  --color-sidebar-active-indicator: var(--color-accent);
+}
+
+[data-theme='dark'] {
+  --color-bg-primary: #08080f;
+  --color-bg-secondary: #0e0e18;
+  --color-bg-tertiary: #141420;
+  --color-surface: rgba(255, 255, 255, 0.04);
+  --color-surface-raised: rgba(255, 255, 255, 0.06);
+  --color-surface-inset: #0a0a14;
+  --color-surface-overlay: rgba(255, 255, 255, 0.08);
+
+  --color-text-primary: #f0f2f8;
+  --color-text-secondary: #9ca3c0;
+  --color-text-tertiary: #6b7490;
+  --color-text-inverse: #0f1729;
+
+  --color-border-subtle: rgba(255, 255, 255, 0.07);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-focus-ring: rgba(129, 120, 255, 0.35);
+  --color-mask: rgba(0, 0, 0, 0.6);
+
+  --color-accent: #8178ff;
+  --color-accent-hover: #9b93ff;
+  --color-accent-active: #6b62e6;
+  --color-accent-subtle: rgba(129, 120, 255, 0.12);
+  --color-success: #34d673;
+  --color-success-subtle: rgba(52, 214, 115, 0.1);
+  --color-warning: #fbbf24;
+  --color-warning-subtle: rgba(251, 191, 36, 0.1);
+  --color-error: #f87171;
+  --color-error-subtle: rgba(248, 113, 113, 0.1);
+
+  --color-table-header: rgba(255, 255, 255, 0.03);
+  --color-table-row-hover: rgba(255, 255, 255, 0.05);
+  --color-menu-bg: #0a0a14;
+  --color-menu-hover: rgba(255, 255, 255, 0.06);
+  --color-menu-active: rgba(129, 120, 255, 0.12);
+  --color-input-bg: rgba(255, 255, 255, 0.04);
+  --color-input-disabled: rgba(255, 255, 255, 0.02);
+  --color-scrollbar: rgba(255, 255, 255, 0.08);
+  --color-scrollbar-hover: rgba(255, 255, 255, 0.16);
+
+  --color-topbar-bg: #000000;
+  --color-topbar-border: rgba(255, 255, 255, 0.06);
+
+  --color-sidebar-bg: #000000;
+  --color-sidebar-active-indicator: var(--color-accent);
+}
