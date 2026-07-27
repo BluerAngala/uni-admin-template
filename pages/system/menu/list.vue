@@ -2,8 +2,13 @@
   <view>
     <view class="uni-header">
       <uni-stat-breadcrumb class="uni-stat-breadcrumb-on-phone" />
+      <view class="uni-group">
+        <button v-show="currentTab === 'menus'" @click="navigateTo('./add')" size="mini" plain="true" type="primary">{{ $t('menu.button.addFirstLevelMenu') }}</button>
+        <button v-show="currentTab === 'menus'" @click="updateBuiltInMenu" size="mini" plain="true" style="margin-left: 10px" type="warn">{{ $t('menu.button.updateBuiltInMenu') }}</button>
+        <button v-show="currentTab === 'pluginMenus'" style="width: 130px" @click="addPluginMenus" size="mini" type="primary">添加选中的菜单</button>
+      </view>
     </view>
-    <view class="uni-tabs__header">
+    <view class="uni-tabs__header" v-if="pluginMenus.length">
       <view class="uni-tabs__nav-wrap">
         <view class="uni-tabs__nav-scroll">
           <view class="uni-tabs__nav">
@@ -19,13 +24,6 @@
       </view>
     </view>
     <view v-show="currentTab === 'menus'">
-      <view class="uni-header" style="border-bottom: 0; margin-bottom: -15px">
-        <view class="uni-group">
-          <button @click="navigateTo('./add')" size="mini" plain="true" type="primary">{{ $t('menu.button.addFirstLevelMenu') }}</button>
-          <button @click="updateBuiltInMenu" size="mini" plain="true" style="margin-left: 10px" type="warn">{{ $t('menu.button.updateBuiltInMenu') }}</button>
-        </view>
-        <view class="uni-group"> </view>
-      </view>
       <view class="uni-container">
         <unicloud-db
           ref="udb"
@@ -75,12 +73,6 @@
       </view>
     </view>
     <view v-show="currentTab === 'pluginMenus'">
-      <view class="uni-header" style="border-bottom: 0; margin-bottom: -15px">
-        <view class="uni-group">
-          <button style="width: 130px" @click="addPluginMenus" size="mini" type="primary">添加选中的菜单</button>
-        </view>
-        <view class="uni-group"></view>
-      </view>
       <view class="uni-container">
         <uni-table ref="pluginMenusTable" type="selection" stripe @selection-change="pluginMenuSelectChange">
           <uni-tr>

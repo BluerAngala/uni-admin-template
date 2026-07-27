@@ -233,7 +233,6 @@ button:after {
 
 .uni-table-scroll {
   background-color: var(--color-surface);
-  border-radius: var(--radius-xl);
 }
 
 .uni-table-mask {
@@ -377,6 +376,32 @@ button:after {
 /* #endif */
 
 /* #ifdef H5 */
+/* ── 定制滚动条 ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+  border-radius: 3px;
+  transition: background var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-hover);
+}
+
+/* Firefox 滚动条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+}
+
 .uni-embed-hide-left uni-left-window {
   display: none !important;
 }
