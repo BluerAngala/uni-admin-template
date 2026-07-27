@@ -7,13 +7,15 @@
           <view class="hero__bg" />
           <view class="hero__mesh" />
           <view class="hero__content">
-            <view class="hero__avatar">
-              <text class="hero__avatar-letter">{{ avatarLetter }}</text>
-            </view>
-            <view class="hero__text">
-              <text class="hero__greeting">{{ greeting }}</text>
-              <text class="hero__name">{{ displayName }}</text>
-              <text class="hero__date">{{ todayDate }}</text>
+            <view class="hero__left">
+              <view class="hero__avatar">
+                <text class="hero__avatar-letter">{{ avatarLetter }}</text>
+              </view>
+              <view class="hero__text">
+                <text class="hero__greeting">{{ greeting }}</text>
+                <text class="hero__name">{{ displayName }}</text>
+                <text class="hero__date">{{ todayDate }}</text>
+              </view>
             </view>
             <view class="hero__status">
               <view
@@ -256,16 +258,23 @@
       z-index: 2;
       display: flex;
       align-items: center;
-      gap: var(--space-6);
+      justify-content: space-between;
       width: 100%;
+    }
+
+    &__left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
     }
 
     &__status {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-3);
+      gap: var(--space-4);
       margin-left: auto;
       flex-shrink: 0;
+      min-width: 320px;
     }
 
     &__avatar {
@@ -328,10 +337,10 @@
   .status-item {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-2-5) var(--space-3);
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-lg);
     backdrop-filter: blur(8px);
     transition: background var(--transition-fast), border-color var(--transition-fast);
@@ -638,6 +647,12 @@
 
       &__content {
         flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-5);
+      }
+
+      &__left {
+        flex-direction: column;
         align-items: flex-start;
         gap: var(--space-4);
       }
@@ -645,6 +660,7 @@
       &__status {
         margin-left: 0;
         width: 100%;
+        min-width: 0;
       }
 
       &__avatar {
