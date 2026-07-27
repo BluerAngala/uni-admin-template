@@ -409,26 +409,22 @@
 
   .status-info {
     display: flex;
-    flex-direction: column;
-    gap: 1px;
+    align-items: baseline;
+    gap: var(--space-2);
   }
 
   .status-name {
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
   }
 
   .status-value {
-    color: #fff;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    letter-spacing: var(--tracking-tight);
-    background: linear-gradient(to right, #4ade80, #22d3ee);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    letter-spacing: var(--tracking-normal);
   }
 
   @keyframes heroGradient {
