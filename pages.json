@@ -168,7 +168,7 @@
       ]
     }
   ],
-  "globalStyle": { {
+  "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "管理系统",
     "navigationBarBackgroundColor": "#F8F8F8",
