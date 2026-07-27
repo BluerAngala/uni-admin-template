@@ -87,10 +87,6 @@
 								-
 							</view> -->
               <view class="uni-group">
-                <button @click="publish(item._id)" class="uni-button" size="mini" type="primary">{{ $t('common.button.publish') }}</button>
-                <button @click="navigateTo('/uni_modules/uni-upgrade-center/pages/version/list?appid=' + item.appid, false)" class="uni-button" size="mini" type="primary">
-                  {{ $t('common.button.version') }}
-                </button>
                 <button @click="navigateTo('./add?id=' + item.appid, false)" class="uni-button" size="mini" type="primary">{{ $t('common.button.edit') }}</button>
                 <button @click="confirmDelete(item._id)" class="uni-button" size="mini" type="warn">{{ $t('common.button.delete') }}</button>
               </view>
@@ -322,11 +318,6 @@
         }
         this.$nextTick(() => {
           this.$refs.udb.loadData();
-        });
-      },
-      publish(id) {
-        uni.navigateTo({
-          url: '/pages/system/app/uni-portal/uni-portal?id=' + id,
         });
       },
       getAppType(app_type = 0) {
