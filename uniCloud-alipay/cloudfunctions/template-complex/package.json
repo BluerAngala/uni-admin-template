@@ -1,6 +1,0 @@
-{
-  "name": "template-complex",
-  "version": "1.0.0",
-  "description": "模块化云对象模板",
-  "main": "index.obj.js"
-}

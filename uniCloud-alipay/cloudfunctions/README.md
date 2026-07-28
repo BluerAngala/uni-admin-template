@@ -8,13 +8,13 @@
 
 | 模板 | 目录 | 适用场景 |
 |---|---|---|
-| 简单 CRUD | `docs/ai-agent-docs/templates/template-simple/` | 1 个文件，单表增删改查 |
-| 模块化 | `docs/ai-agent-docs/templates/template-complex/` | 多业务域，按 module/ 拆文件 |
+| 简单 CRUD | `_template/simple.obj.js` | 1 个文件，单表增删改查 |
+| 模块化 | `_template/complex.obj.js` | 多业务域，需拆 module/ 目录 |
 
 ```bash
-# 快速开始（以 simple 为例）：
-cp -r template-simple uniCloud-alipay/cloudfunctions/my-co
-# 修改 my-co/index.obj.js 中的 collection_name 和字段
+# 快速开始：
+cp _template/simple.obj.js my-co/index.obj.js
+# 修改 collection_name
 ```
 
 ## 本目录内容
