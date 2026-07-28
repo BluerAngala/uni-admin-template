@@ -13,7 +13,7 @@
 
 ```bash
 # 快速开始（以 simple 为例）：
-cp -r docs/ai-agent-docs/templates/template-simple uniCloud-alipay/cloudfunctions/my-co
+cp -r template-simple uniCloud-alipay/cloudfunctions/my-co
 # 修改 my-co/index.obj.js 中的 collection_name 和字段
 ```
 
