@@ -8,13 +8,14 @@
 
 | 模板 | 目录 | 适用场景 |
 |---|---|---|
-| 简单 CRUD | `_template/simple.obj.js` | 1 个文件，单表增删改查 |
-| 模块化 | `_template/complex.obj.js` | 多业务域，需拆 module/ 目录 |
+| 简单 CRUD | `_template/simple.obj.js` | 单文件，单表增删改查 |
+| 模块化 | `_template/complex/` | 多业务域，module/ 拆文件 |
 
 ```bash
-# 快速开始：
+# 快速开始（简单）：
 cp _template/simple.obj.js my-co/index.obj.js
-# 修改 collection_name
+# 快速开始（模块化）：
+cp -r _template/complex my-co
 ```
 
 ## 本目录内容

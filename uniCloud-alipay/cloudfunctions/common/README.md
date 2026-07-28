@@ -2,7 +2,10 @@
 
 云函数公共模块目录。存放可被多个云函数共享引用的模块。
 
-## 模块
+> ⚠️ HBuilderX 会将 uni_modules 自带的公共模块以快捷方式形式虚拟显示在此目录下（图标带小箭头）。文件实际在 `uni_modules/<id>/uniCloud/cloudfunctions/common/` 中。VSCode 无此功能。
+> 详见 `docs/ai-agent-docs/cloud-dev.md`。
+
+## 本目录模块
 
 ### uni-stat/
 

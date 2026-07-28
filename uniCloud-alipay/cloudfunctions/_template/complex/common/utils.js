@@ -2,7 +2,6 @@
 // 通用工具函数
 // ========================================
 
-/** 分页参数标准化 */
 function parsePage({ page = 1, pageSize = 20 } = {}) {
   return {
     page: Math.max(1, Number(page)),
@@ -10,6 +9,4 @@ function parsePage({ page = 1, pageSize = 20 } = {}) {
   }
 }
 
-module.exports = {
-  parsePage
-}
+module.exports = { parsePage }
