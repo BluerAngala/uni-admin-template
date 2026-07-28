@@ -7,74 +7,132 @@
 | 调用方式 | `uniCloud.importObject('name')` | `uniCloud.callFunction({ name })` |
 | 代码结构 | 对象方法，天然分 action | switch/case 分发 action |
 | 生命周期 | `_before()` / `_after()` 钩子 | 无内置钩子 |
-| 本项目中 | 新功能推荐用这个 | 历史代码用这个 |
+| 本项目 | 新功能默认用**云对象** | 旧代码有的用传统云函数，保持不动 |
 
 **判断依据：** 新功能用云对象，已有传统云函数就继续用传统方式，不需要迁移。
 
-## 云对象开发
+## 云对象开发（推荐，新功能默认用此方式）
 
-### 文件结构
+### 推荐目录结构
+
+参考 `uni_modules/uni-id-pages/uniCloud/cloudfunctions/uni-id-co` 的架构：
 
 ```
-uniCloud-alipay/cloudfunctions/
-└── xxx-co/                    # 目录名 = 云对象名
-    └── xxx-co.obj.js          # 文件名 = 云对象名.obj.js
+xxx-co/                          # 目录名 = 云对象名
+├── index.obj.js                 # 入口文件（只组装，不写业务）
+├── package.json                 # 云对象元数据
+├── common/                      # 共享层
+│   ├── constants.js             # 常量/枚举
+│   ├── error.js                 # 错误码定义
+│   └── utils.js                 # 通用工具函数
+├── middleware/                   # 中间件（可选）
+│   └── index.js                 # _before 中调用的拦截逻辑
+└── module/                      # 业务模块
+    ├── account/
+    │   ├── index.js             # 桶文件：导出本域所有方法
+    │   ├── list.js              # 每个方法一个文件
+    │   └── update.js
+    └── order/
+        ├── index.js
+        ├── create.js
+        └── detail.js
 ```
 
-### 模板
+### 三大规范
+
+#### ① `index.obj.js` 只做导入导出，不写业务逻辑
 
 ```js
-const db = uniCloud.database()
-const dbCmd = db.command
+const { ERROR } = require('./common/error')
+const { list, update } = require('./module/account/index')
+const { create, detail, remove } = require('./module/order/index')
 
 module.exports = {
   _before() {
-    // 每次方法调用前执行
-    // 权限校验、参数预处理
     const token = this.getUniIdToken()
     if (!token) throw new Error('未登录')
   },
-
   _after(error, result) {
-    if (error) throw error
+    if (error) {
+      // _after 中 error 是原生 Error 对象，errCode 不会自动透传
+      // 必须手动返回 { errCode, errMsg } 格式前端才能收到
+      if (error.errCode) {
+        return { errCode: error.errCode, errMsg: error.errMsg || '' }
+      }
+      throw error
+    }
     return result
   },
-
-  async list({ page = 1, pageSize = 20, where = '' } = {}) {
-    let query = db.collection('collection_name')
-    if (where) query = query.where(where)
-    const res = await query.skip((page - 1) * pageSize)
-      .limit(pageSize).orderBy('create_date', 'desc').get()
-    return res.data
-  },
-
-  async add(data) {
-    return await db.collection('collection_name').add(data)
-  },
-
-  async update(id, data) {
-    return await db.collection('collection_name').doc(id).update(data)
-  },
-
-  async remove(id) {
-    return await db.collection('collection_name').doc(id).remove()
-  }
+  list, update, create, detail, remove
 }
 ```
+
+> **两种方法注册模式**：
+> - **轻量模式**（推荐小项目用）：每个文件直接导出 async function，如上所示
+> - **配置注册模式**（`uni-id-co` 的方式）：每个文件导出 `{ _config: { label, needUser, needPermission }, _handler: async function(){} }` 对象，统一注册器批量挂载并读取配置做权限控制。后续如需声明式权限可升级到此模式
+
+**② 每个方法一个文件，不超过 150 行**
+
+```js
+// module/order/create.js
+const { ERROR } = require('../../common/error')
+
+/**
+ * 创建订单
+ * @param {Object} params
+ * @param {String} params.title   订单标题
+ * @param {Number} params.amount  金额
+ */
+module.exports = async function (params = {}) {
+  // 参数校验
+  if (!params.title || !params.amount) {
+    throw { errCode: ERROR.PARAM_REQUIRED }
+  }
+  // 业务逻辑（通常 20-50 行）
+  const db = uniCloud.database()
+  return await db.collection('orders').add({
+    title: params.title,
+    amount: params.amount,
+    create_date: Date.now()
+  })
+}
+```
+
+**③ 业务域桶文件汇总**
+
+```js
+// module/order/index.js
+module.exports = {
+  create: require('./create'),
+  detail: require('./detail'),
+  remove: require('./remove')
+}
+```
+
+### 文件大小控制策略
+
+| 当文件超过 150 行 | 怎么做 |
+|---|---|
+| `index.obj.js` 太长 | 逻辑移到 `module/` 下新子目录，`index.obj.js` 只保留 import/export |
+| `module/x/foo.js` 太长 | 拆成 `foo.js` + `foo-helper.js`，或者把共用逻辑提到 `common/utils.js` |
+| `_before()` 太长 | 拆到 `middleware/` 目录，`_before` 里逐行调用 |
+| 错误码散落各处 | 集中到 `common/error.js`，用对象管理 |
+
+> **AI 开发注意**：向 AI 描述需求时，明确要求**每个方法创建独立文件**到 `module/` 子目录，不要追加到 `index.obj.js`。`index.obj.js` 只做 import + export。
 
 ### 前端调用
 
 ```js
 const xxxCo = uniCloud.importObject('xxx-co')
 const list = await xxxCo.list({ page: 1, pageSize: 20 })
-await xxxCo.add({ name: 'test' })
+await xxxCo.create({ title: 'test', amount: 100 })
 ```
 
 ### 参考文件
 
-`uniCloud-alipay/cloudfunctions/uni-sms-co/` — 完整的云对象示例
+`uni_modules/uni-id-pages/uniCloud/cloudfunctions/uni-id-co/` — 官方最佳实践。
 
-## 传统云函数开发
+## 传统云函数（旧代码，新功能不用此方式）
 
 ### 文件结构
 
@@ -199,9 +257,13 @@ uni_modules 可以包含自己的 `uniCloud/` 目录（云函数 + 数据库 sch
 
 ## 开发 checklist
 
-- [ ] 确定用云对象还是云函数
-- [ ] 文件名和目录名一致（云对象必须 `.obj.js` 后缀）
+- [ ] 确定用云对象还是云函数（新功能默认云对象）
+- [ ] 目录名 = 云对象名，文件名 = `xxx.obj.js`（云对象必须 `.obj.js` 后缀）
 - [ ] `_before()` 中做了权限校验（云对象）
+- [ ] `index.obj.js` 只做 import/export，不写业务
+- [ ] 每个方法一个文件，不超过 150 行
+- [ ] 共用逻辑提到 `common/` 目录
+- [ ] 错误码统一放在 `common/error.js`
 - [ ] 数据库操作前检查参数合法性
 - [ ] 云函数/数据库表名不与 uni_modules 冲突
 - [ ] 错误信息对前端友好（用户能看懂）
