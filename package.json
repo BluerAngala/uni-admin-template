@@ -1,32 +1,34 @@
 {
-  "name": "uni-admin 基础框架（原名 uniCloud admin）",
-  "id": "uni-template-admin",
-  "displayName": "uni-admin 基础框架",
+  "name": "uni-admin Modern UI",
+  "id": "bluer-uni-admin",
+  "displayName": "uni-admin Modern UI",
   "version": "1.0.0",
   "description": "基于uni-app & uniCloud的后台管理项目模板（管理后台开发必备神器）",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "https://github.com/dcloudio/uni-admin.git",
+  "repository": "",
   "keywords": [
     "admin",
     "uniCloud",
     "管理后台",
     "云后台",
-    "uni-admin"
+    "uni-admin",
+    "modern-ui",
+    "dark-mode"
 ],
   "engines": {
     "HBuilderX": "^3.6.0",
     "uni-app": "^4.36",
     "uni-app-x": ""
   },
-  "author": "",
+  "author": "BluerAngala",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dcloudio/uni-admin/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/dcloudio/uni-admin#readme",
+  "homepage": "",
   "dcloudext": {
     "sale": {
       "regular": {
@@ -37,7 +39,7 @@
       }
     },
     "contact": {
-      "qq": ""
+      "qq": "2128484413"
     },
     "declaration": {
       "ads": "无",
