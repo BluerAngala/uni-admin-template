@@ -1,0 +1,6 @@
+{
+  "name": "template-simple",
+  "version": "1.0.0",
+  "description": "单表 CRUD 模板",
+  "main": "index.obj.js"
+}

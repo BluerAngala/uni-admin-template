@@ -2,6 +2,21 @@
 
 项目自有云函数、公共模块目录。
 
+## 新建云对象模板
+
+项目提供了两个模板，新建时直接复制使用：
+
+| 模板 | 目录 | 适用场景 |
+|---|---|---|
+| 简单 CRUD | `template-simple/` | 1 个文件，单表增删改查 |
+| 模块化 | `template-complex/` | 多业务域，按 module/ 拆文件 |
+
+```bash
+# 快速开始（以 simple 为例）：
+cp -r template-simple my-co
+# 修改 my-co/index.obj.js 中的 collection_name 和字段
+```
+
 ## 本目录内容
 
 | 模块 | 路径 | 说明 |
