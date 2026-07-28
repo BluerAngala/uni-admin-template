@@ -132,8 +132,8 @@ await xxxCo.create({ title: 'test', amount: 100 })
 
 | 模板 | 路径 | 适用场景 |
 |---|---|---|
-| **简单模板** | `uniCloud-alipay/cloudfunctions/template-simple/` | 单表 CRUD，一个文件搞定 |
-| **复杂模板** | `uniCloud-alipay/cloudfunctions/template-complex/` | 多业务域、按模块拆文件 |
+| **简单模板** | `docs/ai-agent-docs/templates/template-simple/` | 单表 CRUD，一个文件搞定 |
+| **复杂模板** | `docs/ai-agent-docs/templates/template-complex/` | 多业务域、按模块拆文件 |
 | **官方参考** | `uni_modules/uni-id-pages/uniCloud/cloudfunctions/uni-id-co/` | 官方最佳实践（配置注册模式） |
 
 > 复制模板目录 → 改名为你的云对象名 → 修改业务逻辑即可。

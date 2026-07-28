@@ -39,3 +39,5 @@ uniCloud-temp/
 # 开发日志内部版（不公开）
 dev_docs/articles/internal/
 dev_docs/.drafts/
+
+.omp/
